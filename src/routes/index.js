@@ -3,6 +3,7 @@ import config from '../config';
 // Auth
 import Login from '../pages/auth/login';
 import Logout from '../pages/auth/logout';
+import Register from '../pages/auth/register';
 
 // Home
 import Home from '../pages/home';
@@ -21,6 +22,7 @@ const privateRoutes = [
     // Authentication
     { path: config.routes.login, component: Login, layout: null },
     { path: config.routes.logout, component: Logout, layout: null },
+    { path: config.routes.register, component: Register, layout: null },
 
     // Introduction
     { path: config.routes.home, component: Home },

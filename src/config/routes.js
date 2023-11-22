@@ -2,6 +2,7 @@ const routes = {
     // Auth
     login: '/login',
     logout: '/logout',
+    register: '/register',
 
     // Home
     home: '',

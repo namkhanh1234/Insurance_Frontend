@@ -1,6 +1,11 @@
+import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
-import { Button } from '@/components/ui/button';
+
 import styles from './Header.module.scss';
+
+import { Button } from '@/components/ui/button';
+
+import config from '../../config';
 
 const cx = classNames.bind(styles);
 
@@ -36,8 +41,12 @@ function Header() {
                 <h4>Hỗ trợ</h4>
 
                 {/* Chỗ này cần khi có account ẩn này hiện iamge cho khách hàng */}
-                <Button className="bg-[#3E8DCC]">Đăng nhập</Button>
-                <Button className="bg-[#aadffb] text-[#3E8DCC]">Đăng ký</Button>
+                <Button className="bg-[#3E8DCC]">
+                    <Link to={config.routes.login}>Đăng nhập</Link>
+                </Button>
+                <Button className="bg-[#aadffb] text-[#3E8DCC]">
+                    <Link to={config.routes.logout}>Đăng ký</Link>
+                </Button>
             </div>
         </div>
     );
