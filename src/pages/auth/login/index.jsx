@@ -19,9 +19,9 @@ function Login() {
                 <div className={cx('login__modal-inner', 'rounded-2xl border-2')}>
                     <div className="login__header flex flex-col items-center justify-center">
                         {/* <Link to={config.routes.register} className="w-fit "> */}
-                        <img className="h-24 w-24 rounded-full" src={logo} alt="KNK" />
+                        <img className="h-24 w-24 rounded-full" src={logo} alt="KNH" />
                         {/* </Link> */}
-                        <h2 className="mt-2 font-semibold">Quản lý hợp đồng bảo hiểm online cùng KNK</h2>
+                        <h2 className="mt-2 font-semibold">Quản lý hợp đồng bảo hiểm online cùng KNH</h2>
                     </div>
 
                     {/* login__form */}
@@ -38,7 +38,7 @@ function Login() {
                             />
                         </div>
                         <div className={cx('password__wrapper', 'mt-2 space-y-1')}>
-                            <Label htmlFor="password">Password</Label>
+                            <Label htmlFor="password">Mật khẩu</Label>
                             <Input
                                 type="password"
                                 id="password"
@@ -70,7 +70,7 @@ function Login() {
                                 to={config.routes.register}
                                 className="font-normal text-blue-600 hover:underline italic"
                             >
-                                Register here
+                                Đăng ký tài khoản
                             </Link>
                         </div>
                     </div>

@@ -32,7 +32,7 @@ function Header() {
                         </g>
                     </svg>
                 </div>
-                <div className="ml-4 text-xl text-[#3E8DCC] font-semibold">Bảo hiểm KNK</div>
+                <div className="ml-4 text-xl text-[#3E8DCC] font-semibold">Bảo hiểm KNH</div>
             </div>
 
             <div className="flex items-center space-x-4">
@@ -41,11 +41,11 @@ function Header() {
                 <h4>Hỗ trợ</h4>
 
                 {/* Chỗ này cần khi có account ẩn này hiện iamge cho khách hàng */}
-                <Button className="bg-[#3E8DCC]">
+                <Button className="bg-[#3E8DCC]" asChild>
                     <Link to={config.routes.login}>Đăng nhập</Link>
                 </Button>
-                <Button className="bg-[#aadffb] text-[#3E8DCC]">
-                    <Link to={config.routes.logout}>Đăng ký</Link>
+                <Button className="bg-[#aadffb] text-[#3E8DCC] " asChild>
+                    <Link to={config.routes.register}>Đăng ký</Link>
                 </Button>
             </div>
         </div>
