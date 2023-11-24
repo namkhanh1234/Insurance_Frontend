@@ -21,7 +21,7 @@ function Login() {
                         {/* <Link to={config.routes.register} className="w-fit "> */}
                         <img className="h-24 w-24 rounded-full" src={logo} alt="KNK" />
                         {/* </Link> */}
-                        <h2 className="mt-2 font-semibold">Quản lý hợp đồng bảo hiểm online cùng KNK</h2>
+                        <h2 className="mt-2 font-semibold">Quản lý hợp đồng bảo hiểm online cùng KN</h2>
                     </div>
 
                     {/* login__form */}
@@ -62,7 +62,7 @@ function Login() {
                     {/* <div className="login__action"></div> */}
 
                     <div className="login__footer">
-                        <Link className="flex justify-center text-normal font-light text-gray-500">Quên mật khẩu</Link>
+                        <Link to = {config.routes.forgotPassword} className="flex justify-center text-normal font-light text-gray-500">Quên mật khẩu</Link>
 
                         <div className="mt-2 flex justify-center items-center text-sm">
                             <span className="mx-2 text-sm text-gray-400">Bạn chưa có tài khoản?</span>
