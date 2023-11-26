@@ -1,7 +1,7 @@
 import axios from 'axios';
 import config from '@/config';
 
-const baseURL = 'http://127.0.0.1:8000/api/';
+const baseURL = 'https://localhost:7162/api/v1';
 
 const axiosInstance = axios.create({
     baseURL: baseURL,
@@ -54,11 +54,11 @@ axiosInstance.interceptors.response.use(
 
                 if (tokenParts.exp > now) {
                     return await axiosInstance
-                        .post('refresh', { refresh: refreshToken })
+                        .post('/token/refresh', { refreshtoken: refreshToken })
                         .then((response) => {
                             console.log(response.data.access);
                             localStorage.setItem('access_token', response.data.access);
-                            // If Backend "ROTATE_REFRESH_TOKENS": True,
+                            // If Backend "ROTATE_REFRESH_TOKENS": True,s
                             // localStorage.setItem('refresh_token', response.data.refresh);
 
                             axiosInstance.defaults.headers['Authorization'] = 'JWT ' + response.data.access;

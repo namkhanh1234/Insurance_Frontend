@@ -6,7 +6,10 @@ const routes = {
     forgotPassword: '/password',
 
     // Home
-    home: '',
+    home: '/',
+
+    // Profile
+    profile: '/profile/:id',
 
     // Insurance
     insurances: '/insurances',
