@@ -9,6 +9,9 @@ import ForgotPassword from '../pages/auth/forgotPassword';
 // Home
 import Home from '../pages/home';
 
+// Profile
+import Profile from '../pages/profile';
+
 // Insurance
 import Insurances from '../pages/insurance/insurances';
 import InsuranceDetailt from '../pages/insurance/detail';
@@ -28,6 +31,7 @@ const privateRoutes = [
 
     // Introduction
     { path: config.routes.home, component: Home },
+    { path: config.routes.profile, component: Profile },
 
     // Insurance
     { path: config.routes.insurances, component: Insurances },

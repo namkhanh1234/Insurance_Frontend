@@ -3,10 +3,13 @@ const routes = {
     login: '/login',
     logout: '/logout',
     register: '/register',
-    forgotPassword: '/password',
+    forgotPassword: '/forgotPassword',
 
     // Home
-    home: '',
+    home: '/',
+
+    // Profile
+    profile: '/profile/:id',
 
     // Insurance
     insurances: '/insurances',

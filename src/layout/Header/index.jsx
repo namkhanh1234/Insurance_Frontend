@@ -1,15 +1,81 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
+import { useEffect, useState } from 'react';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { faEarthAsia, faGear, faSignOut } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Header.module.scss';
 
 import { Button } from '@/components/ui/button';
-
 import config from '../../config';
+import Menu from '@/components/Popper/Menu';
 
 const cx = classNames.bind(styles);
 
 function Header() {
+    const [currentUser, setCurrentUser] = useState(null);
+
+    useEffect(() => {
+        const userId = localStorage.getItem('user_id');
+        // console.log(userId);
+
+        if (userId != null || userId != undefined) {
+            setCurrentUser(userId);
+        }
+    }, []);
+
+    // console.log(config.routes.profile);
+    // console.log(currentUser);
+
+    const userMenu = [
+        // {
+        //     icon: <FontAwesomeIcon icon={faUser} />,
+        //     title: 'View profile',
+        //     to: `${config.routes.profile}/${currentUser}`,
+        // },
+        {
+            icon: <FontAwesomeIcon icon={faEarthAsia} />,
+            title: 'English',
+            children: {
+                title: 'Language',
+                data: [
+                    {
+                        type: 'lanaguage',
+                        code: 'en',
+                        title: 'English',
+                    },
+                    {
+                        type: 'language',
+                        code: 'ja',
+                        title: 'Japanese',
+                    },
+                    {
+                        type: 'lanaguage',
+                        code: 'vi',
+                        title: 'Tiếng Việt',
+                    },
+                ],
+            },
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGear} />,
+            title: 'Settings',
+            to: `${config.routes.settings}`,
+        },
+        {
+            icon: <FontAwesomeIcon icon={faSignOut} />,
+            title: 'Log out',
+            to: `${config.routes.logout}`,
+            separate: true,
+        },
+    ];
+
+    const handleMenuOnChange = (menuItem) => {
+        console.log(menuItem);
+    };
+
     return (
         <div className={cx('wrapper', 'h-full flex items-center justify-between')}>
             <div className="flex items-center">
@@ -32,7 +98,7 @@ function Header() {
                         </g>
                     </svg>
                 </div>
-                <div className="ml-4 text-xl text-[#3E8DCC] font-semibold">Bảo hiểm KNH</div>
+                <div className="ml-4 text-xl text-[#3E8DCC] font-bold">Bảo hiểm KNH</div>
             </div>
 
             <div className="flex items-center space-x-4">
@@ -41,12 +107,27 @@ function Header() {
                 <h4>Hỗ trợ</h4>
 
                 {/* Chỗ này cần khi có account ẩn này hiện iamge cho khách hàng */}
-                <Button className="bg-[#3E8DCC]" asChild>
-                    <Link to={config.routes.login}>Đăng nhập</Link>
-                </Button>
-                <Button className="bg-[#aadffb] text-[#3E8DCC] " asChild>
-                    <Link to={config.routes.register}>Đăng ký</Link>
-                </Button>
+                {currentUser != null || currentUser != undefined ? (
+                    <div className="mt-[4px]">
+                        <Menu items={userMenu} onChange={handleMenuOnChange}>
+                            <button>
+                                <FontAwesomeIcon
+                                    className="w-4 h-4 p-2 border border-[#0f172a1a] rounded-full  hover:bg-gray-200 hover:text-sky-500"
+                                    icon={faUser}
+                                />
+                            </button>
+                        </Menu>
+                    </div>
+                ) : (
+                    <>
+                        <Button className="bg-[#3E8DCC]" asChild>
+                            <Link to={config.routes.login}>Đăng nhập</Link>
+                        </Button>
+                        <Button className="bg-[#aadffb] text-[#3E8DCC] " asChild>
+                            <Link to={config.routes.register}>Đăng ký</Link>
+                        </Button>
+                    </>
+                )}
             </div>
         </div>
     );
