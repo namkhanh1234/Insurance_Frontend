@@ -12,29 +12,33 @@ import logo from '@/assets/images/logo.png';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
+import axios from 'axios';
 const cx = classNames.bind(styles);
 YupPassword(yup);
 const schema = yup
     .object({
-        email: yup.string().required('Email không được để trống').email('Email không đúng định dạng'),
+        //email: yup.string().required('Email không được để trống').email('Email không đúng định dạng'),
         name: yup.string().required('Họ tên không được để trống'),
-        password: yup
-            .string()
-            .required('Mật khẩu không được để trống')
-            .password()
-            .min(8, 'Mật khẩu chứa ít nhất 8 kí tự')
-            .minLowercase(1, 'Mật khẩu chứa ít nhất 1 chữ cái thường')
-            .minUppercase(1, 'Mật khẩu chứa ít nhất 1 chữ cái in hoa')
-            .minNumbers(1, 'Mật khẩu chứa ít nhất 1 số')
-            .minSymbols(1, 'Mật khẩu chứa ít nhất 1 kí tự đặc biệt'),
-        confirm_password: yup
-            .string()
-            .label('confirm password')
-            .required('Vui lòng nhập lại mật khẩu')
-            .oneOf([yup.ref('password'), null], 'Mật khẩu không khớp'),
-        phone_number: yup.string().required('Số điện thoại không được để trống'),
-        birthday: yup.string().required('Ngày sinh không được để trống'),
+        // password: yup
+        //     .string()
+        //     .required('Mật khẩu không được để trống')
+        //     .password()
+        //     .min(8, 'Mật khẩu chứa ít nhất 8 kí tự')
+        //     .minLowercase(1, 'Mật khẩu chứa ít nhất 1 chữ cái thường')
+        //     .minUppercase(1, 'Mật khẩu chứa ít nhất 1 chữ cái in hoa')
+        //     .minNumbers(1, 'Mật khẩu chứa ít nhất 1 số')
+        //     .minSymbols(1, 'Mật khẩu chứa ít nhất 1 kí tự đặc biệt'),
+        // confirm_password: yup
+        //     .string()
+        //     .label('confirm password')
+        //     .required('Vui lòng nhập lại mật khẩu')
+        //     .oneOf([yup.ref('password'), null], 'Mật khẩu không khớp'),
+        // phone_number: yup.string().required('Số điện thoại không được để trống'),
+        // birthday: yup.string().required('Ngày sinh không được để trống'),
+        // id: yup.string().required('Số căn cước không được để trống'),
+        gender: yup.string(),
     })
     .required();
 
@@ -43,11 +47,32 @@ function Register() {
         register,
         handleSubmit,
         formState: { errors },
+        setValue,
     } = useForm({
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = (data) => console.log(data);
+    const onSubmit = (data) => {
+        console.log(data);
+        // axios
+        //     .post('http://localhost:5118/api/v1/User/register', {
+        //         email: 'user@example.com',
+        //         password: 'string',
+        //         fullName: 'string',
+        //         phone: 'string',
+        //         sex: 'string',
+        //         dateOfBirth: '2023-11-26T13:31:49.581Z',
+        //         cardIdentification: 'string',
+        //     })
+        //     .then(function (response) {
+        //         // handle success
+        //         console.log(response);
+        //     })
+        //     .catch(function (error) {
+        //         // handle error
+        //         console.log(error);
+        //     });
+    };
     return (
         <>
             <div className={cx('register__modal')}>
@@ -65,13 +90,40 @@ function Register() {
                             <p className="text-red-600 text-xs">{errors.name?.message}</p>
                         </div>
                         <div className={cx('username__wrapper', 'space-y-1')}>
+                            <Label htmlFor="name">Giới tính</Label>
+                            <Select
+                                onValueChange={(e) => {
+                                    console.log(e);
+                                }}
+                            >
+                                <SelectTrigger {...register('gender')} name="gender">
+                                    <SelectValue placeholder="Select a fruit" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectItem value="apple">Apple</SelectItem>
+                                        <SelectItem value="banana">Banana</SelectItem>
+                                        <SelectItem value="blueberry">Blueberry</SelectItem>
+                                        <SelectItem value="grapes">Grapes</SelectItem>
+                                        <SelectItem value="pineapple">Pineapple</SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                            <p className="text-red-600 text-xs">{errors.gender?.message}</p>
+                        </div>
+                        {/* <div className={cx('username__wrapper', 'space-y-1')}>
+                            <Label htmlFor="name">CCCD</Label>
+                            <Input type="text" placeholder="012324567" {...register('id')} />
+                            <p className="text-red-600 text-xs">{errors.id?.message}</p>
+                        </div>
+                        <div className={cx('username__wrapper', 'space-y-1')}>
                             <Label htmlFor="email">Email</Label>
                             <Input type="email" placeholder="johndoe104@gmail.com" {...register('email')} />
                             <p className="text-red-600 text-xs">{errors.email?.message}</p>
                         </div>
                         <div className={cx('username__wrapper', 'space-y-1')}>
                             <Label htmlFor="phonenumber">Số điện thoại</Label>
-                            <Input type="email" placeholder="0123456789" {...register('phonenummber')} />
+                            <Input type="text" placeholder="0123456789" {...register('phone_number')} />
                             <p className="text-red-600 text-xs">{errors.phone_number?.message}</p>
                         </div>
                         <div className={cx('username__wrapper', 'space-y-1')}>
@@ -90,7 +142,7 @@ function Register() {
                             <Label htmlFor="confirmPassword">Nhập lại mật khẩu</Label>
                             <Input type="password" placeholder="•••••••••" {...register('confirm_password')} />
                             <p className="text-red-600 text-xs">{errors.confirm_password?.message}</p>
-                        </div>
+                        </div> */}
                         <div className="my-6 flex justify-center items-center">
                             <Button
                                 type="submit"
