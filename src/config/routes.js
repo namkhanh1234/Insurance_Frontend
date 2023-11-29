@@ -11,6 +11,9 @@ const routes = {
     // Profile
     profile: '/profile/:id',
 
+    // Support
+    support: '/support',
+
     // Insurance
     insurances: '/insurances',
     insuranceDetail: '/insurances/:id',

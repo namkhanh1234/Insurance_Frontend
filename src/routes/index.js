@@ -9,6 +9,8 @@ import ForgotPassword from '../pages/auth/forgotPassword';
 // Home
 import Home from '../pages/home';
 
+import Support from '../pages/support';
+
 // Profile
 import Profile from '../pages/profile';
 
@@ -32,6 +34,7 @@ const privateRoutes = [
     // Introduction
     { path: config.routes.home, component: Home },
     { path: config.routes.profile, component: Profile },
+    { path: config.routes.support, component: Support },
 
     // Insurance
     { path: config.routes.insurances, component: Insurances },

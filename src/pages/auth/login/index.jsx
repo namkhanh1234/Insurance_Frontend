@@ -11,11 +11,16 @@ import axiosInstance from '../../../utils/axios';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-regular-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
 function Login() {
     const navigate = useNavigate();
+    const [typeInput, setTypeInput] = useState('password');
+
     const initialFormData = Object.freeze({
         email: '',
         password: '',
@@ -53,6 +58,14 @@ function Login() {
         apiLogin();
     };
 
+    const handleTypeInput = () => {
+        if (typeInput == 'password') {
+            setTypeInput('text');
+        } else {
+            setTypeInput('password');
+        }
+    };
+
     // console.log(formData);
 
     return (
@@ -60,9 +73,9 @@ function Login() {
             <div className={cx('login__modal')}>
                 <div className={cx('login__modal-inner', 'rounded-2xl border-2')}>
                     <div className="login__header flex flex-col items-center justify-center select-none">
-                        {/* <Link to={config.routes.register} className="w-fit "> */}
-                        <img className="h-24 w-24 rounded-full" src={logo} alt="KNH" />
-                        {/* </Link> */}
+                        <Link to={config.routes.home} className="w-fit ">
+                            <img className="h-24 w-24 rounded-full" src={logo} alt="KNH" />
+                        </Link>
                         <h2 className="mt-2 font-semibold">Quản lý hợp đồng bảo hiểm online cùng KNH</h2>
                     </div>
 
@@ -81,14 +94,21 @@ function Login() {
                         </div>
                         <div className={cx('password__wrapper', 'mt-2 space-y-1')}>
                             <Label htmlFor="password">Mật khẩu</Label>
-                            <Input
-                                type="password"
-                                id="password"
-                                name="password"
-                                placeholder="•••••••••"
-                                value={formData.password}
-                                onChange={(e) => handleChange(e)}
-                            />
+                            <div className="relative">
+                                <Input
+                                    type={typeInput}
+                                    id="password"
+                                    name="password"
+                                    placeholder="•••••••••"
+                                    value={formData.password}
+                                    onChange={(e) => handleChange(e)}
+                                />
+                                <FontAwesomeIcon
+                                    onClick={handleTypeInput}
+                                    className="absolute top-3 right-4"
+                                    icon={typeInput == 'password' ? faEyeSlash : faEye}
+                                />
+                            </div>
                         </div>
                         <div className="my-6 flex justify-center items-center">
                             <Button
