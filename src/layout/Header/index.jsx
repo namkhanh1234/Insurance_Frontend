@@ -3,16 +3,12 @@ import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { faEarthAsia, faGear, faSignOut } from '@fortawesome/free-solid-svg-icons';
-
-import styles from './Header.module.scss';
+import { faBell, faUser } from '@fortawesome/free-regular-svg-icons';
+import { faEarthAsia, faPhone, faSignOut } from '@fortawesome/free-solid-svg-icons';
 
 import { Button } from '@/components/ui/button';
 import config from '../../config';
 import Menu from '@/components/Popper/Menu';
-
-const cx = classNames.bind(styles);
 
 function Header() {
     const [currentUser, setCurrentUser] = useState(null);
@@ -30,11 +26,11 @@ function Header() {
     // console.log(currentUser);
 
     const userMenu = [
-        // {
-        //     icon: <FontAwesomeIcon icon={faUser} />,
-        //     title: 'View profile',
-        //     to: `${config.routes.profile}/${currentUser}`,
-        // },
+        {
+            icon: <FontAwesomeIcon icon={faUser} />,
+            title: 'View profile',
+            // to: `${config.routes.profile}/${currentUser}`,
+        },
         {
             icon: <FontAwesomeIcon icon={faEarthAsia} />,
             title: 'English',
@@ -60,13 +56,13 @@ function Header() {
             },
         },
         {
-            icon: <FontAwesomeIcon icon={faGear} />,
-            title: 'Settings',
-            to: `${config.routes.settings}`,
+            icon: <FontAwesomeIcon icon={faPhone} />,
+            title: 'Hỗ trợ',
+            to: `${config.routes.support}`,
         },
         {
             icon: <FontAwesomeIcon icon={faSignOut} />,
-            title: 'Log out',
+            title: 'Đăng xuất',
             to: `${config.routes.logout}`,
             separate: true,
         },
@@ -77,9 +73,9 @@ function Header() {
     };
 
     return (
-        <div className={cx('wrapper', 'h-full flex items-center justify-between')}>
+        <div className="w-full h-full flex justify-between">
             <div className="flex items-center">
-                <div>
+                <Link to={config.routes.home}>
                     <svg
                         width="40px"
                         height="40px"
@@ -97,22 +93,25 @@ function Header() {
                             ></path>
                         </g>
                     </svg>
-                </div>
-                <div className="ml-4 text-xl text-[#3E8DCC] font-bold">Bảo hiểm KNH</div>
+                </Link>
+                <div className="ml-3 text-lg text-[#3E8DCC] font-bold select-none">Bảo hiểm KNH</div>
             </div>
 
             <div className="flex items-center space-x-4">
-                <h4>Giới thiệu</h4>
-                <h4>Sản phẩm</h4>
-                <h4>Hỗ trợ</h4>
+                <div className="space-x-3 items-center hidden sm:inline-flex">
+                    <h4>Giới thiệu</h4>
+                    <h4>Sản phẩm</h4>
+                    <h4>Hỗ trợ</h4>
+                </div>
 
                 {/* Chỗ này cần khi có account ẩn này hiện iamge cho khách hàng */}
                 {currentUser != null || currentUser != undefined ? (
-                    <div className="mt-[4px]">
+                    <div className="mt-[4px] flex items-center space-x-4">
+                        <FontAwesomeIcon icon={faBell} className="text-lg" />
                         <Menu items={userMenu} onChange={handleMenuOnChange}>
                             <button>
                                 <FontAwesomeIcon
-                                    className="w-4 h-4 p-2 border border-[#0f172a1a] rounded-full  hover:bg-gray-200 hover:text-sky-500"
+                                    className="w-4 h-4 p-2 border-2 border-[#0f172a1a] rounded-full  hover:bg-gray-200 hover:text-[#3E8DCC]"
                                     icon={faUser}
                                 />
                             </button>
