@@ -12,7 +12,11 @@ import logo from '@/assets/images/logo.png';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
+import axiosInstance from '../../../utils/axios';
+import { useState } from 'react';
+import axios from 'axios';
 const cx = classNames.bind(styles);
 YupPassword(yup);
 const schema = yup
@@ -35,10 +39,13 @@ const schema = yup
             .oneOf([yup.ref('password'), null], 'Mật khẩu không khớp'),
         phone_number: yup.string().required('Số điện thoại không được để trống'),
         birthday: yup.string().required('Ngày sinh không được để trống'),
+        id: yup.string().required('Số căn cước không được để trống'),
     })
     .required();
 
 function Register() {
+    const [gender, setGender] = useState('Nam');
+
     const {
         register,
         handleSubmit,
@@ -47,7 +54,39 @@ function Register() {
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = (data) => console.log(data);
+    const onSubmit = async (data) => {
+        // try {
+        //     await axiosInstance.post('/User/register', {
+        //         email: data.email,
+        //         password: data.password,
+        //         fullName: data.name,
+        //         phone: data.phone_number,
+        //         sex: gender,
+        //         dateOfBirth: '2023-11-29T07:25:14.027Z',
+        //         cardIdentification: data.id,
+        //     });
+        // } catch (error) {
+        //     console.log(error);
+        // }
+        console.log(data);
+        axios
+            .post('http://localhost:5118/api/v1/User/register', {
+                email: data.email,
+                password: data.password,
+                fullName: data.name,
+                phone: data.phone_number,
+                sex: gender,
+                dateOfBirth: '2023-11-29T07:25:14.027Z',
+                cardIdentification: data.id,
+            })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     return (
         <>
             <div className={cx('register__modal')}>
@@ -65,13 +104,36 @@ function Register() {
                             <p className="text-red-600 text-xs">{errors.name?.message}</p>
                         </div>
                         <div className={cx('username__wrapper', 'space-y-1')}>
+                            <Label htmlFor="name">Giới tính</Label>
+                            <Select
+                                onValueChange={(e) => {
+                                    setGender(e);
+                                }}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Nam" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectItem value="Nam">Nam</SelectItem>
+                                        <SelectItem value="Nữ">Nữ</SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <div className={cx('username__wrapper', 'space-y-1')}>
+                            <Label htmlFor="name">CCCD</Label>
+                            <Input type="text" placeholder="012324567" {...register('id')} />
+                            <p className="text-red-600 text-xs">{errors.id?.message}</p>
+                        </div>
+                        <div className={cx('username__wrapper', 'space-y-1')}>
                             <Label htmlFor="email">Email</Label>
                             <Input type="email" placeholder="johndoe104@gmail.com" {...register('email')} />
                             <p className="text-red-600 text-xs">{errors.email?.message}</p>
                         </div>
                         <div className={cx('username__wrapper', 'space-y-1')}>
                             <Label htmlFor="phonenumber">Số điện thoại</Label>
-                            <Input type="email" placeholder="0123456789" {...register('phonenummber')} />
+                            <Input type="text" placeholder="0123456789" {...register('phone_number')} />
                             <p className="text-red-600 text-xs">{errors.phone_number?.message}</p>
                         </div>
                         <div className={cx('username__wrapper', 'space-y-1')}>
