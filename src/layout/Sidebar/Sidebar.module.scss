@@ -1,0 +1,15 @@
+.nav__bar {
+    margin: 28px 18px 0 18px;
+}
+
+.active {
+    background-color: #dbeafe;
+    color: #0284c7;
+    fill: #0284c7;
+
+    &:hover {
+        background-color: #bfdbfe;
+        color: #0284c7;
+        fill: #0284c7;
+    }
+}
