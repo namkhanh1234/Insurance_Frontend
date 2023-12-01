@@ -22,6 +22,9 @@ import InsuranceDetailt from '../pages/insurance/detail';
 import Contracts from '../pages/contract/contracts';
 import ContractDetail from '../pages/contract/detail';
 
+//Payment
+import PaymentRequest from '../pages/payment/PaymentRequest';
+
 const publicRoutes = [];
 
 const privateRoutes = [
@@ -43,6 +46,9 @@ const privateRoutes = [
     // Contract
     { path: config.routes.contracts, component: Contracts },
     { path: config.routes.contractDetail, component: ContractDetail },
+
+    //Payment
+    {path: config.routes.paymentRequest, component: PaymentRequest},
 ];
 
 export { privateRoutes, publicRoutes };

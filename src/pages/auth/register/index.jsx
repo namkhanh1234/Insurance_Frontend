@@ -13,10 +13,13 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useToast } from '@/components/ui/use-toast';
 
 import axiosInstance from '../../../utils/axios';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 const cx = classNames.bind(styles);
 YupPassword(yup);
 const schema = yup
@@ -45,6 +48,8 @@ const schema = yup
 
 function Register() {
     const [gender, setGender] = useState('Nam');
+    const navigate = useNavigate();
+    const { toast } = useToast();
 
     const {
         register,
@@ -76,14 +81,22 @@ function Register() {
                 fullName: data.name,
                 phone: data.phone_number,
                 sex: gender,
-                dateOfBirth: '2023-11-29T07:25:14.027Z',
+                dateOfBirth: data.birthday,
                 cardIdentification: data.id,
             })
             .then((response) => {
-                console.log(response);
+                toast({
+                    description: 'Đăng ký thành công.',
+                    variant: 'success',
+                });
+                navigate('/login');
             })
             .catch((error) => {
                 console.log(error);
+                toast({
+                    description: 'Lỗi hệ thống vui lòng thử lại.',
+                    variant: 'destructive',
+                });
             });
     };
 
