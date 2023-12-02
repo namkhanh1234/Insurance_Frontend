@@ -100,7 +100,11 @@ function Header() {
             <div className="flex items-center space-x-4">
                 <div className="space-x-3 items-center hidden sm:inline-flex">
                     <h4>Giới thiệu</h4>
-                    <h4>Sản phẩm</h4>
+                    <h4 className= "flex justify-center text-normal text-black-500 hover:text-sky-500 p-4">
+                        <Link to = {config.routes.insurances}>
+                            Sản phẩm
+                        </Link>
+                    </h4>
                     <h4>Hỗ trợ</h4>
                 </div>
 
