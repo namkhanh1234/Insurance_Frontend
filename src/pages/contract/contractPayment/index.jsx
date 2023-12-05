@@ -147,12 +147,12 @@ function ContractPayment() {
                         </div>
 
                         <div className={cx('payments')}>
-                            <RadioGroup defaultValue="MoMo">
-                                <div className="flex items-center space-x-2 ml-6">
-                                    <RadioGroupItem value="MoMo" id="r1" />
+                            <RadioGroup defaultValue="MoMo" className='flex'>
+                                <div className="flex items-center space-x-2 ml-6 inline-flex">
+                                    <RadioGroupItem value="MoMo" id="r1" className=''/>
                                     <Label htmlFor="r1">Ví điện tử MoMo</Label>
                                 </div>
-                                <div className="flex items-center space-x-2 ml-6">
+                                <div className="flex items-center space-x-2 ml-6 inline-flex">
                                     <RadioGroupItem value="atStore" id="r2" />
                                     <Label htmlFor="r2">Trực tiếp tại điểm bán</Label>
                                 </div>
@@ -190,7 +190,7 @@ function ContractPayment() {
 
                     <div className={cx('line')}></div>
                     <div className="items-top flex space-x-2">
-                        <Checkbox id="contractTerm" />
+                        <Checkbox id="contractTerm" className='data-[state=checked]:bg-blue-500  dark:data-[state=checked]:bg-blue-100 dark:data-[state=checked]:text-blue-800'/>
                                 <div className="grid gap-1.5 leading-none">
                                     <Label
                                         htmlFor="contractTerm"
