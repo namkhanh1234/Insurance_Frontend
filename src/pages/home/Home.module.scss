@@ -1,0 +1,45 @@
+.wrapper {
+    margin: 0 auto;
+    max-width: 1036px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.image-introduction {
+    width: 100%;
+}
+
+.box {
+    padding: 24px 16px;
+    border: 1px solid #dbe0e6;
+    border-radius: 8px;
+    text-align: center;
+
+    .icon {
+        width: 74px;
+        height: 74px;
+    }
+
+    .title {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 24px;
+        text-transform: uppercase;
+        margin-top: 16px;
+        margin-bottom: 6px;
+    }
+
+    .subtitle {
+        margin-bottom: 8px;
+        font-size: 20px;
+        line-height: 30px;
+        font-weight: bold;
+        color: #3e8bcc;
+    }
+
+    .description {
+        font-size: 14px;
+        line-height: 21px;
+        color: #596481;
+    }
+}

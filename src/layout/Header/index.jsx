@@ -98,10 +98,10 @@ function Header() {
             </div>
 
             <div className="flex items-center space-x-4">
-                <div className="space-x-3 items-center hidden sm:inline-flex">
-                    <h4>Giới thiệu</h4>
-                    <h4>Sản phẩm</h4>
-                    <h4>Hỗ trợ</h4>
+                <div className="space-x-3 items-center hidden md:inline-flex">
+                    <Link to={config.routes.home}>Giới thiệu</Link>
+                    <Link to={config.routes.insurances}>Sản phẩm</Link>
+                    <Link to={config.routes.support}>Hỗ trợ</Link>
                 </div>
 
                 {/* Chỗ này cần khi có account ẩn này hiện iamge cho khách hàng */}
