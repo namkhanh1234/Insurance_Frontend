@@ -9,7 +9,7 @@ const routes = {
     home: '/',
 
     // Profile
-    profile: '/profile/:id',
+    profile: '/profile',
 
     // Support
     support: '/support',
@@ -25,6 +25,10 @@ const routes = {
     contractDetail: '/contracts/:id',
 
     // Customer service
+
+    //Payment
+    paymentRequest: '/paymentRequest',
+
 };
 
 export default routes;

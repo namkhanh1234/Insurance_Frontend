@@ -29,7 +29,7 @@ function Header() {
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'View profile',
-            // to: `${config.routes.profile}/${currentUser}`,
+            to: `${config.routes.profile}/${currentUser}`,
         },
         {
             icon: <FontAwesomeIcon icon={faEarthAsia} />,
