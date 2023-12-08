@@ -39,9 +39,9 @@ function PaymentRequest() {
     });
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center">
                 <h3 className="text-2xl m-[20px] font-bold text-sky-600 text-center">YÊU CẦU THANH TOÁN ĐIỀU TRỊ</h3>
-                <div className="flex flex-col ml-4 items-center">
+                <div className="flex flex-col items-center p-7 rounded-2xl border-2 bg-white w-full">
                     <div className="flex w-1/2 justify-between">
                         <div>
                             <Label>Mã khách hàng</Label>
@@ -63,16 +63,16 @@ function PaymentRequest() {
                         </div>
                     </div>
 
-                    <div className="w-1/2">
+                    <div className="w-1/2 mt-5">
                         <Label htmlFor="message">Mô tả điều trị</Label>
                         <Textarea placeholder="Nhập mô tả ở đây." id="message" {...register('text')} />
                     </div>
-                    <div className="w-1/2 mb-5">
+                    <div className="w-1/2 mt-5">
                         <Label htmlFor="picture">Ảnh hóa đơn hoặc hồ sơ bệnh án</Label>
                         <Input id="picture" type="file" accept="image/*" onChange={handleOnChange} />
                     </div>
-                    {image && <img src={image.preview} className="w-1/2 h-96"></img>}
-                    <div className="my-6 flex justify-evenly w-1/2">
+                    {image && <img src={image.preview} className="w-1/2 h-96 mt-5"></img>}
+                    <div className="mt-4 flex justify-evenly w-1/2">
                         <Button
                             className="w-[140px] h-[42px] bg-sky-600 text-base rounded-md hover:bg-sky-700"
                             type="submit"
@@ -80,7 +80,7 @@ function PaymentRequest() {
                             Gửi
                         </Button>
                         <Button className="w-[140px] h-[42px] bg-red-600 text-base rounded-md hover:bg-red-700">
-                            Hủy
+                            Quay về
                         </Button>
                     </div>
                 </div>

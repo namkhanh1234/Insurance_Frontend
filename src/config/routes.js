@@ -9,7 +9,7 @@ const routes = {
     home: '/',
 
     // Profile
-    profile: '/profile/:id',
+    profile: '/profile',
 
     // Support
     support: '/support',
