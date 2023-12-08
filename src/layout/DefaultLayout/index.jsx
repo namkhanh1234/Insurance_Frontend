@@ -17,7 +17,7 @@ function DefaultLayout({ children }) {
             <header className={cx('header', 'flex justify-between items-center border-b-2 border-gray-100')}>
                 <label className="mt-1 ml-3" htmlFor="nav-mobile-input">
                     <FontAwesomeIcon
-                        className="p-1 text-gray-500 hover:bg-gray-200 hover:text-gray-900 hover:cursor-pointer text-2xl lg:hidden"
+                        className="p-1 text-gray-500 hover:bg-gray-200 hover:text-gray-900 hover:cursor-pointer text-2xl md:hidden"
                         icon={faBars}
                     />
                 </label>
@@ -35,7 +35,8 @@ function DefaultLayout({ children }) {
                 </div>
             </header>
             <div className={cx('container')}>
-                <div className={cx('content', 'mx-3 md:mx-6')}>{children}</div>
+                {/* <div className={cx('content', 'mx-3 md:mx-6')}>{children}</div> */}
+                <div className={cx('content', 'my-4')}>{children}</div>
 
                 <div className="mx-3 md:mx-6">
                     <Footer />
