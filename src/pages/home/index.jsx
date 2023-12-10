@@ -110,7 +110,7 @@ function Home() {
             </div>
 
             {/* Bạn có biết */}
-            <div className="pt-14 mx-4">
+            <div className="py-10 mx-4">
                 <div className="flex justify-center">
                     <header className="text-4xl font-bold mb-4">Bạn có biết</header>
                 </div>
@@ -146,28 +146,28 @@ function Home() {
             </div>
             {/* Điểm mạnh của KNH */}
             <div className={cx('wrapper')}>
-                <h3 className="text-4xl font-bold text-sky-600 ml-10 mt-5">NHỮNG THẾ MẠNH CỦA KNH CARE </h3>
+                <h3 className="text-4xl font-bold text-sky-600 ml-10 mb-5">NHỮNG THẾ MẠNH CỦA KNH CARE </h3>
                 <div className="flex justify-evenly items-center">
                     <div className="flex flex-col justify-between h-[70vh]">
                         <div className="flex items-center">
                             <ShieldPlus className="mr-2 w-[3vw] h-auto" />
-                            <p className="text-2xl font-semibold">QUYỀN LỢI BẢO HIỂM TOÀN DIỆN</p>
+                            <p className="ml-3 text-2xl font-semibold">QUYỀN LỢI BẢO HIỂM TOÀN DIỆN</p>
                         </div>
                         <div className="flex items-center">
                             <Baby className="mr-2 w-[3vw] h-auto" />
-                            <p className="text-2xl font-semibold">TRẺ EM ĐƯỢC THAM GIA ĐỘC LẬP</p>
+                            <p className="ml-3 text-2xl font-semibold">TRẺ EM ĐƯỢC THAM GIA ĐỘC LẬP</p>
                         </div>
                         <div className="flex items-center">
                             <FontAwesomeIcon icon={faHospital} className="mr-2 w-[3vw] h-auto" />
-                            <p className="text-2xl font-semibold">HỆ THỐNG CƠ SỞ Y TẾ TOÀN QUỐC</p>
+                            <p className="ml-3 text-2xl font-semibold">HỆ THỐNG CƠ SỞ Y TẾ TOÀN QUỐC</p>
                         </div>
                         <div className="flex items-center">
                             <FontAwesomeIcon icon={faHandshake} className="mr-2 w-[3vw] h-auto" />
-                            <p className="text-2xl font-semibold">CHI PHÍ ƯU ĐÃI SO VỚI TẦM GIÁ</p>
+                            <p className="ml-3 text-2xl font-semibold">CHI PHÍ ƯU ĐÃI SO VỚI TẦM GIÁ</p>
                         </div>
                         <div className="flex items-center">
                             <FontAwesomeIcon icon={faClock} className="mr-2 w-[3vw] h-auto" />
-                            <p className="text-2xl font-semibold">GIẢI NGÂN NHANH CHÓNG</p>
+                            <p className="ml-3 text-2xl font-semibold">GIẢI NGÂN NHANH CHÓNG</p>
                         </div>
                     </div>
                     <div className="flex flex-col justify-between w-1/3">
@@ -178,22 +178,23 @@ function Home() {
             </div>
 
             {/* sản phẩm của KNHCare */}
-            <div className="my-10">
-                <h3 className="text-4xl font-bold text-sky-600 ml-10 my-10">SẢN PHẨM ĐƯỢC KNH CARE CUNG CẤP </h3>
+            <div className="py-10">
+                <h3 className="text-4xl font-bold text-sky-600 ml-10 mb-5">SẢN PHẨM ĐƯỢC KNH CARE CUNG CẤP </h3>
                 <div className="flex justify-evenly items-center w-full">
                     <img src={images.family3} alt="" className="w-1/3 h-auto" />
                     <div className="w-1/2">
-                        <p className="font-bold text-xl">
-                            KNH Care cam kết mang đến cho khách hàng những sản phẩm bảo hiểm tốt nhất với giá cả cạnh
-                            tranh
+                        <p className="font-bold text-xl leading-8">
+                            KNH Care cam kết mang đến cho khách hàng những sản phẩm bảo hiểm
+                            <br />
+                            tốt nhất với giá cả cạnh tranh
                         </p>
-                        <p className="text-xl">
+                        <p className="text-xl leading-8">
                             Cung cấp giải pháp bảo hiểm, tài chính Tạo sự an tâm cho gia đình Việt
                         </p>
-                        <div className="flex items-center">
-                            <FontAwesomeIcon icon={faArrowRight} className="mr-2" />
+                        <div className="flex items-center mt-2">
+                            <FontAwesomeIcon icon={faArrowRight} className="mr-4" />
                             <div className="flex text-lg">
-                                <p>Xem chi tiết tại </p>
+                                <p>Xem chi tiết tại</p>
                                 <Link to={config.routes.insurances} className="underline text-blue-600 ml-1">
                                     Sản phẩm
                                 </Link>
@@ -203,8 +204,8 @@ function Home() {
                 </div>
             </div>
             {/* Thông tin cung cấp */}
-            <div className="my-10 bg-sky-100 p-10">
-                <h3 className="text-4xl font-bold ml-10 mb-10">THÔNG TIN MỚI NHẤT </h3>
+            <div className="py-10 bg-sky-100 p-10">
+                <h3 className="text-4xl font-bold mb-5">THÔNG TIN MỚI NHẤT </h3>
                 <SlickSlider data={news} className="flex justify-between"></SlickSlider>
             </div>
         </div>
