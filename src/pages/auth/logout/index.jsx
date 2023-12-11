@@ -26,6 +26,8 @@ function Logout() {
 
     useEffect(() => {
         logoutApi();
+
+        navigate(config.routes.login);
     }, []);
 }
 
