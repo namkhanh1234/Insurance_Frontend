@@ -45,7 +45,7 @@ function Login() {
         // console.log(res);
 
         if (res && res.data) {
-            // console.log(res.data);
+            console.log(res.data);
             localStorage.setItem('access_token', res.data.access);
             localStorage.setItem('refresh_token', res.data.refresh);
             localStorage.setItem('user_id', res.data.user_id);

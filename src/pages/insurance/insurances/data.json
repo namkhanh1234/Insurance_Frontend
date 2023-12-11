@@ -1,0 +1,111 @@
+[{
+  "insuranceId":1,
+  "nameInsurance":"KNH gói Đồng",
+  "fromAge":0,
+  "toAge":0,
+  "price":1065000,
+  "discount":0,
+  "status":"Active",
+  "insuranceTypeId":1,
+  "insuranceType": null
+},
+{
+    "insuranceId":2,
+    "nameInsurance":"KNH gói Bạc",
+    "fromAge":0,
+    "toAge":0,
+    "price":2130000,
+    "discount":0,
+    "status":"Active",
+    "insuranceTypeId":2,
+    "insuranceType": null
+},
+{
+    "insuranceId":3,
+    "nameInsurance":"KNH gói Titan",
+    "fromAge":0,
+    "toAge":0,
+    "price":4260000,
+    "discount":0,
+    "status":"Active",
+    "insuranceTypeId":3,
+    "insuranceType": null
+},
+{
+    "insuranceId":4,
+    "nameInsurance":"KNH gói Vàng",
+    "fromAge":0,
+    "toAge":0,
+    "price":8681000,
+    "discount":0,
+    "status":"Active",
+    "insuranceTypeId":4,
+    "insuranceType": null
+},
+{
+    "insuranceId":5,
+    "nameInsurance":"KNH gói Bạch Kim",
+    "fromAge":0,
+    "toAge":0,
+    "price":17152000,
+    "discount":0,
+    "status":"Active",
+    "insuranceTypeId":5,
+    "insuranceType": null
+},
+{
+    "insuranceId":6,
+    "nameInsurance":"KNH gói Đồng",
+    "fromAge":1,
+    "toAge":3,
+    "price":710000,
+    "discount":0,
+    "status":"Active",
+    "insuranceTypeId":1,
+    "insuranceType": null
+},
+{
+    "insuranceId":7,
+    "nameInsurance":"KNH gói Bạc",
+    "fromAge":1,
+    "toAge":3,
+    "price":1420000,
+    "discount":0,
+    "status":"Active",
+    "insuranceTypeId":2,
+    "insuranceType": null
+},
+{
+    "insuranceId":8,
+    "nameInsurance":"KNH gói Titan",
+    "fromAge":1,
+    "toAge":3,
+    "price":2840000,
+    "discount":0,
+    "status":"Active",
+    "insuranceTypeId":3,
+    "insuranceType": null
+},
+{
+    "insuranceId":9,
+    "nameInsurance":"KNH gói Vàng",
+    "fromAge":1,
+    "toAge":3,
+    "price":5787000,
+    "discount":0,
+    "status":"Active",
+    "insuranceTypeId":4,
+    "insuranceType": null
+},
+{
+    "insuranceId":10,
+    "nameInsurance":"KNH gói Bạch kim",
+    "fromAge":1,
+    "toAge":3,
+    "price":11435000,
+    "discount":0,
+    "status":"Active",
+    "insuranceTypeId":5,
+    "insuranceType": null
+}
+]
