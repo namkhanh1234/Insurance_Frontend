@@ -14,8 +14,8 @@ const login = async (email, password) => {
 
 // const refresh = async (refreshToken) => {
 //     try {
-//         const res = await axiosInstance.post('refresh', {
-//             refresh: refreshToken,
+//         const res = await axiosInstance.post('/refresh', {
+//             refreshtoken: refreshToken,
 //         });
 //         return res;
 //     } catch (error) {
@@ -23,15 +23,15 @@ const login = async (email, password) => {
 //     }
 // };
 
-// const logout = async (refreshToken) => {
-//     try {
-//         const res = await axiosInstance.post('logout', {
-//             refresh: refreshToken,
-//         });
-//         return res;
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
+const ApiLogout = async (refreshToken) => {
+    try {
+        const reponse = await axiosInstance.post('/token/logout', {
+            refreshtoken: refreshToken,
+        });
+        return reponse;
+    } catch (error) {
+        console.log(error);
+    }
+};
 
-export { login };
+export { login, ApiLogout };
