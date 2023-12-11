@@ -18,6 +18,9 @@ import Profile from '../pages/profile';
 import Insurances from '../pages/insurance/insurances';
 import InsuranceDetailt from '../pages/insurance/detail';
 
+// Registration Form
+import RegistrationForm from '../pages/registrationForm';  
+
 // Contracts
 import Contracts from '../pages/contract/contracts';
 import ContractDetail from '../pages/contract/detail';
@@ -43,6 +46,9 @@ const privateRoutes = [
     // Insurance
     { path: config.routes.insurances, component: Insurances },
     { path: config.routes.insuranceDetail, component: InsuranceDetailt },
+
+    // Registration FOrm
+    { path: config.routes.registrationForm, component: RegistrationForm},
 
     // Contract
     { path: config.routes.contracts, component: Contracts },

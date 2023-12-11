@@ -20,6 +20,9 @@ const routes = {
 
     // Registration insurance package
 
+    // Registration Form
+    registrationForm: '/registrationForm',
+
     // Contract insurance
     contracts: '/contracts',
     contractDetail: '/contracts/:id',
