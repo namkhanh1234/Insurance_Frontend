@@ -13,10 +13,16 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useToast } from '@/components/ui/use-toast';
 
 import axiosInstance from '../../../utils/axios';
 import { useState } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-regular-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 const cx = classNames.bind(styles);
 YupPassword(yup);
 const schema = yup
@@ -44,7 +50,11 @@ const schema = yup
     .required();
 
 function Register() {
+    const [typeInput, setTypeInput] = useState('password');
+    const [typeInput2, setTypeInput2] = useState('password');
     const [gender, setGender] = useState('Nam');
+    const navigate = useNavigate();
+    const { toast } = useToast();
 
     const {
         register,
@@ -54,37 +64,44 @@ function Register() {
         resolver: yupResolver(schema),
     });
 
+    const handleTypeInput = () => {
+        if (typeInput == 'password') {
+            setTypeInput('text');
+        } else {
+            setTypeInput('password');
+        }
+    };
+
+    const handleTypeInput2 = () => {
+        if (typeInput2 == 'password') {
+            setTypeInput2('text');
+        } else {
+            setTypeInput2('password');
+        }
+    };
     const onSubmit = async (data) => {
-        // try {
-        //     await axiosInstance.post('/User/register', {
-        //         email: data.email,
-        //         password: data.password,
-        //         fullName: data.name,
-        //         phone: data.phone_number,
-        //         sex: gender,
-        //         dateOfBirth: '2023-11-29T07:25:14.027Z',
-        //         cardIdentification: data.id,
-        //     });
-        // } catch (error) {
-        //     console.log(error);
-        // }
-        console.log(data);
-        axios
-            .post('http://localhost:5118/api/v1/User/register', {
+        try {
+            await axiosInstance.post('/User/register', {
                 email: data.email,
                 password: data.password,
                 fullName: data.name,
                 phone: data.phone_number,
                 sex: gender,
-                dateOfBirth: '2023-11-29T07:25:14.027Z',
+                dateOfBirth: data.birthday,
                 cardIdentification: data.id,
-            })
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
             });
+            toast({
+                description: 'Đăng ký thành công.',
+                variant: 'success',
+            });
+            navigate('/login');
+        } catch (error) {
+            console.log(error);
+            toast({
+                description: 'Lỗi hệ thống vui lòng thử lại.',
+                variant: 'destructive',
+            });
+        }
     };
 
     return (
@@ -144,15 +161,31 @@ function Register() {
 
                         <div className={cx('password__wrapper', 'mt-2 space-y-1')}>
                             <Label htmlFor="password">Mật khẩu</Label>
-                            <Input type="password" placeholder="•••••••••" {...register('password')} />
+                            <div className="relative">
+                                <Input type={typeInput2} placeholder="•••••••••" {...register('password')} />
+                                <FontAwesomeIcon
+                                    onClick={handleTypeInput2}
+                                    className="absolute top-3 right-4"
+                                    icon={typeInput2 == 'password' ? faEyeSlash : faEye}
+                                />
+                            </div>
+
                             <p className="text-red-600 text-xs">{errors.password?.message}</p>
                         </div>
 
                         <div className={cx('username__wrapper', 'space-y-1')}>
                             <Label htmlFor="confirmPassword">Nhập lại mật khẩu</Label>
-                            <Input type="password" placeholder="•••••••••" {...register('confirm_password')} />
-                            <p className="text-red-600 text-xs">{errors.confirm_password?.message}</p>
+                            <div className="relative">
+                                <Input type={typeInput} placeholder="•••••••••" {...register('confirm_password')} />
+                                <FontAwesomeIcon
+                                    onClick={handleTypeInput}
+                                    className="absolute top-3 right-4"
+                                    icon={typeInput == 'password' ? faEyeSlash : faEye}
+                                />
+                                <p className="text-red-600 text-xs">{errors.confirm_password?.message}</p>
+                            </div>
                         </div>
+
                         <div className="my-6 flex justify-center items-center">
                             <Button
                                 type="submit"

@@ -26,6 +26,9 @@ const routes = {
     contractPayment: 'contracts/payment',
 
     // Customer service
+
+    //Payment
+    paymentRequest: '/paymentRequest',
 };
 
 export default routes;
