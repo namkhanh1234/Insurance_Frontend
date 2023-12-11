@@ -1,0 +1,37 @@
+.contractPayment_modal {
+    // height: 80vh;
+    // display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.personClass_modal {
+    padding: 5px 10px;
+    background-color: #0369a1;
+}
+
+.personInfo_modal {
+    padding: 5px 10px;
+    background-color: #bae6fd;
+    border: 1px solid #ccc; 
+    position: relative;
+}
+
+.paymentMethod_modal {
+    padding: 5px 10px;
+    background-color: #082f49;
+}
+
+.payments {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.line {
+    height: 1px;
+    background-color: #0369a1;  
+    margin: 10px 0; 
+    margin-right: 10px;
+}
+
