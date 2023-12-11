@@ -12,18 +12,15 @@ import Menu from '@/components/Popper/Menu';
 
 function Header() {
     const [currentUser, setCurrentUser] = useState(null);
+    const userId = localStorage.getItem('user_id');
 
     useEffect(() => {
-        const userId = localStorage.getItem('user_id');
-        // console.log(userId);
+        console.log(userId);
 
         if (userId != null || userId != undefined) {
             setCurrentUser(userId);
         }
     }, []);
-
-    // console.log(config.routes.profile);
-    // console.log(currentUser);
 
     const userMenu = [
         {
@@ -98,10 +95,19 @@ function Header() {
             </div>
 
             <div className="flex items-center space-x-4">
-                <div className="space-x-3 items-center hidden md:inline-flex">
-                    <Link to={config.routes.home}>Giới thiệu</Link>
-                    <Link to={config.routes.insurances}>Sản phẩm</Link>
-                    <Link to={config.routes.support}>Hỗ trợ</Link>
+                <div className="mr-6 space-x-6 items-center hidden md:inline-flex">
+                    <Link to={config.routes.home} className="hover:underline">
+                        Giới thiệu
+                    </Link>
+                    <Link to={config.routes.insurances} className="hover:underline">
+                        Sản phẩm
+                    </Link>
+                    <Link to={config.routes.support} className="hover:underline">
+                        Hỗ trợ
+                    </Link>
+                    <Link to={config.routes.registrationForm} className="hover:underline">
+                        Đăng ký bảo hiểm
+                    </Link>
                 </div>
 
                 {/* Chỗ này cần khi có account ẩn này hiện iamge cho khách hàng */}
@@ -119,10 +125,10 @@ function Header() {
                     </div>
                 ) : (
                     <>
-                        <Button className="bg-[#3E8DCC]" asChild>
+                        <Button className="bg-[#3E8DCC] hover:bg-sky-700" asChild>
                             <Link to={config.routes.login}>Đăng nhập</Link>
                         </Button>
-                        <Button className="bg-[#aadffb] text-[#3E8DCC] " asChild>
+                        <Button className="bg-[#aadffb] text-[#3E8DCC] hover:bg-sky-300" asChild>
                             <Link to={config.routes.register}>Đăng ký</Link>
                         </Button>
                     </>

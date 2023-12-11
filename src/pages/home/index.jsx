@@ -22,7 +22,6 @@ import { Link } from 'react-router-dom';
 import config from '../../config';
 
 import SlickSlider from '../../components/SlickSlider/SlickSlider';
-import Card from '../../components/Card/Card';
 
 const cx = classNames.bind(styles);
 
@@ -104,7 +103,6 @@ function Home() {
                 </div>
                 {/* Image introduction */}
                 <div className="max-w-full">
-                    {/* <img src="https://m.evbi.vn/Content/landingpage/InsuranceHeathCare/images/laptop.png" alt="" /> */}
                     <img className="w-full" src={images.imageIntroduction} alt="" />
                 </div>
             </div>

@@ -50,7 +50,7 @@ function Profile() {
                     <div className="flex w-full justify-evenly mb-4 ">
                         <div className="w-1/4">
                             <Label>Họ tên</Label>
-                            <Input type="text" disabled={enable} defaultValue={user?.fullName}></Input>
+                            <Input type="text" disabled={enable} value={user?.fullName}></Input>
                         </div>
                         <div className="w-1/4">
                             <Label>Giới tính</Label>

@@ -36,7 +36,7 @@ function DefaultLayout({ children }) {
             </header>
             <div className={cx('container')}>
                 {/* <div className={cx('content', 'mx-3 md:mx-6')}>{children}</div> */}
-                <div className={cx('content', 'my-4')}>{children}</div>
+                <div className={cx('content', 'my-4 mx-4')}>{children}</div>
 
                 <div className="mx-3 md:mx-6">
                     <Footer />
