@@ -9,7 +9,7 @@ const routes = {
     home: '/',
 
     // Profile
-    profile: '/profile',
+    profile: '/profile/:id',
 
     // Support
     support: '/support',
@@ -28,7 +28,6 @@ const routes = {
 
     //Payment
     paymentRequest: '/paymentRequest',
-
 };
 
 export default routes;
