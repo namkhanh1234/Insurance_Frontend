@@ -15,7 +15,7 @@ function Header() {
     const userId = localStorage.getItem('user_id');
 
     useEffect(() => {
-        console.log(userId);
+        // console.log(userId);
 
         if (userId != null || userId != undefined) {
             setCurrentUser(userId);
