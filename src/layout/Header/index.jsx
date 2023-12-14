@@ -108,6 +108,9 @@ function Header() {
                     <Link to={config.routes.registrationForm} className="hover:underline">
                         Đăng ký bảo hiểm
                     </Link>
+                    <Link to={config.routes.paymentRequest} className="hover:underline">
+                        Yêu cầu
+                    </Link>
                 </div>
 
                 {/* Chỗ này cần khi có account ẩn này hiện iamge cho khách hàng */}
