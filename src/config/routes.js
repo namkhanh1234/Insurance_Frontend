@@ -26,7 +26,7 @@ const routes = {
     // Contract insurance
     contracts: '/contracts',
     contractDetail: '/contracts/:id',
-    contractPayment: 'contracts/payment',
+    contractPayment: '/contracts/payment',
 
     // Customer service
 

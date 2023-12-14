@@ -77,7 +77,7 @@ function Home() {
         <div>
             <div className="flex justify-evenly max-w-full bg-sky-100 p-8 mt-0 items-center">
                 <div className="">
-                    <img src={images.logoTitle} alt="" className="w-3/4 mb-2" />
+                    <img src={images.logoTitle} alt="" className="w-3/4 mb-4" />
                     <h1 className="text-3xl mb-2">Bảo hiểm sức khỏe KNH</h1>
                     <div className="flex items-center">
                         <CheckSquare2 className="mr-2"></CheckSquare2>
