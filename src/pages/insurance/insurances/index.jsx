@@ -95,7 +95,7 @@ function Insurances() {
         }
     };
     // console.log('Checked >> ', currentAge);
-    console.log('Checked data >> ', insurances);
+    // console.log('Checked data >> ', insurances);
 
     useEffect(() => {
         GetAllAges();
@@ -125,7 +125,7 @@ function Insurances() {
             </div> */}
 
             <div className="text-2xl font-semibold text-[#3e8bcc] select-none uppercase pt-8 pb-3">
-                CHỌN SẢN PHẨM BẢO HIỂM - NAM
+                CHỌN SẢN PHẨM BẢO HIỂM
             </div>
             <div className="mb-8"></div>
             <div className={cx('age-ranges', 'age-ranges flex pb-3 border-b-4 border-[#005691]')}>
