@@ -6,6 +6,7 @@ import family2 from '@/assets/images/family2.png';
 import family3 from '@/assets/images/family3.png';
 import card1 from '@/assets/images/card1.png';
 import card2 from '@/assets/images/card2.png';
+import camera from '@/assets/images/camera.svg';
 
 const images = {
     logo: logo,
@@ -16,7 +17,7 @@ const images = {
     family3: family3,
     card1: card1,
     card2: card2,
-
+    camera: camera,
 };
 
 export default images;

@@ -17,7 +17,7 @@ const ApiGetAllInsurances = async (query = {}) => {
 
 const ApiInsurancesByAgeCustomer = async (age = 0) => {
     try {
-        console.log('call api');
+        // console.log('call api');
         const response = await axiosInstance.get('insurance/filter', {
             params: {
                 age: age,
