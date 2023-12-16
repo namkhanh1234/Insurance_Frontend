@@ -22,6 +22,7 @@ const routes = {
 
     // Registration Form
     registrationForm: '/registerinsurance',
+    contractPaymentInfo: '/contractPaymentInfo',
 
     // Contract insurance
     contracts: '/contracts',
