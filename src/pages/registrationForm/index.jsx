@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './ContractPayment.module.scss';
 
 import { Button } from '@/components/ui/button';
@@ -13,11 +13,12 @@ import config from '../../config';
 import images from '../../assets/images';
 import { ApiInsurancesByAgeCustomer } from '../../services/insuranceService';
 import FormatCurrency from '../../components/FormatCurrency/FormatCurrency';
-import { AlignHorizontalJustifyCenterIcon } from 'lucide-react';
+import { ApiPostRegistration } from '../../services/registrationService';
 
 const cx = classNames.bind(styles);
 
 function RegistrationForm() {
+    const navigate = useNavigate();
     const initialBeneficiaryData = Object.freeze({
         email: '',
         fullName: '',
@@ -28,7 +29,15 @@ function RegistrationForm() {
         address: '',
     });
 
-    // Nam
+    const initialRegistration = Object.freeze({
+        startDate: '',
+        endDate: '',
+        basicInsuranceFee: '',
+        totalSupplementBenefitFee: '',
+        beneficiaryId: '',
+        insuranceId: '',
+    });
+
     const [relationship, setRelationship] = useState('');
     const [gender, setGender] = useState('');
     const [currentInsurance, setCurrentInsurance] = useState({});
@@ -38,85 +47,84 @@ function RegistrationForm() {
     const [age, setAge] = useState(0);
     const [imageSrc, setImageSrc] = useState(null);
 
-    // Một form của beneficiary - dựa trên API
+    // Form - beneficiary  && registration + beneficiaryResult && registrationResult
     const [beneficiaryData, setBeneficiaryData] = useState(initialBeneficiaryData);
+    const [beneficiaryResult, setBeneficiaryResult] = useState({});
+    const [registration, setRegistration] = useState(initialRegistration);
+    const [registrationResult, setRegistrationResult] = useState({});
 
-    const handleChangeBeneficiary = (event) => {
-        if ([event.target.name] == 'fullName') {
-            setBeneficiaryData({
-                ...beneficiaryData,
-                [event.target.name]: event.target.value.trim(),
-            });
-        } else if ([event.target.name] == 'phone') {
-            setBeneficiaryData({
-                ...beneficiaryData,
-                [event.target.name]: event.target.value.trim(),
-            });
-        } else if ([event.target.name] == 'dateOfBirth') {
-            setBeneficiaryData({
-                ...beneficiaryData,
-                [event.target.name]: event.target.value.trim(),
-            });
-        } else if ([event.target.name] == 'email') {
-            setBeneficiaryData({
-                ...beneficiaryData,
-                [event.target.name]: event.target.value.trim(),
-            });
-        } else if ([event.target.name] == 'cardidentification') {
-            setBeneficiaryData({
-                ...beneficiaryData,
-                [event.target.name]: event.target.value.trim(),
-            });
-        } else [event.target.name] == 'address';
-        {
-            setBeneficiaryData({
-                ...beneficiaryData,
-                [event.target.name]: event.target.value.trim(),
-            });
-        }
-    };
-    // console.log(beneficiaryData);
-
-    // Một form của đơn đăng ký - mã insurance id lấy từ currentInsurance.inusranceId
     // Submit form
     const handleSubmit = async (event) => {
-        event.preventDefault();
+        try {
+            event.preventDefault();
+            let formDataBeneficiary = new FormData();
 
-        let formDataBeneficiary = new FormData();
+            formDataBeneficiary.append('email', beneficiaryData.email);
+            formDataBeneficiary.append('fullName', beneficiaryData.fullName);
+            formDataBeneficiary.append('phone', beneficiaryData.phone);
+            formDataBeneficiary.append('sex', gender);
+            formDataBeneficiary.append('dateOfBirth', beneficiaryData.dateOfBirth);
+            formDataBeneficiary.append('cardidentification', beneficiaryData.cardidentification);
+            formDataBeneficiary.append('imageIdentification', beneficiaryData.imageIdentification);
+            formDataBeneficiary.append('address', beneficiaryData.address);
+            formDataBeneficiary.append('RelationshipPolicyholder', relationship);
 
-        formDataBeneficiary.append('email', beneficiaryData.email);
-        formDataBeneficiary.append('fullName', beneficiaryData.fullName);
-        formDataBeneficiary.append('phone', beneficiaryData.phone);
-        formDataBeneficiary.append('sex', gender);
-        formDataBeneficiary.append('dateOfBirth', beneficiaryData.dateOfBirth);
-        formDataBeneficiary.append('cardidentification', beneficiaryData.cardidentification);
-        formDataBeneficiary.append('imageIdentification', beneficiaryData.imageIdentification);
-        formDataBeneficiary.append('address', beneficiaryData.address);
-        formDataBeneficiary.append('RelationshipPolicyholder', relationship);
+            // console.log('Check form data beneficiary >> ', formDataBeneficiary);
+            // for (const pair of formDataBeneficiary.entries()) {
+            //     console.log(`${pair[0]}: ${pair[1]}`);
+            // }
 
-        // console.log('Check data >> ', beneficiaryData);
-
-        // console.log('Check form data >> ', formDataBeneficiary);
-        // for (const pair of formDataBeneficiary.entries()) {
-        //     console.log(`${pair[0]}: ${pair[1]}`);
-        // }
-
-        await axios
-            .post(`https://localhost:7162/api/v1/beneficiary`, formDataBeneficiary, {
-                timeout: 5000,
-                headers: {
-                    Authorization: localStorage.getItem('access_token')
-                        ? 'JWT ' + localStorage.getItem('access_token')
-                        : null,
-                    accept: 'application/json',
+            // Step 1: Post API beneficiary
+            const beneficiaryResponse = await axios.post(
+                `https://localhost:7162/api/v1/beneficiary`,
+                formDataBeneficiary,
+                {
+                    timeout: 5000,
+                    headers: {
+                        Authorization: localStorage.getItem('access_token')
+                            ? 'JWT ' + localStorage.getItem('access_token')
+                            : null,
+                        accept: 'application/json',
+                    },
                 },
-            })
-            .then((res) => {
-                console.log(res.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+            );
+
+            // Get result from API beneficiary
+            if (beneficiaryResponse && beneficiaryResponse.data) {
+                console.log(beneficiaryResponse.data);
+                setBeneficiaryResult(beneficiaryResponse.data);
+
+                // Kiểm tra xem có ID người thụ hưởng không
+                if (!beneficiaryResponse.data.beneficiaryId) {
+                    throw new Error('Failed to get beneficiary ID.');
+                }
+
+                // Step 2: Prepare data for beneficiary's registration
+                if (currentInsurance.insuranceId != null && currentInsurance.insuranceId != undefined) {
+                    registration.insuranceId = currentInsurance.insuranceId;
+                    registration.basicInsuranceFee = currentInsurance.price;
+                    registration.beneficiaryId = beneficiaryResponse.data.beneficiaryId;
+                    registration.totalSupplementBenefitFee = 0; // chưa làm module này nên cho không
+
+                    // Step 3: Post API registration
+                    PostRegistration(registration);
+
+                    // Step 4: Nếu thành công -> Navigate contracts
+                    navigate(config.routes.contractPayment);
+                }
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const PostRegistration = async (data = {}) => {
+        const res = await ApiPostRegistration(data);
+
+        if (res && res.data) {
+            setRegistrationResult(res.data);
+            console.log('Result registration: ', res.data);
+        }
     };
 
     const GetInsurancesByAgeCustomer = async (age) => {
@@ -153,7 +161,6 @@ function RegistrationForm() {
         if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dateOfBirth.getDate())) {
             age--;
         }
-
         setBirthdate(newBirthdate);
         setAge(age);
     };
@@ -169,6 +176,55 @@ function RegistrationForm() {
         if (file) {
             const imageUrl = URL.createObjectURL(file);
             setImageSrc(imageUrl);
+        }
+    };
+
+    const handleChangeBeneficiary = (event) => {
+        if ([event.target.name] == 'fullName') {
+            setBeneficiaryData({
+                ...beneficiaryData,
+                [event.target.name]: event.target.value.trim(),
+            });
+        } else if ([event.target.name] == 'phone') {
+            setBeneficiaryData({
+                ...beneficiaryData,
+                [event.target.name]: event.target.value.trim(),
+            });
+        } else if ([event.target.name] == 'dateOfBirth') {
+            setBeneficiaryData({
+                ...beneficiaryData,
+                [event.target.name]: event.target.value.trim(),
+            });
+        } else if ([event.target.name] == 'email') {
+            setBeneficiaryData({
+                ...beneficiaryData,
+                [event.target.name]: event.target.value.trim(),
+            });
+        } else if ([event.target.name] == 'cardidentification') {
+            setBeneficiaryData({
+                ...beneficiaryData,
+                [event.target.name]: event.target.value.trim(),
+            });
+        } else [event.target.name] == 'address';
+        {
+            setBeneficiaryData({
+                ...beneficiaryData,
+                [event.target.name]: event.target.value.trim(),
+            });
+        }
+    };
+
+    const handleChangeRegistration = (event) => {
+        if ([event.target.name] == 'startDate') {
+            setRegistration({
+                ...registration,
+                [event.target.name]: event.target.value + 'T00:00:00',
+            });
+        } else if ([event.target.name] == 'endDate') {
+            setRegistration({
+                ...registration,
+                [event.target.name]: event.target.value + 'T00:00:00',
+            });
         }
     };
 
@@ -325,16 +381,10 @@ function RegistrationForm() {
                 <div className="font-semibold pb-3 border-b-4 border-[#005691]">Chọn gói bảo hiểm</div>
 
                 <div className="grid grid-cols-4 gap-2 md:gap-4">
-                    {/* <div className={cx('username__wrapper', 'col_span_1 ml-4 mr-4')}> */}
                     <div className={cx('username__wrapper', 'col_span_1')}>
                         <div className="pt-2">
-                            <Label htmlFor="startDate">Ngày hiệu lực</Label>
-                            <Input
-                                type="date"
-                                id="start-date"
-                                // value={startdate}
-                                // onChange={handleBirthdateChange}
-                            />
+                            <Label htmlFor="start-date">Ngày hiệu lực</Label>
+                            <Input name="startDate" type="date" id="start-date" onChange={handleChangeRegistration} />
                         </div>
 
                         <div className="pt-2">
@@ -362,33 +412,23 @@ function RegistrationForm() {
 
                     <div className={cx('username__wrapper', 'col_span_1')}>
                         <div className="pt-2">
-                            <Label htmlFor="startTime">Thời gian bắt đầu</Label>
-                            <Input type="time" id="start-time" name="start-time"></Input>
-                        </div>
-
-                        <div className="pt-2">
-                            <Label htmlFor="oldContract">Số hợp đồng cũ</Label>
-                            <Input type="number" placeholder="Nhập số hợp đồng cũ"></Input>
-                        </div>
-                    </div>
-
-                    <div className={cx('username__wrapper', 'col_span_1')}>
-                        <div className="pt-2">
-                            <Label htmlFor="endDate">Ngày kết thúc</Label>
+                            <Label htmlFor="start-time">Thời gian bắt đầu</Label>
                             <Input
-                                type="date"
-                                id="end-date"
-                                // value={birthdate}
-                                // onChange={handleBirthdateChange}
-                            />
+                                readOnly
+                                value="00:00"
+                                type="time"
+                                id="start-time"
+                                className="focus:ring-0 focus-visible:ring-0 focus-visible:ring-transparent"
+                            ></Input>
                         </div>
-
                         <div className="pt-2">
                             <Label htmlFor="fee">Phí bảo hiểm</Label>
                             <Input
+                                name="basicInsuranceFee"
                                 readOnly
                                 type="text"
                                 placeholder="Nhập phí bảo hiểm"
+                                onChange={handleChangeRegistration}
                                 value={currentInsurance?.price ? FormatCurrency(currentInsurance?.price) : '0đ'}
                                 className="bg-green-100 border-green-200 focus:ring-0 focus-visible:ring-0 focus-visible:ring-transparent"
                             ></Input>
@@ -397,8 +437,32 @@ function RegistrationForm() {
 
                     <div className={cx('username__wrapper', 'col_span_1')}>
                         <div className="pt-2">
-                            <Label htmlFor="endTime">Thời gian kết thúc</Label>
-                            <Input type="time" id="end-time" name="end-time"></Input>
+                            <Label htmlFor="end-date">Ngày kết thúc</Label>
+                            <Input name="endDate" type="date" id="end-date" onChange={handleChangeRegistration} />
+                        </div>
+
+                        {/* <div className="pt-2">
+                            <Label htmlFor="old-contract">Số hợp đồng cũ</Label>
+                            <Input
+                                name="oldContract"
+                                type="text"
+                                id="old-contract"
+                                placeholder="Nhập số hợp đồng cũ"
+                                onChange={handleChangeRegistration}
+                            ></Input>
+                        </div> */}
+                    </div>
+
+                    <div className={cx('username__wrapper', 'col_span_1')}>
+                        <div className="pt-2">
+                            <Label htmlFor="end-time">Thời gian kết thúc</Label>
+                            <Input
+                                readOnly
+                                value="00:00"
+                                type="time"
+                                id="end-time"
+                                className="focus:ring-0 focus-visible:ring-0 focus-visible:ring-transparent"
+                            ></Input>
                         </div>
                     </div>
                 </div>
@@ -414,14 +478,9 @@ function RegistrationForm() {
                     >
                         Chi tiết quyền lợi
                     </Button>
-
-                    <Button style={{ fontWeight: 'bold', marginLeft: '50px', backgroundColor: '#0369a1' }}>
-                        <Link to={config.routes.contractPayment}>Tiếp tục</Link>
-                        {/* Tiếp tục */}
-                    </Button>
-                    <button onSubmit={handleSubmit} onClick={handleSubmit}>
+                    <Button onSubmit={handleSubmit} onClick={handleSubmit} className="bg-[#3E8DCC] hover:bg-sky-700">
                         Tiếp tục
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>
