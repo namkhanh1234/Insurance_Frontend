@@ -47,6 +47,8 @@
     outline: none;
     background: transparent;
 }
+
+
 .slick-prev:hover:before,
 .slick-prev:focus:before,
 .slick-next:hover:before,

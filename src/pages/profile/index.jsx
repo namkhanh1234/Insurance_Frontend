@@ -8,6 +8,8 @@ import { useParams } from 'react-router-dom';
 
 import { ApiGetUserById } from '../../services/userService';
 
+import { format } from 'date-fns';
+
 function Profile() {
     const userId = useParams();
     const [user, setUser] = useState({});
@@ -18,6 +20,13 @@ function Profile() {
     const handleButton = (e) => {
         setEnable(false);
     };
+    const formatingDated = (birthDay) => {
+        if (!birthDay) return;
+        const dateObject = new Date(birthDay);
+        const formattedDate = format(new Date(birthDay), 'yyyy-MM-dd');
+        return formattedDate;
+        //return dateObject;
+    };
 
     const GetUserById = async (id) => {
         const response = await ApiGetUserById(id);
@@ -26,8 +35,6 @@ function Profile() {
             setUser(response.data);
         }
     };
-
-    console.log(user);
 
     useEffect(() => {
         GetUserById(userId.id);
@@ -42,21 +49,22 @@ function Profile() {
             variant: 'success',
         });
     };
+
     return (
         <>
-            <div>
-                <h3 className="text-2xl m-[20px] font-bold text-sky-600 ">THÔNG TIN CÁ NHÂN</h3>
-                <div className="p-7 rounded-2xl border-2 bg-white flex flex-col items-center">
-                    <div className="flex w-full justify-evenly mb-4 ">
+            <div className="flex flex-col items-center bg-sky-100 pb-10">
+                <h3 className="text-2xl m-[20px] font-bold text-sky-600">THÔNG TIN CÁ NHÂN</h3>
+                <div className="p-7 rounded-2xl border-2 bg-white flex flex-col items-center w-[50vw]">
+                    <div className="flex justify-evenly mb-4 w-full ">
                         <div className="w-1/4">
                             <Label>Họ tên</Label>
-                            <Input type="text" disabled={enable} value={user?.fullName}></Input>
+                            <Input type="text" disabled={enable} defaultValue={user?.fullName}></Input>
                         </div>
                         <div className="w-1/4">
                             <Label>Giới tính</Label>
                             <Select disabled={enable}>
                                 <SelectTrigger>
-                                    <SelectValue placeholder="Nam" />
+                                    <SelectValue placeholder={user?.sex} />
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
@@ -68,26 +76,30 @@ function Profile() {
                         </div>
                         <div className="w-1/4">
                             <Label>Ngày sinh</Label>
-                            <Input type="text" disabled={enable} value={user?.dateOfBirth}></Input>
+                            <Input
+                                type="date"
+                                disabled={enable}
+                                defaultValue={formatingDated(user?.dateOfBirth)}
+                            ></Input>
                         </div>
                     </div>
 
                     <div className="flex w-full justify-evenly">
                         <div className="w-1/4">
                             <Label>Email</Label>
-                            <Input type="text" disabled={enable} value={user?.email}></Input>
+                            <Input type="text" disabled={enable} defaultValue={user?.email}></Input>
                         </div>
                         <div className="w-1/4">
                             <Label>CCCD</Label>
-                            <Input type="text" disabled={enable} value={user?.cardIdentification}></Input>
+                            <Input type="text" disabled={enable} defaultValue={user?.cardIdentification}></Input>
                         </div>
                         <div className="w-1/4">
                             <Label>Số điện thoại</Label>
-                            <Input type="text" disabled={enable} value={user?.phone}></Input>
+                            <Input type="text" disabled={enable} defaultValue={user?.phone}></Input>
                         </div>
                     </div>
 
-                    <div className="my-6 flex w-1/2 justify-evenly ">
+                    <div className="mt-8 flex w-1/2 justify-evenly ">
                         {enable ? (
                             <Button
                                 className="w-[140px] h-[42px] bg-sky-600 text-base rounded-md hover:bg-sky-700"
