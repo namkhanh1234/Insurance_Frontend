@@ -68,8 +68,6 @@ function Login() {
         }
     };
 
-    // console.log(formData);
-
     return (
         <>
             <div className={cx('login__modal')}>
