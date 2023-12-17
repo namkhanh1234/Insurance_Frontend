@@ -7,10 +7,53 @@ import styles from './PaymentInfo.module.scss';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import axiosInstance from '../../../utils/axios';
+import { useToast } from '@/components/ui/use-toast';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const cx = classNames.bind(styles);
 
+const schema = yup
+    .object({
+        name: yup.string().required('Họ tên không được để trống'),
+        phone_number: yup.string().required('Số điện thoại không được để trống'),
+        invoice_id: yup.string().required('Mã thanh toán không được để trống'),
+        periodic_fee: yup.string().required('Số tiền không được để trống')
+    })
+    .required();
+
 function ContractPaymentInfo() {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(schema),
+    });
+    const { toast } = useToast();
+    const onSubmit = async (data) => {
+        console.log(data);
+        try {
+            await axiosInstance.post('/contractPaymentInfo', {
+                fullName: data.name,
+                phone_number: data.phone_number,
+                invoice_id: data.invoice_id,
+                periodic_fee: data.periodic_fee
+            });
+            toast({
+                description: 'Đăng ký thành công.',
+                variant: 'success',
+            });
+        } catch (error) {
+            console.log(error);
+            toast({
+                description: 'Lỗi hệ thống vui lòng thử lại.',
+                variant: 'destructive',
+            });
+        }
+    }
     return (
         <div className='mx-3 md:mx-6'>
             <div className='bg-white'>
@@ -40,7 +83,7 @@ function ContractPaymentInfo() {
 
                     </div>
 
-                    <div className={cx('username__wrapper', 'ccol-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2 p-4 rounded-md border')}>
+                    <form className={cx('username__wrapper', 'ccol-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2 p-4 rounded-md border')} onSubmit={handleSubmit(onSubmit)}>
                         <div className='text-2xl uppercase font-semibold pb-5'>Thông tin khách hàng thanh toán</div>
 
                         <div className='border-b'></div>
@@ -53,32 +96,36 @@ function ContractPaymentInfo() {
                             <div className={cx('username__wrapper', 'col_span_1')}>
                                 <div className='pt-5 mr-5'>
                                     <Label htmlFor='name'>Họ tên</Label>
-                                    <Input type='text' placeholder='Nhập họ tên tài khoản'></Input>
+                                    <Input type='text' placeholder='Nhập họ tên tài khoản' {...register('name')}></Input>
+                                    <p className="text-red-600 text-xs">{errors.name?.message}</p>
                                 </div>
 
                                 <div className='pt-5 mr-5'>
                                     <Label htmlFor='invoice_id'>Mã thanh toán</Label>
-                                    <Input type='text' placeholder='Nhập mã thanh toán MoMo'></Input>
+                                    <Input type='text' placeholder='Nhập mã thanh toán MoMo' {...register('invoice_id')}></Input>
+                                    <p className="text-red-600 text-xs">{errors.invoice_id?.message}</p>
                                 </div>                                
                             </div>
                             
                             <div className={cx('username__wrapper', 'col_span_1')}>
                                 <div className='pt-5 ml-5'>
                                     <Label htmlFor='phone_number'>Số điện thoại</Label>
-                                    <Input type='text' placeholder='Nhập số điện thoại tài khoản'></Input>
+                                    <Input type='text' placeholder='Nhập số điện thoại tài khoản' {...register('phone_number')}></Input>
+                                    <p className="text-red-600 text-xs">{errors.phone_number?.message}</p>
                                 </div>
                                 
                                 <div className='pt-5 ml-5'>
                                     <Label htmlFor='periodic_fee'>Số tiền</Label>
-                                    <Input type='text' placeholder='Nhập số tiền'></Input>
+                                    <Input type='text' placeholder='Nhập số tiền' {...register('periodic_fee')}></Input>
+                                    <p className="text-red-600 text-xs">{errors.periodic_fee?.message}</p>
                                 </div>
                             </div>
                         </div>
 
                         <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '25px' }}>
-                            <Button style={{ fontWeight: 'bold', backgroundColor: '#db2777' }}>Xác nhận</Button>
+                            <Button type="submit" style={{ fontWeight: 'bold', backgroundColor: '#db2777' }}>Xác nhận</Button>
                         </div>                    
-                    </div>
+                    </form>
                 </div>
             </div>
 
