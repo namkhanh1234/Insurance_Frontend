@@ -100,7 +100,7 @@ function Insurances() {
     useEffect(() => {
         GetAllAges();
 
-        console.log('call useffect');
+        // console.log('call useffect');    
         // console.log(currentAge);
         GetAllInsurancesByAge(currentAge);
     }, [currentAge]);
