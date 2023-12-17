@@ -7,6 +7,7 @@ import config from '../../../config';
 import logo from '@/assets/images/logo.png';
 import { login } from '../../../services/authenticationService';
 import axiosInstance from '../../../utils/axios';
+import GoogleLoginButton from '../../../components/GoogleLoginButton/GoogleLoginButton';
 
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -45,7 +46,7 @@ function Login() {
         // console.log(res);
 
         if (res && res.data) {
-            console.log(res.data);
+            // console.log(res.data);
             localStorage.setItem('access_token', res.data.access);
             localStorage.setItem('refresh_token', res.data.refresh);
             localStorage.setItem('user_id', res.data.user_id);
@@ -68,6 +69,15 @@ function Login() {
         }
     };
 
+    const handleGoogleLoginSuccess = (response) => {
+        // Gửi `response.tokenId` về server để xác thực người dùng.
+        // Lưu trữ thông tin người dùng nếu cần.
+    };
+
+    const handleGoogleLoginFailure = (error) => {
+        console.error('Google login failed:', error);
+    };
+
     return (
         <>
             <div className={cx('login__modal')}>
@@ -78,7 +88,6 @@ function Login() {
                         </Link>
                         <h2 className="mt-2 font-semibold">Quản lý hợp đồng bảo hiểm online cùng KNH</h2>
                     </div>
-
                     {/* login__form */}
                     <form action="" method="POST" className="mt-6 flex-1">
                         <div className={cx('username__wrapper', 'space-y-1')}>
@@ -120,9 +129,10 @@ function Login() {
                             </Button>
                         </div>
                     </form>
-
-                    {/* <div className="login__action"></div> */}
-
+                    {/* login google */}
+                    <div className="login__action">
+                        <GoogleLoginButton onSuccess={handleGoogleLoginSuccess} onFailure={handleGoogleLoginFailure} />
+                    </div>
                     <div className="login__footer">
                         <Link
                             to={config.routes.forgotPassword}
