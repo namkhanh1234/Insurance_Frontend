@@ -12,7 +12,6 @@ function Logout() {
         const refresh_token = localStorage.getItem('refresh_token');
 
         const response = await ApiLogout(refresh_token);
-        console.log(response);
 
         if (response && response.status === 200) {
             localStorage.removeItem('access_token');

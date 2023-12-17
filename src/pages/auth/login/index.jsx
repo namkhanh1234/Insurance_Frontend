@@ -1,11 +1,11 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import styles from './Login.module.scss';
 import config from '../../../config';
 import logo from '@/assets/images/logo.png';
-import { login } from '../../../services/authenticationService';
+import { ApiLogin } from '../../../services/authenticationService';
 import axiosInstance from '../../../utils/axios';
 import GoogleLoginButton from '../../../components/GoogleLoginButton/GoogleLoginButton';
 
@@ -36,17 +36,10 @@ function Login() {
         });
     };
 
-    // const = []
-
-    const apiLogin = async () => {
-        // // Không cần try catch bắt handling error vì đã làm bên service
-        // debugger;
-        // console.log(formData);
-        const res = await login(formData.email, formData.password);
-        // console.log(res);
+    const login = async () => {
+        const res = await ApiLogin(formData.email, formData.password);
 
         if (res && res.data) {
-            // console.log(res.data);
             localStorage.setItem('access_token', res.data.access);
             localStorage.setItem('refresh_token', res.data.refresh);
             localStorage.setItem('user_id', res.data.user_id);
@@ -58,7 +51,7 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        apiLogin();
+        login();
     };
 
     const handleTypeInput = () => {
@@ -69,24 +62,15 @@ function Login() {
         }
     };
 
-    const handleGoogleLoginSuccess = (response) => {
-        // Gửi `response.tokenId` về server để xác thực người dùng.
-        // Lưu trữ thông tin người dùng nếu cần.
-    };
-
-    const handleGoogleLoginFailure = (error) => {
-        console.error('Google login failed:', error);
-    };
-
     return (
         <>
             <div className={cx('login__modal')}>
                 <div className={cx('login__modal-inner', 'rounded-2xl border-2')}>
                     <div className="login__header flex flex-col items-center justify-center select-none">
                         <Link to={config.routes.home} className="w-fit ">
-                            <img className="h-24 w-24 rounded-full" src={logo} alt="KNH" />
+                            <img className="h-24 w-24 rounded-3xl" src={logo} alt="KNH" />
                         </Link>
-                        <h2 className="mt-2 font-semibold">Quản lý hợp đồng bảo hiểm online cùng KNH</h2>
+                        <h2 className="mt-3 font-semibold">Quản lý hợp đồng bảo hiểm online cùng KNH</h2>
                     </div>
                     {/* login__form */}
                     <form action="" method="POST" className="mt-6 flex-1">
@@ -129,9 +113,12 @@ function Login() {
                             </Button>
                         </div>
                     </form>
-                    {/* login google */}
-                    <div className="login__action">
-                        <GoogleLoginButton onSuccess={handleGoogleLoginSuccess} onFailure={handleGoogleLoginFailure} />
+                    {/* login google - auth2 */}
+                    <div className="mb-4">
+                        {/* <div> */}
+                        <GoogleLoginButton />
+                        {/* </div> */}
+                        {/* <div>Facebook</div> */}
                     </div>
                     <div className="login__footer">
                         <Link
