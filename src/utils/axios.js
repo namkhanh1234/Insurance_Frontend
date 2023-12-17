@@ -20,8 +20,8 @@ axiosInstance.interceptors.response.use(
     async function (error) {
         const originalRequest = error.config;
 
-        // console.log('>> check reponse error', error.response);
-        // console.log('>> check original ', originalRequest);
+        console.log('>> check reponse error', error.response);
+        console.log('>> check original ', originalRequest);
 
         if (typeof error.response === 'undefined') {
             alert(
@@ -32,18 +32,25 @@ axiosInstance.interceptors.response.use(
             return Promise.reject(error);
         }
 
-        if (error.response.status === 401 && originalRequest.url === baseURL + 'refresh') {
+        // Check response khi gửi request mà authorize thì về login
+        // if (error.response.status === 401 && originalRequest.url === baseURL + '/token/refresh') {
+        if (error.response.status === 401 && originalRequest.baseURL === baseURL + '/token/refresh') {
             window.location.href = config.routes.login;
             return Promise.reject(error);
         }
 
+        // if (
+        //     error.response.data.code === 'token_not_valid' &&
+        //     error.response.status === 401 &&
+        //     error.response.statusText === 'Unauthorized'
+        // ) {
         if (
-            error.response.data.code === 'token_not_valid' &&
+            // error.response.data.code === 'token_not_valid' &&
             error.response.status === 401 &&
-            error.response.statusText === 'Unauthorized'
+            error.response.data.title === 'Unauthorized'
         ) {
             const refreshToken = localStorage.getItem('refresh_token');
-            // console.log(refreshToken);
+            console.log('Check refresh token from localstorgae >> ', refreshToken);
             if (refreshToken) {
                 const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
 
@@ -56,7 +63,7 @@ axiosInstance.interceptors.response.use(
                     return await axiosInstance
                         .post('/token/refresh', { refreshtoken: refreshToken })
                         .then((response) => {
-                            console.log(response.data.access);
+                            console.log('Check access token from response >> ', response.data.access);
                             localStorage.setItem('access_token', response.data.access);
                             // If Backend "ROTATE_REFRESH_TOKENS": True,s
                             // localStorage.setItem('refresh_token', response.data.refresh);
@@ -75,6 +82,13 @@ axiosInstance.interceptors.response.use(
                 }
             } else {
                 console.log('Refresh token not available.');
+
+                // Trước khi về login - xóa access, refresh, user_id trước khi navigate về trang login
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+                localStorage.removeItem('user_id');
+                axiosInstance.defaults.headers['Authorization'] = null;
+
                 window.location.href = config.routes.login;
             }
         }
