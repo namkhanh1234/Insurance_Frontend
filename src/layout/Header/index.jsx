@@ -26,7 +26,7 @@ function Header() {
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'View profile',
-            to: `profile/${currentUser}`,
+            to: `/profile/${currentUser}`,
         },
         {
             icon: <FontAwesomeIcon icon={faEarthAsia} />,
