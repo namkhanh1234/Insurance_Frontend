@@ -49,12 +49,13 @@ function Insurances() {
                 CHỌN SẢN PHẨM BẢO HIỂM
             </div>
             <div className="mb-8"></div>
-            <div
+            {/* <div
                 className={cx(
                     'age-ranges',
                     'py-3 flex whitespace-nowrap overflow-x-auto scroll-smooth scroll-m-5  border-b-4 border-[#005691]',
                 )}
-            >
+            > */}
+            <div className={cx('age-ranges', 'custom-scroll', 'py-3 flex')}>
                 {ages.map((age) => (
                     <div key={`age-${age?.fromAge}`}>
                         <input
@@ -92,7 +93,7 @@ function Insurances() {
             </div>
             <div className="supplemental_benefits">
                 <p className="font-semibold mt-4 mb-2">Quyền lợi bổ sung</p>
-                <div className="flex space-x-8">
+                <div className={cx('custom-scroll', 'flex space-x-8 py-3')}>
                     <div className="space-x-2 ">
                         <Checkbox id="pregnant" className="data-[state=checked]:bg-blue-500" />
                         <Label htmlFor="pregnant" className="font-normal">
@@ -119,10 +120,10 @@ function Insurances() {
                     </div>
                 </div>
             </div>
-            <div className="insurance lg:mx-[100px] grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-3 mt-10 pb-20">
+            <div className="insurance lg:mx-[100px] grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-3 mt-10">
                 {insurances.map((insurance) => (
                     <div key={`insurance-${insurance.insuranceId}`} className={cx('product')}>
-                        <h3 className="name_package text-lg font-medium text-black-500 text-center">
+                        <h3 className="name_package mb-2 text-lg font-medium text-black-500 text-center">
                             {insurance?.nameInsurance}
                         </h3>
                         <div className="text-sm font-medium">Mức quyền lợi cao nhất</div>
@@ -130,7 +131,7 @@ function Insurances() {
                             Phí quyền lợi chính: {FormatCurrency(insurance?.price)}
                         </span>
                         <div className="text-sm font-normal text-emerald-500">{`Giảm giá: ${insurance?.discount}%`}</div>
-                        <div className="text-sm font-light text-gray-500">-------------------------------</div>
+                        <div className="my-3 border-b-2 border-dashed border-gray-500"></div>
                         {/* Tạm thời tính giá giảm ở front-end */}
                         <span className="text-sm font-medium">
                             Tổng số tiền:{' '}

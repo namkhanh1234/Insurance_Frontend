@@ -114,7 +114,7 @@ function Login() {
                         </div>
                     </form>
                     {/* login google - auth2 */}
-                    <div className="mb-4">
+                    <div className="mb-4 flex justify-center">
                         {/* <div> */}
                         <GoogleLoginButton />
                         {/* </div> */}
