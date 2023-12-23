@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styles from './ContractPayment.module.scss';
+import styles from './RegistrationInsurance.module.scss';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
