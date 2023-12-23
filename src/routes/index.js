@@ -25,6 +25,7 @@ import RegistrationForm from '../pages/registrationForm';
 import Contracts from '../pages/contract/contracts';
 import ContractDetail from '../pages/contract/detail';
 import ContractPayment from '../pages/contract/contractPayment';
+import ContractPaymentInfo from '../pages/contract/PaymentInfo';
 
 //Payment
 import PaymentRequest from '../pages/payment/PaymentRequest';
@@ -49,6 +50,7 @@ const privateRoutes = [
 
     // Registration FOrm
     { path: config.routes.registrationForm, component: RegistrationForm},
+    { path: config.routes.contractPaymentInfo, component: ContractPaymentInfo},
 
     // Contract
     { path: config.routes.contracts, component: Contracts },
