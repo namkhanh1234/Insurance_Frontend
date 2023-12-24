@@ -30,7 +30,7 @@ const ApiSendAccessTokenToBackend = async (email, credential) => {
 
 const ApiLogout = async (refreshToken) => {
     try {
-        const reponse = await axiosInstance.post('/token/logout', {
+        const reponse = await axios.post('https://localhost:7162/api/v1/token/logout', {
             refreshtoken: refreshToken,
         });
         return reponse;
@@ -38,6 +38,17 @@ const ApiLogout = async (refreshToken) => {
         console.log(error);
     }
 };
+
+// const ApiLogout = async (refreshToken) => {
+//     try {
+//         const reponse = await axiosInstance.post('/token/logout', {
+//             refreshtoken: refreshToken,
+//         });
+//         return reponse;
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
 
 // const refresh = async (refreshToken) => {
 //     try {

@@ -53,6 +53,10 @@ function RegistrationForm() {
     const [registration, setRegistration] = useState(initialRegistration);
     const [registrationResult, setRegistrationResult] = useState({});
 
+    /// Hùng
+    // console.log(beneficiaryResult);
+    // console.log(registrationResult);
+
     // Submit form
     const handleSubmit = async (event) => {
         try {
@@ -108,6 +112,10 @@ function RegistrationForm() {
 
                     // Step 3: Post API registration
                     PostRegistration(registration);
+
+                    // Set local storage // Hùng
+                    // localStorage.setItem('registration_id', registrationResult.registrationId);
+                    // localStorage.setItem('beneficiary_id', beneficiaryResult.beneficiaryId);
 
                     // Step 4: Nếu thành công -> Navigate contracts
                     navigate(config.routes.contractPayment);

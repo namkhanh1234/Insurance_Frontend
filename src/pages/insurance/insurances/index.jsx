@@ -80,13 +80,13 @@ function Insurances() {
                 ))}
             </div>
 
-            <div classnName="gender">
+            <div className="gender">
                 <p className="font-semibold  mt-4 mb-2">Giới tính</p>
-                <label htmlfor="m">
+                <label htmlFor="m">
                     <input type="radio" id="m" className="mr-1" />
                     Nam
                 </label>
-                <label htmlfor="f">
+                <label htmlFor="f">
                     <input type="radio" id="f" className="ml-2 mr-1" />
                     Nữ
                 </label>
