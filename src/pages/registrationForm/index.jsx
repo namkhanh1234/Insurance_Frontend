@@ -89,6 +89,9 @@ function RegistrationForm() {
                 },
             );
 
+            //Save to local storage
+            //saveBeneficiaryToLocalStorage();//K
+            //saveRegistrationToLocalStorage();//K
             // Get result from API beneficiary
             if (beneficiaryResponse && beneficiaryResponse.data) {
                 console.log(beneficiaryResponse.data);
@@ -98,7 +101,7 @@ function RegistrationForm() {
                 if (!beneficiaryResponse.data.beneficiaryId) {
                     throw new Error('Failed to get beneficiary ID.');
                 }
-
+                
                 // Step 2: Prepare data for beneficiary's registration
                 if (currentInsurance.insuranceId != null && currentInsurance.insuranceId != undefined) {
                     registration.insuranceId = currentInsurance.insuranceId;
@@ -112,6 +115,14 @@ function RegistrationForm() {
                     // Step 4: Nếu thành công -> Navigate contracts
                     navigate(config.routes.contractPayment);
                 }
+                // localStorage.setItem('beneficiary_fullName', beneficiaryResponse.data.fullName);
+                // localStorage.setItem('beneficiary_dateOfBirth', beneficiaryResponse.data.dateOfBirth);
+                // localStorage.setItem('relationship', beneficiaryResponse.data.relationshipPolicyholder);
+                // localStorage.setItem('beneficiary_sex', beneficiaryResponse.data.sex);
+                // localStorage.setItem('beneficiary_cardIdentification', beneficiaryResponse.data.cardIdentification);
+                // localStorage.setItem('beneficiary_phone', beneficiaryResponse.data.phone);
+                // localStorage.setItem('beneficiary_email', beneficiaryResponse.data.email);
+                localStorage.setItem('beneficiaryData',JSON.stringify(beneficiaryResponse.data));
             }
         } catch (error) {
             console.log(error);
@@ -122,6 +133,9 @@ function RegistrationForm() {
         const res = await ApiPostRegistration(data);
 
         if (res && res.data) {
+            localStorage.setItem('basicInsuranceFee', res.data.basicInsuranceFee);
+            localStorage.setItem('registrationId', res.data.registrationId);
+
             setRegistrationResult(res.data);
             console.log('Result registration: ', res.data);
         }
@@ -227,6 +241,14 @@ function RegistrationForm() {
             });
         }
     };
+
+    // const saveBeneficiaryToLocalStorage = () => {//K
+    //     localStorage.setItem('beneficiaryData', JSON.stringify(beneficiaryData));
+    // };
+
+    // const saveRegistrationToLocalStorage = () => {//K
+    //     localStorage.setItem('registrationData', JSON.stringify(registration));
+    // };
 
     return (
         <div className="mx-3 md:mx-6">

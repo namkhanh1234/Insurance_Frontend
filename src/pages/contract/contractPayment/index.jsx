@@ -14,24 +14,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faFileContract } from '@fortawesome/free-solid-svg-icons';
+import { useParams } from 'react-router-dom';
+import { ApiGetUserById } from '../../../services/userService';
+import { format } from 'date-fns';
 
 const cx = classNames.bind(styles);
 
 function ContractPayment() {
-    const BuyerInfo = () => {
-        const [buyerData, setBuyerData] = useState([]);
+    // const BuyerInfo = () => {
+    //     const [buyerData, setBuyerData] = useState([]);
 
-        const fetchData = async () => {
-            try {
-                const response = await fetch('');
-                const data = await response.json();
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await fetch('');
+    //             const data = await response.json();
 
-                setBuyerData(data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-    };
+    //             setBuyerData(data);
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     };
+    // };
 
     const [isBuyerAdditionalInfoVisible, setBuyerAdditionalInfoVisible] = useState(false);
 
@@ -43,6 +46,56 @@ function ContractPayment() {
 
     const toggleBuyeeAdditionalInfo = () => {
         setBuyeeAdditionalInfoVisible(!isBuyeeAdditionalInfoVisible);
+    };
+
+    //const userId = useParams();
+    const userId = JSON.parse(localStorage.getItem('user_id'));
+    const [user, setUser] = useState({});
+
+    const GetUserById = async (id) => {
+        const response = await ApiGetUserById(id);
+
+        if (response && response.data) {
+            setUser(response.data);
+        }
+    };
+
+    const readBeneficiaryFromLocalStorage = () =>{
+        var x = localStorage.getItem('beneficiaryData');
+        var _beneficiary = JSON.parse(x);
+        //console.log(_beneficiary);
+        return _beneficiary;
+    }
+
+    const readRegistrationIdFromLocalStograge = () =>{
+        var x = localStorage.getItem('registrationId');
+        var _registrationId = JSON.parse(x);
+        //console.log(_registrationId);
+        return _registrationId;
+    }
+
+    const readFeeFromLocalStograge = () =>{
+        var x = localStorage.getItem('basicInsuranceFee');
+        var _fee = JSON.parse(x);
+        //console.log(_fee);
+        return _fee;
+    }
+
+
+    useEffect(() => {
+        GetUserById(userId.id);
+        console.log(user);
+    }, []);
+
+    const beneficiaryData = readBeneficiaryFromLocalStorage();
+    const registrationDataId = readRegistrationIdFromLocalStograge();
+    const insuranceFee = readFeeFromLocalStograge();
+
+    const formatingDated = (birthDay) => {
+        if (!birthDay) return;
+        const formattedDate = format(new Date(birthDay), 'yyyy-MM-dd');
+        return formattedDate;
+        //return dateObject;
     };
 
     return (
@@ -63,8 +116,8 @@ function ContractPayment() {
 
                         <div className={cx('personInfo_modal', 'rounded-2xl border-2 mr-20 mb-6')}>
                             <div className="Buyer__info items-center">
-                                <p className="info ml-3">Họ tên:</p>
-                                <p className="info ml-3">Ngày sinh:</p>
+                                <p className="info ml-3">Họ tên: {user?.fullName}</p>
+                                <p className="info ml-3">Ngày sinh: {formatingDated(user?.dateOfBirth)}</p>
                             </div>
 
                             <FontAwesomeIcon
@@ -75,10 +128,10 @@ function ContractPayment() {
 
                             {isBuyerAdditionalInfoVisible && (
                                 <div>
-                                    <p className="info ml-3">Giới tính:</p>
-                                    <p className="info ml-3">CMND/CCCD:</p>
-                                    <p className="info ml-3">Số điện thoại:</p>
-                                    <p className="info ml-3">Email:</p>
+                                    <p className="info ml-3">Giới tính: {user?.sex}</p>
+                                    <p className="info ml-3">CMND/CCCD: {user?.cardIdentification}</p>
+                                    <p className="info ml-3">Số điện thoại: {user?.phone}</p>
+                                    <p className="info ml-3">Email: {user?.email}</p>
                                 </div>
                             )}
                         </div>
@@ -94,8 +147,8 @@ function ContractPayment() {
 
                         <div className={cx('personInfo_modal', 'rounded-2xl border-2 mr-20 mb-6')}>
                             <div className="Buyee__info items-center">
-                                <p className="info ml-3">Họ tên:</p>
-                                <p className="info ml-3">Phí bảo hiểm:</p>
+                                <p className="info ml-3">Họ tên: {beneficiaryData.fullName}</p>
+                                <p className="info ml-3">Phí bảo hiểm: {insuranceFee} </p>
                             </div>
 
                             <FontAwesomeIcon
@@ -106,12 +159,12 @@ function ContractPayment() {
 
                             {isBuyeeAdditionalInfoVisible && (
                                 <div>
-                                    <p className="info ml-3">Mối quan hệ:</p>
-                                    <p className="info ml-3">Ngày sinh:</p>
-                                    <p className="info ml-3">Giới tính:</p>
-                                    <p className="info ml-3">CMND/CCCD:</p>
-                                    <p className="info ml-3">Số điện thoại:</p>
-                                    <p className="info ml-3">Email:</p>
+                                    <p className="info ml-3">Mối quan hệ: {beneficiaryData.relationshipPolicyholder}</p>
+                                    <p className="info ml-3">Ngày sinh: {formatingDated(beneficiaryData.dateOfBirth)}</p>
+                                    <p className="info ml-3">Giới tính: {beneficiaryData.sex}</p>
+                                    <p className="info ml-3">CMND/CCCD: {beneficiaryData.cardIdentification}</p>
+                                    <p className="info ml-3">Số điện thoại: {beneficiaryData.phone}</p>
+                                    <p className="info ml-3">Email: {beneficiaryData.email}</p>
                                 </div>
                             )}
 
