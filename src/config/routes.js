@@ -27,7 +27,7 @@ const routes = {
     contracts: '/contracts',
     contractDetail: '/contracts/:id',
     contractPayment: '/contracts/payment',
-
+    contractPaymentHistory: '/contracts/paymentHistory',
     // Customer service
 
     //Payment

@@ -25,7 +25,7 @@ import RegistrationForm from '../pages/registrationForm';
 import Contracts from '../pages/contract/contracts';
 import ContractDetail from '../pages/contract/detail';
 import ContractPayment from '../pages/contract/contractPayment';
-
+import ContractPaymentHistory from '../pages/contract/contractPaymentHistory';
 //Payment
 import PaymentRequest from '../pages/payment/PaymentRequest';
 
@@ -54,7 +54,7 @@ const privateRoutes = [
     { path: config.routes.contracts, component: Contracts },
     { path: config.routes.contractDetail, component: ContractDetail },
     { path: config.routes.contractPayment, component: ContractPayment },
-
+    { path: config.routes.contractPaymentHistory, component: ContractPaymentHistory },
     //Payment
     {path: config.routes.paymentRequest, component: PaymentRequest},
 ];

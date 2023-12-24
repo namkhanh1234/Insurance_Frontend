@@ -21,7 +21,7 @@ function Contracts() {
         <>
         <h3 className="text-2xl m-[20px] font-bold text-sky-600 uppercase text-center">Danh sách hợp đồng bảo hiểm</h3><div>
             <div className='grid grid-cols-2 gap-20 md-gap-40 m-12'>
-                <div className='col_span_1 flex items-center'>
+                <div className='col_span_1 flex items-center w-2/3 ml-14'>
                     <Label className="whitespace-nowrap m-2">Mã khách hàng:</Label>
                     <Input
                         name="user_id"
@@ -32,7 +32,7 @@ function Contracts() {
                     ></Input>
                 </div>
 
-                <div className='col_span_1 flex items-center'>
+                <div className='col_span_2 flex items-center w-3/4'>
                     <Label className="whitespace-nowrap m-2">Tên khách hàng:</Label>
                     <Input
                         name="user_name"
