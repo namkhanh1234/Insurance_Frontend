@@ -16,7 +16,7 @@ import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faFileContract } from '@fortawesome/free-solid-svg-icons';
 import {useToast} from '@/components/ui/use-toast';
 import { ApiGetUserById } from '../../../services/userService';
-import { ApiSendRegisId } from '../../../services/contractService';
+import { ApiPostContract } from '../../../services/contractService';
 import { ApiSendBeneficiarysId } from '../../../services/contractService';
 import { format } from 'date-fns';
 
@@ -50,21 +50,21 @@ function ContractPayment() {
     const readBeneficiaryFromLocalStorage = () =>{
         var x = localStorage.getItem('beneficiaryData');
         var _beneficiary = JSON.parse(x);
-        //console.log(_beneficiary);
+        console.log(_beneficiary);
         return _beneficiary;
     }
 
     const readRegistrationIdFromLocalStograge = () =>{
         var x = localStorage.getItem('registrationId');
         var _registrationId = JSON.parse(x);
-        //console.log(_registrationId);
+        console.log(_registrationId);
         return _registrationId;
     }
 
     const readFeeFromLocalStograge = () =>{
         var x = localStorage.getItem('basicInsuranceFee');
         var _fee = JSON.parse(x);
-        //console.log(_fee);
+        console.log(_fee);
         return _fee;
     }
 
@@ -87,7 +87,7 @@ function ContractPayment() {
     };
 
     const PostRegistrationId = async (data) =>{
-        await ApiSendRegisId(data);
+        await ApiPostContract(localStorage.getItem('registrationId'));
     }
 
     const PostBeneficiaryId = async (data) =>{
@@ -136,7 +136,7 @@ function ContractPayment() {
 
     const onSubmit = async (data) => {
         onSubmit_1(data);
-        onSubmit_2(data);
+        //onSubmit_2(data);
     }
 
 

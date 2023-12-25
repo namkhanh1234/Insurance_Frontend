@@ -1,14 +1,24 @@
 import axiosInstance from "../utils/axios";
+import axios from "axios";
 
-const ApiSendRegisId = async (data) => {
-    console.log(data);
+const ApiPostContract = async (registrationId = 1) => {
     try {
-        await axiosInstance.patch(`/Contracts/${data.id}`, {
-            userId: data.id,
-            registrationId: data.registrationId,
-        });
+        const formData = new FormData();
+        formData.append('registration_id', registrationId)
 
-    } catch (error) {
+        const response = await axios.post('https://localhost:7162/api/Contracts', formData,
+        {
+            headers: {
+                Authorization: localStorage.getItem('access_token')
+                    ? 'JWT ' + localStorage.getItem('access_token')
+                    : null,
+            },
+        });
+        console.log(response.data);
+
+        //return response;
+    }
+    catch (error) {
         console.log(error);
     }
 };
@@ -26,4 +36,4 @@ const ApiSendBeneficiarysId = async (data) => {
     }
 };
 
-export { ApiSendRegisId, ApiSendBeneficiarysId };
+export { ApiPostContract, ApiSendBeneficiarysId };
