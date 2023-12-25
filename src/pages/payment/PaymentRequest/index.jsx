@@ -8,14 +8,18 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import { ApiGetUserById } from '../../../services/userService';
+import { ApiInsertRequest } from '../../../services/paymentRequestService';
+
 const schema = yup
     .object({
-        payment: yup.number().required('Email không được để trống'),
+        cost: yup.number().required('Email không được để trống'),
         description: yup.string(),
     })
     .required();
 function PaymentRequest() {
     const [image, setImage] = useState();
+    const [user, setUser] = useState();
     useEffect(() => {
         return () => {
             image && URL.revokeObjectURL(image.preview);
@@ -31,9 +35,14 @@ function PaymentRequest() {
         console.log(data);
 
         //call API
-        // const formData = new FormData();
-        // formData.append('description', data.description);
-        // formData.append('payment', data.payment);
+        const formData = new FormData();
+        formData.append('description', data.description);
+        formData.append('total_cost', data.cost);
+        formData.append('contract_id', 1);
+        const response = await ApiInsertRequest(formData);
+        if (response) {
+        } else {
+        }
     };
 
     const {
@@ -43,6 +52,17 @@ function PaymentRequest() {
     } = useForm({
         resolver: yupResolver(schema),
     });
+    const GetUserById = async (id) => {
+        const response = await ApiGetUserById(id);
+
+        if (response && response.data) {
+            setUser(response.data);
+        }
+    };
+    useEffect(() => {
+        const userId = localStorage.getItem('user_id');
+        GetUserById(userId);
+    }, []);
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center bg-sky-100 pb-10">
@@ -51,7 +71,7 @@ function PaymentRequest() {
                     <div className="flex justify-evenly w-full">
                         <div className="w-1/2">
                             <Label>Họ tên khách hàng</Label>
-                            <Input type="text" disabled></Input>
+                            <Input type="text" disabled defaultValue={user?.fullName}></Input>
                         </div>
                         <div className="w-1/2">
                             <Label>Mã hợp đồng bảo hiểm</Label>
@@ -70,13 +90,7 @@ function PaymentRequest() {
                         </div>
                         <div className="w-1/2">
                             <Label>Chi phí điều trị</Label>
-                            <Input
-                                type="number"
-                                min="0"
-                                placeholder="1000"
-                                step="1000"
-                                {...register('payment')}
-                            ></Input>
+                            <Input type="number" min="0" placeholder="1000" step="1000" {...register('cost')}></Input>
                         </div>
                     </div>
                     {image && <img src={image.preview} className="w-full h-[30vh] mt-5"></img>}

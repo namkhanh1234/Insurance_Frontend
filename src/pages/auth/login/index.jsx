@@ -12,9 +12,11 @@ import GoogleLoginButton from '../../../components/GoogleLoginButton/GoogleLogin
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { Divider } from '@mui/material';
 
 const cx = classNames.bind(styles);
 
@@ -112,6 +114,9 @@ function Login() {
                                 Đăng nhập
                             </Button>
                         </div>
+                        <div className="my-4">
+                            <Divider>Hoặc</Divider>
+                        </div>
                     </form>
                     {/* login google - auth2 */}
                     <div className="mb-4 flex justify-center">
@@ -123,7 +128,7 @@ function Login() {
                     <div className="login__footer">
                         <Link
                             to={config.routes.forgotPassword}
-                            className="flex justify-center text-normal font-light text-gray-500"
+                            className="flex justify-center text-normal font-normal text-blue-600"
                         >
                             Quên mật khẩu
                         </Link>
