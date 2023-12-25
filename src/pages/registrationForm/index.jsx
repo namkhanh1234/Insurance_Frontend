@@ -8,6 +8,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog';
 
 import config from '../../config';
 import images from '../../assets/images';
@@ -476,16 +484,30 @@ function RegistrationForm() {
                 </div>
 
                 <div style={{ textAlign: 'center', marginTop: '40px' }}>
-                    <Button
-                        style={{
-                            fontWeight: 'bold',
-                            marginRight: '50px',
-                            backgroundColor: '#bae6fd',
-                            color: '#075985',
-                        }}
-                    >
-                        Chi tiết quyền lợi
-                    </Button>
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Button
+                                style={{
+                                    fontWeight: 'bold',
+                                    marginRight: '50px',
+                                    backgroundColor: '#bae6fd',
+                                    color: '#075985',
+                                }}
+                            >
+                                Chi tiết quyền lợi
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+                                <DialogDescription>
+                                    This action cannot be undone. This will permanently delete your account and remove
+                                    your data from our servers.
+                                </DialogDescription>
+                            </DialogHeader>
+                        </DialogContent>
+                    </Dialog>
+
                     <Button onSubmit={handleSubmit} onClick={handleSubmit} className="bg-[#3E8DCC] hover:bg-sky-700">
                         Tiếp tục
                     </Button>
