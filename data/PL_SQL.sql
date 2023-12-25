@@ -203,6 +203,7 @@ END;
 GO
 
 --EXEC dbo.ResetPassword 9, 'password_1'
+--EXEC dbo.CheckLogin 'nam608072@gmail.com', 'password_2'
 
 
 --
@@ -249,3 +250,6 @@ end
 go
 
 --exec AddContract '2024-01-01', '2024-01-01', 1, 1, 1, 900, 0, 900, 900, 1, 3
+
+
+

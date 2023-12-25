@@ -1,14 +1,13 @@
 import axios from 'axios';
 import config from '@/config';
-
-const baseURL = 'https://localhost:7162/api/v1';
+import { API_BASE_URL } from '../utils/constant';
 
 const axiosInstance = axios.create({
-    baseURL: baseURL,
+    baseURL: API_BASE_URL,
     timeout: 5000,
     headers: {
         Authorization: localStorage.getItem('access_token') ? 'JWT ' + localStorage.getItem('access_token') : null,
-        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/json',
         accept: 'application/json',
     },
 });
