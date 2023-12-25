@@ -1,6 +1,14 @@
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog';
 import styles from './Insurances.module.scss';
 import classNames from 'classnames/bind';
 import React, { useState, useEffect } from 'react';
@@ -142,7 +150,23 @@ function Insurances() {
                                 Mua ngay
                             </Button>
                         </div>
-                        <div className="text-center text-sm font-normal text-gray-500 mt-4">Chi tiết quyền lợi</div>
+                        {/* <div className="text-center text-sm font-normal text-gray-500 mt-4 cursor-pointer">
+                            Chi tiết quyền lợi
+                        </div> */}
+                        <div className="flex justify-center mt-2 text-gray-500">
+                            <Dialog>
+                                <DialogTrigger>Chi tiết quyền lợi</DialogTrigger>
+                                <DialogContent>
+                                    <DialogHeader>
+                                        <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+                                        <DialogDescription>
+                                            This action cannot be undone. This will permanently delete your account and
+                                            remove your data from our servers.
+                                        </DialogDescription>
+                                    </DialogHeader>
+                                </DialogContent>
+                            </Dialog>
+                        </div>
                     </div>
                 ))}
             </div>
