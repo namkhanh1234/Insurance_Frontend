@@ -115,13 +115,7 @@ function RegistrationForm() {
                     // Step 4: Nếu thành công -> Navigate contracts
                     navigate(config.routes.contractPayment);
                 }
-                // localStorage.setItem('beneficiary_fullName', beneficiaryResponse.data.fullName);
-                // localStorage.setItem('beneficiary_dateOfBirth', beneficiaryResponse.data.dateOfBirth);
-                // localStorage.setItem('relationship', beneficiaryResponse.data.relationshipPolicyholder);
-                // localStorage.setItem('beneficiary_sex', beneficiaryResponse.data.sex);
-                // localStorage.setItem('beneficiary_cardIdentification', beneficiaryResponse.data.cardIdentification);
-                // localStorage.setItem('beneficiary_phone', beneficiaryResponse.data.phone);
-                // localStorage.setItem('beneficiary_email', beneficiaryResponse.data.email);
+                
                 localStorage.setItem('beneficiaryData',JSON.stringify(beneficiaryResponse.data));
             }
         } catch (error) {
@@ -242,13 +236,11 @@ function RegistrationForm() {
         }
     };
 
-    // const saveBeneficiaryToLocalStorage = () => {//K
-    //     localStorage.setItem('beneficiaryData', JSON.stringify(beneficiaryData));
-    // };
-
-    // const saveRegistrationToLocalStorage = () => {//K
-    //     localStorage.setItem('registrationData', JSON.stringify(registration));
-    // };
+    useEffect(() => {
+        localStorage.removeItem('beneficiaryData');
+        localStorage.removeItem('registrationId');
+        localStorage.removeItem('basicInsuranceFee');
+    }, []);
 
     return (
         <div className="mx-3 md:mx-6">

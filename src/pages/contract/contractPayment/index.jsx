@@ -14,28 +14,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faFileContract } from '@fortawesome/free-solid-svg-icons';
-import { useParams } from 'react-router-dom';
+import {useToast} from '@/components/ui/use-toast';
 import { ApiGetUserById } from '../../../services/userService';
+import { ApiSendRegisId } from '../../../services/contractService';
+import { ApiSendBeneficiarysId } from '../../../services/contractService';
 import { format } from 'date-fns';
 
 const cx = classNames.bind(styles);
 
 function ContractPayment() {
-    // const BuyerInfo = () => {
-    //     const [buyerData, setBuyerData] = useState([]);
-
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await fetch('');
-    //             const data = await response.json();
-
-    //             setBuyerData(data);
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     };
-    // };
-
+    
     const [isBuyerAdditionalInfoVisible, setBuyerAdditionalInfoVisible] = useState(false);
 
     const toggleBuyerAdditionalInfo = () => {
@@ -48,8 +36,7 @@ function ContractPayment() {
         setBuyeeAdditionalInfoVisible(!isBuyeeAdditionalInfoVisible);
     };
 
-    //const userId = useParams();
-    const userId = JSON.parse(localStorage.getItem('user_id'));
+    const userId = localStorage.getItem('user_id');
     const [user, setUser] = useState({});
 
     const GetUserById = async (id) => {
@@ -83,8 +70,9 @@ function ContractPayment() {
 
 
     useEffect(() => {
-        GetUserById(userId.id);
-        console.log(user);
+        //console.log(userId);
+        GetUserById(userId);
+        //console.log(user);
     }, []);
 
     const beneficiaryData = readBeneficiaryFromLocalStorage();
@@ -97,6 +85,60 @@ function ContractPayment() {
         return formattedDate;
         //return dateObject;
     };
+
+    const PostRegistrationId = async (data) =>{
+        await ApiSendRegisId(data);
+    }
+
+    const PostBeneficiaryId = async (data) =>{
+        await ApiSendBeneficiarysId(data);
+    }
+
+    const { toast } = useToast();
+
+    const onSubmit_1 = async (data) => {
+        data.id = userId;
+        data.registrationId = registrationDataId;
+        console.log(data);
+        // call API
+        try {
+            PostRegistrationId(data);
+            toast({
+                description: 'Gửi thành công.',
+                variant: 'success',
+            });
+        } catch (error) {
+            toast({
+                description: 'Gửi không thành công',
+                variant: 'destructive',
+            });
+        }
+    };
+
+    const onSubmit_2 = async (data) => {
+        data.id = userId;
+        data.beneficiaryId = beneficiaryData.beneficiaryId;
+        console.log(data);
+        // call API
+        try {
+            PostBeneficiaryId(data);
+            toast({
+                description: 'Gửi thành công.',
+                variant: 'success',
+            });
+        } catch (error) {
+            toast({
+                description: 'Gửi không thành công',
+                variant: 'destructive',
+            });
+        }
+    };
+
+    const onSubmit = async (data) => {
+        onSubmit_1(data);
+        onSubmit_2(data);
+    }
+
 
     return (
         <>
@@ -259,7 +301,7 @@ function ContractPayment() {
 
                     {/**Thanh toán */}
                     <div className="mt-10" style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
-                        <Button style={{ backgroundColor: '#0369a1' }}>Thanh toán</Button>
+                        <Button style={{ backgroundColor: '#0369a1' }} onClick={onSubmit}>Thanh toán</Button>
                     </div>
                 </div>
             </div>
