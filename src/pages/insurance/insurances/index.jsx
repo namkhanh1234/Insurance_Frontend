@@ -36,6 +36,7 @@ function Insurances() {
 
     const GetAllInsurancesByAge = async (currentAge) => {
         const res = await ApiGetAllInsurances(currentAge);
+
         if (res && res.data) {
             setInusurances(res.data);
         }
