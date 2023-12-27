@@ -1,13 +1,12 @@
 import axiosInstance from '../utils/axios';
-import axios from 'axios';
 
 const ApiLogin = async (email, password) => {
     try {
-        // Theo mình, chỗ này nên dùng axios
-        const response = await axios.post('https://localhost:7162/api/v1/token/login', {
+        const response = await axiosInstance.post('/token/login', {
             email: email,
             password: password,
         });
+
         return response;
     } catch (error) {
         console.log(error);
@@ -16,8 +15,7 @@ const ApiLogin = async (email, password) => {
 
 const ApiSendAccessTokenToBackend = async (email, credential) => {
     try {
-        // Theo mình, chỗ này nên dùng axios
-        const response = await axios.post('https://localhost:7162/api/v1/token/validate-google-token', {
+        const response = await axiosInstance.post('/token/validate-google-token', {
             email: email,
             credentialToken: credential,
         });
@@ -30,9 +28,10 @@ const ApiSendAccessTokenToBackend = async (email, credential) => {
 
 const ApiLogout = async (refreshToken) => {
     try {
-        const reponse = await axios.post('https://localhost:7162/api/v1/token/logout', {
+        const reponse = await axiosInstance.post('/token/logout', {
             refreshtoken: refreshToken,
         });
+
         return reponse;
     } catch (error) {
         console.log(error);
