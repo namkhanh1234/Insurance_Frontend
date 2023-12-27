@@ -23,6 +23,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
+import { ApiRegister } from '../../../services/userService';
+
+import ShowPassword from '../../../components/ShowPassword/ShowPassword';
 const cx = classNames.bind(styles);
 YupPassword(yup);
 const schema = yup
@@ -50,8 +53,6 @@ const schema = yup
     .required();
 
 function Register() {
-    const [typeInput, setTypeInput] = useState('password');
-    const [typeInput2, setTypeInput2] = useState('password');
     const [gender, setGender] = useState('Nam');
     const navigate = useNavigate();
     const { toast } = useToast();
@@ -64,41 +65,35 @@ function Register() {
         resolver: yupResolver(schema),
     });
 
-    const handleTypeInput = () => {
-        if (typeInput == 'password') {
-            setTypeInput('text');
-        } else {
-            setTypeInput('password');
-        }
-    };
-
-    const handleTypeInput2 = () => {
-        if (typeInput2 == 'password') {
-            setTypeInput2('text');
-        } else {
-            setTypeInput2('password');
-        }
-    };
     const onSubmit = async (data) => {
+        data.gender = gender;
         try {
-            await axiosInstance.post('/User/register', {
-                email: data.email,
-                password: data.password,
-                fullName: data.name,
-                phone: data.phone_number,
-                sex: gender,
-                dateOfBirth: data.birthday,
-                cardIdentification: data.id,
-            });
-            toast({
-                description: 'Đăng ký thành công.',
-                variant: 'success',
-            });
-            navigate('/login');
+            // await axiosInstance.post('/User/register', {
+            //     email: data.email,
+            //     password: data.password,
+            //     fullName: data.name,
+            //     phone: data.phone_number,
+            //     sex: gender,
+            //     dateOfBirth: data.birthday,
+            //     cardIdentification: data.id,
+            // });
+            const response = ApiRegister(data);
+            if (response) {
+                toast({
+                    description: 'Đăng ký thành công.',
+                    variant: 'success',
+                });
+                navigate('/login');
+            } else {
+                toast({
+                    description: 'Email này đã đăng ký! ',
+                    variant: 'destructive',
+                });
+            }
         } catch (error) {
             console.log(error);
             toast({
-                description: 'Lỗi hệ thống vui lòng thử lại.',
+                description: 'Lỗi hệ thống! ',
                 variant: 'destructive',
             });
         }
@@ -161,29 +156,14 @@ function Register() {
 
                         <div className={cx('password__wrapper', 'mt-2 space-y-1')}>
                             <Label htmlFor="password">Mật khẩu</Label>
-                            <div className="relative">
-                                <Input type={typeInput2} placeholder="•••••••••" {...register('password')} />
-                                <FontAwesomeIcon
-                                    onClick={handleTypeInput2}
-                                    className="absolute top-3 right-4"
-                                    icon={typeInput2 == 'password' ? faEyeSlash : faEye}
-                                />
-                            </div>
-
+                            <ShowPassword register={register} name="password"></ShowPassword>
                             <p className="text-red-600 text-xs">{errors.password?.message}</p>
                         </div>
 
                         <div className={cx('username__wrapper', 'space-y-1')}>
                             <Label htmlFor="confirmPassword">Nhập lại mật khẩu</Label>
-                            <div className="relative">
-                                <Input type={typeInput} placeholder="•••••••••" {...register('confirm_password')} />
-                                <FontAwesomeIcon
-                                    onClick={handleTypeInput}
-                                    className="absolute top-3 right-4"
-                                    icon={typeInput == 'password' ? faEyeSlash : faEye}
-                                />
-                                <p className="text-red-600 text-xs">{errors.confirm_password?.message}</p>
-                            </div>
+                            <ShowPassword register={register} name="confirm_password"></ShowPassword>
+                            <p className="text-red-600 text-xs">{errors.confirm_password?.message}</p>
                         </div>
 
                         <div className="my-6 flex justify-center items-center">

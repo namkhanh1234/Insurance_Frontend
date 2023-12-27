@@ -32,6 +32,7 @@ function Profile() {
     const [enable, setEnable] = useState(true);
     const { toast } = useToast();
     const [gender, setGender] = useState('Nam');
+    const [background, setBackground] = useState('bg-slate-200');
 
     const {
         register,
@@ -44,6 +45,7 @@ function Profile() {
     const handleButton = (e) => {
         e.preventDefault();
         setEnable(false);
+        setBackground('');
     };
     const formatingDated = (birthDay) => {
         if (!birthDay) return;
@@ -70,6 +72,7 @@ function Profile() {
 
     const onSubmit = async (data) => {
         setEnable(true);
+        setBackground('bg-slate-200');
         data.id = parseInt(userId?.id);
         data.gender = gender;
 
@@ -100,6 +103,7 @@ function Profile() {
                         <div className="w-1/4">
                             <Label>Họ tên</Label>
                             <Input
+                                className={background}
                                 type="text"
                                 disabled={enable}
                                 defaultValue={user?.fullName}
@@ -115,7 +119,7 @@ function Profile() {
                                 }}
                                 value={gender}
                             >
-                                <SelectTrigger>
+                                <SelectTrigger className={background}>
                                     <SelectValue placeholder={user?.sex} />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -129,6 +133,7 @@ function Profile() {
                         <div className="w-1/4">
                             <Label>Ngày sinh</Label>
                             <Input
+                                className={background}
                                 type="date"
                                 disabled={enable}
                                 defaultValue={formatingDated(user?.dateOfBirth)}
@@ -141,6 +146,7 @@ function Profile() {
                         <div className="w-1/4">
                             <Label>Email</Label>
                             <Input
+                                className={background}
                                 type="text"
                                 disabled={enable}
                                 defaultValue={user?.email}
@@ -150,6 +156,7 @@ function Profile() {
                         <div className="w-1/4">
                             <Label>CCCD</Label>
                             <Input
+                                className={background}
                                 type="text"
                                 disabled={enable}
                                 defaultValue={user?.cardIdentification}
@@ -159,6 +166,7 @@ function Profile() {
                         <div className="w-1/4">
                             <Label>Số điện thoại</Label>
                             <Input
+                                className={background}
                                 type="text"
                                 disabled={enable}
                                 defaultValue={user?.phone}
