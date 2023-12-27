@@ -9,6 +9,8 @@ import { ApiResetPassword } from '../../services/userService';
 import { useToast } from '@/components/ui/use-toast';
 import { useNavigate } from 'react-router-dom';
 
+import ShowPassword from '../ShowPassword/ShowPassword';
+
 YupPassword(yup);
 
 const schema = yup
@@ -74,24 +76,26 @@ function ResetForm() {
         <form id="form2" className="mt-6 flex-1" onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-1">
                 <Label htmlFor="new_password">Mật khẩu mới</Label>
-                <Input
+                {/* <Input
                     type="password"
                     id="new_password"
                     name="new password"
                     placeholder="•••••••••"
                     {...register('newPassword')}
-                />
+                /> */}
+                <ShowPassword register={register} name="newPassword"></ShowPassword>
                 <p className="text-red-600 text-xs">{errors.newPassword?.message}</p>
             </div>
             <div className="space-y-1">
                 <Label htmlFor="enter_new_password">Nhập lại mật khẩu mới</Label>
-                <Input
+                {/* <Input
                     type="password"
                     id="enter_new_password"
                     name="enter_new_password"
                     placeholder="•••••••••"
                     {...register('confirmNewPassword')}
-                />
+                /> */}
+                <ShowPassword register={register} name="confirmNewPassword"></ShowPassword>
                 <p className="text-red-600 text-xs">{errors.confirmNewPassword?.message}</p>
             </div>
             <div className="my-6 flex justify-center items-center">

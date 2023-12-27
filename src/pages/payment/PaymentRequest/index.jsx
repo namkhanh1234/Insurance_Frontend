@@ -39,10 +39,10 @@ function PaymentRequest() {
         formData.append('description', data.description);
         formData.append('total_cost', data.cost);
         formData.append('contract_id', 1);
-        const response = await ApiInsertRequest(formData);
-        if (response) {
-        } else {
-        }
+        //const response = await ApiInsertRequest(formData);
+        // if (response) {
+        // } else {
+        // }
     };
 
     const {
@@ -71,13 +71,13 @@ function PaymentRequest() {
                 <h3 className="text-2xl m-[20px] font-bold text-sky-600 text-center">YÊU CẦU THANH TOÁN ĐIỀU TRỊ</h3>
                 <div className="flex flex-col items-center p-7 rounded-2xl border-2 bg-white">
                     <div className="flex justify-evenly w-full">
-                        <div className="w-1/2">
+                        <div className="w-1/2 mr-2">
                             <Label>Họ tên khách hàng</Label>
-                            <Input type="text" disabled defaultValue={user?.fullName}></Input>
+                            <Input type="text" disabled defaultValue={user?.fullName} className="bg-slate-200"></Input>
                         </div>
                         <div className="w-1/2">
                             <Label>Mã hợp đồng bảo hiểm</Label>
-                            <Input type="text" disabled></Input>
+                            <Input type="text" disabled className="bg-slate-200"></Input>
                         </div>
                     </div>
 
@@ -86,7 +86,7 @@ function PaymentRequest() {
                         <Textarea placeholder="Nhập mô tả ở đây." id="message" {...register('description')} />
                     </div>
                     <div className="mt-5 flex w-full justify-evenly">
-                        <div className="w-1/2">
+                        <div className="w-1/2 mr-2">
                             <Label htmlFor="picture">Ảnh hóa đơn hoặc hồ sơ bệnh án</Label>
                             <Input id="picture" type="file" accept="image/*" onChange={handleOnChange} />
                         </div>

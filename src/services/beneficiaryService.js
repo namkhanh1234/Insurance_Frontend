@@ -10,4 +10,16 @@ const ApiCreateBeneficiary = async (data = {}) => {
     }
 };
 
-export { ApiCreateBeneficiary };
+const ApiGetBenefitsDetail = async (id) =>{
+    try {
+        const response = await axiosInstance.get('/benefitdetail',{params:{
+            insuranceId: id
+        }});
+        return response
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export {ApiGetBenefitsDetail,ApiCreateBeneficiary}

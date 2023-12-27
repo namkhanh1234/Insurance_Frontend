@@ -15,6 +15,7 @@ function Timer({ second }) {
     const { toast } = useToast();
 
     useEffect(() => {
+        console.log(countdown);
         timerId.current = setInterval(() => {
             setCountdown((prev) => prev - 1);
         }, 1000);

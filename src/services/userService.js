@@ -73,4 +73,22 @@ const ApiResetPassword = async (data) => {
         console.log(error);
     }
 };
-export { ApiGetUserById, ApiUpdateUser, ApiSendEmail, ApiVerifiOTP, ApiResetPassword };
+
+const ApiRegister =  async (data) => {
+    try {
+        const response =  await axiosInstance.post('/User/register', {
+            email: data.email,
+            password: data.password,
+            fullName: data.name,
+            phone: data.phone_number,
+            sex: data.gender,
+            dateOfBirth: data.birthday,
+            cardIdentification: data.id,
+        });
+        return response
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+export { ApiGetUserById, ApiUpdateUser, ApiSendEmail, ApiVerifiOTP ,ApiResetPassword ,  ApiRegister};

@@ -25,26 +25,13 @@ const cx = classNames.bind(styles);
 const schema = yup
     .object({
         email: yup.string().required('Email không được để trống').email('Email không đúng định dạng'),
-        // newPassword: yup
-        //     .string()
-        //     .required('Mật khẩu không được để trống')
-        //     .password()
-        //     .min(8, 'Mật khẩu chứa ít nhất 8 kí tự')
-        //     .minLowercase(1, 'Mật khẩu chứa ít nhất 1 chữ cái thường')
-        //     .minUppercase(1, 'Mật khẩu chứa ít nhất 1 chữ cái in hoa')
-        //     .minNumbers(1, 'Mật khẩu chứa ít nhất 1 số')
-        //     .minSymbols(1, 'Mật khẩu chứa ít nhất 1 kí tự đặc biệt'),
-        // confirmNewPassword: yup
-        //     .string()
-        //     .label('confirm password')
-        //     .required('Vui lòng nhập lại mật khẩu')
-        //     .oneOf([yup.ref('newPassword'), null], 'Mật khẩu không khớp'),
     })
     .required();
 
 function ForgotPassword() {
     const [step, setStep] = useState(1);
     const [otp, setOtp] = useState('');
+    const [timer, setTimer] = useState(false);
     const { toast } = useToast();
     const {
         register,
@@ -64,25 +51,25 @@ function ForgotPassword() {
 
     const onSubmitEmail = async (data) => {
         localStorage.setItem('email', data.email);
-        //handleNextStep();
+        handleNextStep();
 
-        try {
-            const response = await ApiSendEmail(data.email);
-            if (response) {
-                handleNextStep();
-            } else {
-                toast({
-                    description: 'Nhập email sai! Vui lòng thử lại.',
-                    variant: 'destructive',
-                });
-            }
-        } catch (error) {
-            console.log(error);
-            toast({
-                description: 'Nhập email sai! Vui lòng thử lại.',
-                variant: 'destructive',
-            });
-        }
+        // try {
+        //     const response = await ApiSendEmail(data.email);
+        //     if (response) {
+        //         handleNextStep();
+        //     } else {
+        //         toast({
+        //             description: 'Nhập email sai! Vui lòng thử lại.',
+        //             variant: 'destructive',
+        //         });
+        //     }
+        // } catch (error) {
+        //     console.log(error);
+        //     toast({
+        //         description: 'Nhập email sai! Vui lòng thử lại.',
+        //         variant: 'destructive',
+        //     });
+        // }
     };
     const verifingOTP = async () => {
         //handleNextStep();
@@ -116,21 +103,26 @@ function ForgotPassword() {
         try {
             const response = await ApiSendEmail(email);
             if (response) {
-                handleNextStep();
+                toast({
+                    description: 'Đã gửi lại email',
+                    variant: 'success',
+                });
             } else {
                 toast({
-                    description: 'Nhập email sai! Vui lòng thử lại.',
+                    description: 'Lỗi hệ thống! Vui lòng thử lại',
                     variant: 'destructive',
                 });
             }
         } catch (error) {
             console.log(error);
             toast({
-                description: 'Nhập email sai! Vui lòng thử lại.',
+                description: 'Lỗi hệ thống! Vui lòng thử lại',
                 variant: 'destructive',
             });
         }
+        setTimer((prev) => !prev);
     };
+
     return (
         <>
             {/* Nhập email đăng ký tài khoản */}
@@ -161,7 +153,6 @@ function ForgotPassword() {
                     </div>
                 </div>
             )}
-
             {/* Nhập mã xác nhận */}
             {step === 2 && (
                 <div className={cx('forgotPassword__modal__2')}>
@@ -171,14 +162,14 @@ function ForgotPassword() {
                             <h2 className="mt-2 font-semibold">Quản lý hợp đồng bảo hiểm online cùng KNH</h2>
                         </div>
 
-                        <div className=" my-2 text-center">
+                        <div className=" my-2 text-center w-full">
                             <p>Chúng tôi đã gửi mã OTP đến email của bạn</p>
                             <p className="mb-4">Vui lòng nhập mã bên dưới để xác nhận email của bạn</p>
                             <OtpInput
                                 name="otp"
                                 id="otp"
-                                inputStyle="text-5xl border-solid border-2 border-indigo-600 bg-slate-200 rounded-md"
-                                containerStyle="flex justify-between"
+                                inputStyle="text-5xl border-solid border-2 border-indigo-600 bg-slate-200 rounded-md min-w-[10px] min-h-[10px] "
+                                containerStyle="flex justify-between w-full"
                                 inputType="text"
                                 value={otp}
                                 onChange={setOtp}
@@ -187,7 +178,7 @@ function ForgotPassword() {
                             />
                             <div className="flex">
                                 <p>Mã sẽ hết hiệu lực trong </p>
-                                <Timer second={90}></Timer>
+                                <Timer key={timer} second={90}></Timer>
                                 <p>giây</p>
                             </div>
                             <div className="my-6 flex justify-center items-center">
@@ -208,7 +199,6 @@ function ForgotPassword() {
                     </div>
                 </div>
             )}
-
             {/* Nhập mật khẩu mới */}
             {step === 3 && (
                 <div className={cx('forgotPassword__modal__3')}>
