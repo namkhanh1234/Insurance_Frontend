@@ -304,3 +304,15 @@ begin
 	select * from payment_request where paymentrequest_id = @@IDENTITY
 end
 GO
+
+CREATE PROCEDURE UpdateRegistrationStatus
+	@id int,
+	@status nvarchar(100)
+as
+begin
+	update registrations set registration_Status = @status where registration_id = @id
+	select * from registrations where registration_id = @id
+end
+go
+
+--exec UpdateRegistrationStatus 1, N'Đã lập hợp đồng'
