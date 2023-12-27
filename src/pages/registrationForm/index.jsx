@@ -1,4 +1,4 @@
-import classNames from 'classnames/bind';s
+import classNames from 'classnames/bind';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './RegistrationInsurance.module.scss';
