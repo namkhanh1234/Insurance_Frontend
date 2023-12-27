@@ -1,19 +1,7 @@
 import axiosInstance from '../utils/axios';
 
-// const ApiLogin = async (email, password) => {
-//     try {
-//         const response = await axiosInstance.post('/token/login', {
-//             email: email,
-//             password: password,
-//         });
-
-//         return response;
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
 const ApiLogin = async ({ email, password }) => {
-    return axiosInstance.post('/token/loginn', {
+    return axiosInstance.post('/token/login', {
         email: email,
         password: password,
     });

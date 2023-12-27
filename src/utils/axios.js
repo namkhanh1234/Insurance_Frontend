@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 
 import config from '@/config';
 import { API_BASE_URL } from '../utils/constant';
+
+import store from '../app/store.js';
 import { refreshAction } from '../features/actions/authAction';
 
 const axiosInstance = axios.create({
@@ -21,7 +23,7 @@ axiosInstance.interceptors.response.use(
     },
     async function (error) {
         const originalRequest = error.config;
-        const dispatch = useDispatch();
+        // const dispatch = useDispatch();
 
         console.log('>> check reponse error', error.response);
         console.log('>> check original ', originalRequest);
@@ -37,23 +39,15 @@ axiosInstance.interceptors.response.use(
 
         // Check response khi gửi request mà authorize thì về login
         // if (error.response.status === 401 && originalRequest.url === baseURL + '/token/refresh') {
-        if (error.response.status === 401 && originalRequest.baseURL === baseURL + '/token/refresh') {
+        if (error.response.status === 401 && originalRequest.baseURL === API_BASE_URL + '/token/refresh') {
             window.location.href = config.routes.login;
             return Promise.reject(error);
         }
 
-        // if (
-        //     error.response.data.code === 'token_not_valid' &&
-        //     error.response.status === 401 &&
-        //     error.response.statusText === 'Unauthorized'
-        // ) {
-        if (
-            // error.response.data.code === 'token_not_valid' &&
-            error.response.status === 401 &&
-            error.response.data.title === 'Unauthorized'
-        ) {
+        if (error.response.status === 401 && error.response.data.title === 'Unauthorized') {
             const refreshToken = localStorage.getItem('refresh_token');
             console.log('Check refresh token from localstorgae >> ', refreshToken);
+
             if (refreshToken) {
                 const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
 
@@ -64,26 +58,27 @@ axiosInstance.interceptors.response.use(
 
                 if (tokenParts.exp > now) {
                     // Redux
-                    dispatch(
-                        refreshAction({
-                            refreshtoken: refreshToken,
-                        }),
-                    );
+                    // Đang gặp lỗi chỗ này - Dùng redux thiếu originalRequest
+                    // Nên chắc dựng một action - cập nhật refresh token
 
-                    // return await axiosInstance
-                    //     .post('/token/refresh', { refreshtoken: refreshToken })
-                    //     .then((response) => {
-                    //         console.log('Check access token from response >> ', response.data.access);
-                    //         localStorage.setItem('access_token', response.data.access);
-                    //         // If Backend "ROTATE_REFRESH_TOKENS": True,s
-                    //         // localStorage.setItem('refresh_token', response.data.refresh);
-                    //         axiosInstance.defaults.headers['Authorization'] = 'Bearer ' + response.data.access;
-                    //         originalRequest.headers['Authorization'] = 'Bearer ' + response.data.access;
-                    //         return axiosInstance(originalRequest);
-                    //     })
-                    //     .catch((err) => {
-                    //         console.log(err);
-                    //     });
+                    // store.dispatch(
+                    //     refreshAction({
+                    //         refreshtoken: refreshToken,
+                    //     }),
+                    // );
+
+                    return await axiosInstance
+                        .post('/token/refresh', { refreshtoken: refreshToken })
+                        .then((response) => {
+                            console.log('Check access token from response >> ', response.data.access);
+                            localStorage.setItem('access_token', response.data.access);
+                            axiosInstance.defaults.headers['Authorization'] = 'Bearer ' + response.data.access;
+                            originalRequest.headers['Authorization'] = 'Bearer ' + response.data.access;
+                            return axiosInstance(originalRequest);
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
                 } else {
                     console.log('Refresh token is expired', tokenParts.exp, now);
                     window.location.href = config.routes.login;
@@ -95,6 +90,7 @@ axiosInstance.interceptors.response.use(
                 localStorage.removeItem('access_token');
                 localStorage.removeItem('refresh_token');
                 localStorage.removeItem('user_id');
+                localStorage.removeItem('email');
                 axiosInstance.defaults.headers['Authorization'] = null;
 
                 window.location.href = config.routes.login;
