@@ -1,7 +1,17 @@
 ﻿
--- Store Procedure && Trigger
+GO
+USE DB_Insurance
+GO
 
-CREATE PROCEDURE dbo.RegisterUser
+--
+-- PROCEDURE RegisterUser
+--
+/*
+DROP PROCEDURE dbo.RegisterUser; 
+GO
+*/
+
+CREATE PROCEDURE [dbo].[RegisterUser]
     @email NVARCHAR(255),
     @password NVARCHAR(100),
     @full_name NVARCHAR(255),
@@ -16,34 +26,27 @@ BEGIN
     -- Return entity instance after inserting
     SELECT * FROM users WHERE user_id = @@IDENTITY;
 END;
+
 GO
 
---SET IDENTITY_INSERT [dbo].[users] OFF
-
--- TEST
---INSERT INTO users (email, hashed_password,full_name, phone, sex, date_of_birth, card_identification)
---    VALUES ('abcd@gmail.com', HASHBYTES('SHA2_256', 'password_1'), N'Nguyen Vassssn A', '0969900900', 'Nam','1986-05-30', N'3526022352');
-
---EXEC RegisterUser 'abcd@gmail.com', 'password_1', N'Nguyen Van A', '0969900900', 'Nam','1986-05-30', N'3526022352';
- --DELETE FROM users WHERE email='nhindv@email.com';
- --select *
- --from users;
-
 --Thêm các bản ghi vào bảng users sử dụng procedures
---EXEC RegisterUser N'tranphuong@example.com', 'password_1', N'Trần Thị Phương', N'0987654321', N'Nữ', '1992-02-15', N'3526022355';
---EXEC RegisterUser N'leminh@example.com', 'password_1', N'Lê Văn Minh', N'0123412345', N'Nam', '1985-05-30', N'3526022356';
+EXEC RegisterUser N'nam608072@gmail.com', 'password_1', N'Mai Nhật Nam', N'0969958958', N'Nam', '2002-01-15', N'352606993';
+EXEC RegisterUser N'namkhanh16052002@gmail.com', 'password_1', N'Nguyễn Đặng Nam Khánh', N'0969958959', N'Nam', '2002-02-25', N'352606804';
+EXEC RegisterUser N'nguyendoanvannhi20@gmail.com', 'password_1', N'Nguyễn Đoàn Vân Nhi', N'0969958960', N'Nữ', '2002-06-18', N'352606702';
+EXEC RegisterUser N'anhkhoaphamnhat@gmail.com', 'password_1', N'Nguyễn Phạm Anh Khoa', N'0969958962', N'Nam', '2002-04-20', N'352606602';
+EXEC RegisterUser N'rename0209@gmail.com', 'password_1', N'Phạm Quốc Hùng', N'0969958964', N'Nam', '2002-03-08', N'352606502';
+GO
 
---EXEC RegisterUser N'tranhieu@example.com', 'password_1', N'Trần Văn Hiếu', N'0912398748', N'Nam', '1994-03-04', N'3526022358';
---EXEC RegisterUser N'lehang@example.com', 'password_1', N'Lệ Hằng', N'0934514548', N'Nữ', '1985-05-30', N'3526022359';
---EXEC RegisterUser N'phamtuan@example.com', 'password_1', N'Phạm Đức Tuấn', N'0987123456', N'Nam', '1995-07-18', N'3526022360';
---GO
 
---kiểm tra login
+--
+-- PROCEDURE CheckLogin
+--
 /*
 DROP PROCEDURE dbo.CheckLogin; 
 GO
 */
-CREATE PROCEDURE dbo.CheckLogin
+
+CREATE PROCEDURE [dbo].[CheckLogin]
     @Email NVARCHAR(50),
     @password NVARCHAR(100)
 AS
@@ -56,22 +59,28 @@ BEGIN
         (SELECT email FROM users WHERE email = @Email AND hashed_password = @HashedPassword);
     END    
 END;
+
 GO
 
--- EXEC dbo.CheckLogin N'phamtuan@example.com', 'password_4';
---EXEC dbo.CheckLogin N'lehang@example.com', 'password_1';
---select * from tokens;
+--EXEC dbo.CheckLogin N'nam608072@gmail.com', 'password_1';
 
 
--- Procedure get insurance based on FromAge && ToAge
-CREATE PROCEDURE dbo.GetInsurances
+--
+-- PROCEDURE GetInsurances
+--
+/*
+DROP PROCEDURE dbo.GetInsurances; 
+GO
+*/
+
+CREATE PROCEDURE [dbo].[GetInsurances]
     @fromAge INT,
     @toAge INT
 AS
 BEGIN
 	declare @average FLOAT
 	SET @average = (@fromAge + @toAge)/2
-	-- Nghĩ được cách nào tối ưu làm thêm
+	
 	--print('Average '+ cast(@average as varchar(10)))
 
 	SELECT *
@@ -90,10 +99,14 @@ GO
 
 
 --
--- Procedure create beneficiary
--- 
+-- PROCEDURE CreateBeneficiary
+--
+/*
+DROP PROCEDURE dbo.CreateBeneficiary; 
+GO
+*/
 
-CREATE PROCEDURE dbo.CreateBeneficiary
+CREATE PROCEDURE [dbo].[CreateBeneficiary]
     @email NVARCHAR(255),
     @full_name NVARCHAR(255),
     @phone NVARCHAR(20),
@@ -106,7 +119,16 @@ CREATE PROCEDURE dbo.CreateBeneficiary
 	@user_id INT
 AS
 BEGIN
-    INSERT INTO beneficiaries (email, full_name, phone, sex, date_of_birth, card_identification, image_identification_url, address, relationship_policyholder, user_id)
+    INSERT INTO beneficiaries (email, 
+								full_name, 
+								phone, 
+								sex, 
+								date_of_birth, 
+								card_identification, 
+								image_identification_url, 
+								address, 
+								relationship_policyholder, 
+								user_id)
     VALUES (
 		@email, 
 		@full_name, 
@@ -117,19 +139,23 @@ BEGIN
 		@image_identification_url,
 		@address,
 		@relationship_policyholder,
-		@user_id);
+		@user_id);    
 
     -- Return entity instance after inserting
     SELECT * FROM beneficiaries WHERE beneficiary_id = @@IDENTITY;
 END;
 GO
 
---EXEC dbo.CreateBeneficiary 'phamhien@gmail.com', N'Phạm Hiển', '0987123001', 'Nam', '2020-12-06', '3526022360', null, N'Thủ Đức', N'Con/cái', 8
 
 --
--- Procuder đăng ký gói bảo hiểm
--- 
-CREATE PROCEDURE dbo.ResgistrationInsurance
+-- PROCEDURE ResgistrationInsurance
+--
+/*
+DROP PROCEDURE dbo.ResgistrationInsurance; 
+GO
+*/
+
+CREATE PROCEDURE [dbo].[ResgistrationInsurance]
    @start_Date DATETIME,
    @end_Date DATETIME,
    @basicInsuranceFee DECIMAL(10,2),
@@ -154,14 +180,16 @@ BEGIN
 END;
 GO
 
---EXEC dbo.ResgistrationInsurance '2024-01-01 00:00:00.000', '2025-01-01 00:00:00.000', 390000, 0, 0, 1, 7
-
 
 --
--- Procedure insert Verfication_Password
--- 
+-- PROCEDURE VerificationPassword
+--
+/*
+DROP PROCEDURE dbo.VerificationPassword; 
+GO
+*/
 
-CREATE PROCEDURE dbo.VerificationPassword
+CREATE PROCEDURE [dbo].[VerificationPassword]
 	@otp_code VARCHAR(6),
 	@expired DATETIME,
 	@user_id INT
@@ -176,17 +204,15 @@ BEGIN
 END;
 GO
 
-select * 
-from verification_password
-where user_id = 9
-order by expired desc;
 
-
+-- PROCEDURE ResetPassword
 --
--- Procedure reset Password by user_id
--- 
+/*
+DROP PROCEDURE dbo.ResetPassword; 
+GO
+*/
 
-CREATE PROCEDURE dbo.ResetPassword
+CREATE PROCEDURE [dbo].[ResetPassword]
 	@user_id INT,
 	@newPassword NVARCHAR(100)
 AS
@@ -202,14 +228,15 @@ BEGIN
 END;
 GO
 
---EXEC dbo.ResetPassword 9, 'password_1'
 
-
+-- PROCEDURE AddContract
 --
--- Procedure add Contract
---
+/*
+DROP PROCEDURE dbo.AddContract; 
+GO
+*/
 
-create PROCEDURE AddContract
+create PROCEDURE [dbo].[AddContract]
 	@startdate datetime,
 	@end_date datetime,
 	@registion_id int,
@@ -242,10 +269,38 @@ begin
 	declare @signDate datetime;
 
 	select @signDate = signing_Date from contracts where contract_id = @id
+
 	declare @insurance_code varchar(20) = FORMAT(@signDate, 'yyyyMMdd') + FORMAT(@id, '0000') 
+
 	UPDATE contracts SET insurance_code = @insurance_code WHERE contract_id = @id;
+
 	select * from contracts where contract_id = @id
 end
-go
+GO
 
---exec AddContract '2024-01-01', '2024-01-01', 1, 1, 1, 900, 0, 900, 900, 1, 3
+
+-- PROCEDURE AddPaymentRequest
+--
+/*
+DROP PROCEDURE dbo.AddPaymentRequest; 
+GO
+*/
+
+CREATE PROCEDURE [dbo].[AddPaymentRequest] 
+	@contract_id int, 
+	@totalcost float, 
+	@description nvarchar(255), 
+	@image nvarchar(255) = null
+as
+begin
+	Insert into payment_request (
+					total_cost, 
+					description, 
+					image_identification_url, 
+					contract_id)
+	values
+		(@totalcost, @description, @image, @contract_id)
+
+	select * from payment_request where paymentrequest_id = @@IDENTITY
+end
+GO
