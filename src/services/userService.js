@@ -18,20 +18,19 @@ const ApiGetUserById = async (userId) => {
 const ApiUpdateUser = async (data) => {
     console.log(data);
     try {
-        await axiosInstance.patch(`/User/${data.id}`,{
+        await axiosInstance.patch(`/User/${data.id}`, {
             // userId: 6,
             // email: "bca@gmail.com",
             // phone: "0987654321",
-            // cardIdentification: "1234567890"  
+            // cardIdentification: "1234567890"
             userId: data.id,
             email: data.email,
             fullName: data.name,
             phone: data.phone_number,
             sex: data.gender,
             dateOfBirth: data.birthday,
-            cardIdentification: data.cardID
+            cardIdentification: data.cardID,
         });
-
     } catch (error) {
         console.log(error);
     }
@@ -40,11 +39,10 @@ const ApiUpdateUser = async (data) => {
 const ApiSendEmail = async (data) => {
     console.log(data);
     try {
-        const response = await axiosInstance.post('VerificationPassword/forgot-password',{
-            email: data 
+        const response = await axiosInstance.post('/verificationPassword/forgot-password', {
+            email: data,
         });
-        return response
-
+        return response;
     } catch (error) {
         console.log(error);
     }
@@ -53,12 +51,11 @@ const ApiSendEmail = async (data) => {
 const ApiVerifiOTP = async (data) => {
     console.log(data);
     try {
-        const response = await axiosInstance.post('VerificationPassword/verify-password',{
-            email: data.email,  
-            message: data.otp
+        const response = await axiosInstance.post('/verificationPassword/verify-password', {
+            email: data.email,
+            message: data.otp,
         });
-        return response
-
+        return response;
     } catch (error) {
         console.log(error);
     }
@@ -67,12 +64,11 @@ const ApiVerifiOTP = async (data) => {
 const ApiResetPassword = async (data) => {
     console.log(data);
     try {
-        const response = await axiosInstance.post('VerificationPassword/reset-password',{
-            email: data.email,  
-            message: data.newPassword
+        const response = await axiosInstance.post('/verificationPassword/reset-password', {
+            email: data.email,
+            message: data.newPassword,
         });
-        return response
-
+        return response;
     } catch (error) {
         console.log(error);
     }
