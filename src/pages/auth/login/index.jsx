@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import styles from './Login.module.scss';
 import config from '../../../config';
@@ -8,11 +9,12 @@ import logo from '@/assets/images/logo.png';
 import { ApiLogin } from '../../../services/authenticationService';
 import axiosInstance from '../../../utils/axios';
 import GoogleLoginButton from '../../../components/GoogleLoginButton/GoogleLoginButton';
+// Redux
+import { loginAction } from '../../../features/actions/authAction';
 
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Separator } from '@/components/ui/separator';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -22,6 +24,11 @@ const cx = classNames.bind(styles);
 
 function Login() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth);
+
+    console.log('>> Check auth: ', user);
+
     const [typeInput, setTypeInput] = useState('password');
 
     const initialFormData = Object.freeze({
@@ -38,23 +45,23 @@ function Login() {
         });
     };
 
-    const login = async () => {
-        const res = await ApiLogin(formData.email, formData.password);
-
-        if (res && res.data) {
-            localStorage.setItem('access_token', res.data.access);
-            localStorage.setItem('refresh_token', res.data.refresh);
-            localStorage.setItem('user_id', res.data.user_id);
-
-            axiosInstance.defaults.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token');
-            navigate(config.routes.home);
-        }
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        login();
+
+        dispatch(
+            loginAction({
+                email: formData.email,
+                password: formData.password,
+            }),
+        );
     };
+
+    useEffect(() => {
+        // Auth trong state
+        if (user.auth) {
+            navigate(config.routes.home);
+        }
+    });
 
     const handleTypeInput = () => {
         if (typeInput == 'password') {
