@@ -46,7 +46,7 @@ function Insurances() {
         try {
             const response = await ApiGetBenefitsDetail(id);
             if (response) {
-                console.log(response);
+                console.log(response.data);
             } else {
             }
         } catch (error) {
@@ -168,7 +168,7 @@ function Insurances() {
                             Chi tiết quyền lợi
                         </div> */}
                         <div className="flex justify-center mt-2 text-gray-500">
-                            {/* {callApi(insurance.insuranceId)} */}
+                            {callApi(insurance.insuranceId)}
                             <Dialog>
                                 <DialogTrigger onClick={handleBenefitDetail}>Chi tiết quyền lợi</DialogTrigger>
                                 <DialogContent>

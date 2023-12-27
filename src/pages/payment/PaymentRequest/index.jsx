@@ -39,10 +39,10 @@ function PaymentRequest() {
         formData.append('description', data.description);
         formData.append('total_cost', data.cost);
         formData.append('contract_id', 1);
-        const response = await ApiInsertRequest(formData);
-        if (response) {
-        } else {
-        }
+        //const response = await ApiInsertRequest(formData);
+        // if (response) {
+        // } else {
+        // }
     };
 
     const {
