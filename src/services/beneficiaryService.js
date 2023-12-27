@@ -1,5 +1,15 @@
 import axiosInstance from '../utils/axios';
 
+const ApiCreateBeneficiary = async (data = {}) => {
+    try {
+        const response = await axiosInstance.post('/beneficiary', data);
+
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 const ApiGetBenefitsDetail = async (id) =>{
     try {
         const response = await axiosInstance.get('/benefitdetail',{params:{
@@ -12,4 +22,4 @@ const ApiGetBenefitsDetail = async (id) =>{
     }
 }
 
-export {ApiGetBenefitsDetail }
+export {ApiGetBenefitsDetail,ApiCreateBeneficiary}

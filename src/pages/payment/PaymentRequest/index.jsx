@@ -52,6 +52,7 @@ function PaymentRequest() {
     } = useForm({
         resolver: yupResolver(schema),
     });
+
     const GetUserById = async (id) => {
         const response = await ApiGetUserById(id);
 
@@ -63,6 +64,7 @@ function PaymentRequest() {
         const userId = localStorage.getItem('user_id');
         GetUserById(userId);
     }, []);
+
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center bg-sky-100 pb-10">
