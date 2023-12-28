@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/dialog';
 import styles from './Insurances.module.scss';
 import classNames from 'classnames/bind';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import FormatCurrency from '../../../components/FormatCurrency/FormatCurrency';
 import { ApiGetAllAges, ApiGetAllInsurances } from '../../../services/insuranceService';
@@ -72,12 +72,6 @@ function Insurances() {
                 CHỌN SẢN PHẨM BẢO HIỂM
             </div>
             <div className="mb-8"></div>
-            {/* <div
-                className={cx(
-                    'age-ranges',
-                    'py-3 flex whitespace-nowrap overflow-x-auto scroll-smooth scroll-m-5  border-b-4 border-[#005691]',
-                )}
-            > */}
             <div className={cx('age-ranges', 'custom-scroll', 'py-3 flex')}>
                 {ages.map((age) => (
                     <div key={`age-${age?.fromAge}`}>

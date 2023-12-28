@@ -7,17 +7,11 @@ const ApiLogin = async ({ email, password }) => {
     });
 };
 
-const ApiSendAccessTokenToBackend = async (email, credential) => {
-    try {
-        const response = await axiosInstance.post('/token/validate-google-token', {
-            email: email,
-            credentialToken: credential,
-        });
-
-        return response;
-    } catch (error) {
-        console.error('Error sending access token to backend:', error.message);
-    }
+const ApiSendAccessTokenToBackend = async ({ email, credential }) => {
+    return await axiosInstance.post('/token/validate-google-token', {
+        email: email,
+        credentialToken: credential,
+    });
 };
 
 const ApiLogout = async (refreshToken) => {

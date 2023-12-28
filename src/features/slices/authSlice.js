@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginAction, refreshAction } from '../actions/authAction';
+import { loginAction, refreshAction, loginGoogleAction } from '../actions/authAction';
 
 // Initial state
 const initialState = {
@@ -19,6 +19,7 @@ const authSlice = createSlice({
     // Code logic xử lý async action
     extraReducers: (builder) => {
         builder
+            // login backend
             .addCase(loginAction.pending, (state) => {
                 state.loading = true;
             })
@@ -35,6 +36,24 @@ const authSlice = createSlice({
                 state.auth = false;
                 state.error = action.error.message;
             })
+            // login google
+            .addCase(loginGoogleAction.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(loginGoogleAction.fulfilled, (state, action) => {
+                state.loading = false;
+                state.email = action.payload?.email;
+                state.user_id = action.payload?.user_id;
+                state.auth = true;
+                state.access_token = action.payload?.access;
+                state.refresh_token = action.payload?.refresh;
+            })
+            .addCase(loginGoogleAction.rejected, (state, action) => {
+                state.loading = false;
+                state.auth = false;
+                state.error = action.error.message;
+            })
+            //
             .addCase(refreshAction.pending, (state) => {
                 state.loading = true;
             })
