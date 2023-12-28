@@ -14,10 +14,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faFileContract } from '@fortawesome/free-solid-svg-icons';
-import {useToast} from '@/components/ui/use-toast';
 import { ApiGetUserById } from '../../../services/userService';
 import { ApiPostContract } from '../../../services/contractService';
 import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
+import config from '../../../config';
+
 
 const cx = classNames.bind(styles);
 
@@ -37,7 +39,7 @@ function ContractPayment() {
 
     const userId = localStorage.getItem('user_id');
     const [user, setUser] = useState({});
-
+    const navigate = useNavigate();
     const GetUserById = async (id) => {
         const response = await ApiGetUserById(id);
 
@@ -69,9 +71,7 @@ function ContractPayment() {
 
 
     useEffect(() => {
-        //console.log(userId);
         GetUserById(userId);
-        //console.log(user);
     }, []);
 
     const beneficiaryData = readBeneficiaryFromLocalStorage();
@@ -82,14 +82,11 @@ function ContractPayment() {
         if (!birthDay) return;
         const formattedDate = format(new Date(birthDay), 'yyyy-MM-dd');
         return formattedDate;
-        //return dateObject;
     };
 
     const PostRegistrationId = async () =>{
         await ApiPostContract(localStorage.getItem('registrationId'));
     }
-
-    const { toast } = useToast();
 
     const onSubmit = async (data) => {
         data.id = userId;
@@ -98,16 +95,10 @@ function ContractPayment() {
         // call API
         try {
             PostRegistrationId(data);
-            toast({
-                description: 'Gửi thành công.',
-                variant: 'success',
-            });
         } catch (error) {
-            toast({
-                description: 'Gửi không thành công',
-                variant: 'destructive',
-            });
+            console.log(error);
         }
+        navigate(config.routes.contractPaymentInfo)
     };
 
 
