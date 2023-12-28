@@ -95,7 +95,7 @@ function RegistrationForm() {
                 if (!res.data.beneficiaryId) {
                     throw new Error('Failed to get beneficiary ID.');
                 }
-
+                
                 // Step 2: Prepare data for beneficiary's registration
                 if (currentInsurance.insuranceId != null && currentInsurance.insuranceId != undefined) {
                     registration.insuranceId = currentInsurance.insuranceId;
@@ -109,6 +109,8 @@ function RegistrationForm() {
                     // Step 4: Nếu thành công -> Navigate contracts
                     navigate(config.routes.contractPayment);
                 }
+                
+                localStorage.setItem('beneficiaryData',JSON.stringify(beneficiaryResponse.data));
             }
         } catch (error) {
             console.log(error);
@@ -120,6 +122,9 @@ function RegistrationForm() {
         const res = await ApiPostRegistration(data);
 
         if (res && res.data) {
+            localStorage.setItem('basicInsuranceFee', res.data.basicInsuranceFee);
+            localStorage.setItem('registrationId', res.data.registrationId);
+
             setRegistrationResult(res.data);
             console.log('Result registration: ', res.data);
         }
@@ -226,6 +231,12 @@ function RegistrationForm() {
             });
         }
     };
+
+    useEffect(() => {
+        localStorage.removeItem('beneficiaryData');
+        localStorage.removeItem('registrationId');
+        localStorage.removeItem('basicInsuranceFee');
+    }, []);
 
     return (
         <div className="mx-3 md:mx-6">
