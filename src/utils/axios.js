@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
 
 import config from '@/config';
 import { API_BASE_URL } from '../utils/constant';
@@ -23,10 +22,9 @@ axiosInstance.interceptors.response.use(
     },
     async function (error) {
         const originalRequest = error.config;
-        // const dispatch = useDispatch();
 
-        console.log('>> check reponse error', error.response);
-        console.log('>> check original ', originalRequest);
+        // console.log('>> check reponse error', error.response);
+        // console.log('>> check original ', originalRequest);
 
         if (typeof error.response === 'undefined') {
             alert(
@@ -46,7 +44,7 @@ axiosInstance.interceptors.response.use(
 
         if (error.response.status === 401 && error.response.data.title === 'Unauthorized') {
             const refreshToken = localStorage.getItem('refresh_token');
-            console.log('Check refresh token from localstorgae >> ', refreshToken);
+            // console.log('Check refresh token from localstorgae >> ', refreshToken);
 
             if (refreshToken) {
                 const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
@@ -59,26 +57,31 @@ axiosInstance.interceptors.response.use(
                 if (tokenParts.exp > now) {
                     // Redux
                     // Đang gặp lỗi chỗ này - Dùng redux thiếu originalRequest
+                    // Cách fix tạm thời ở đây, getItem localstorage do bên action gắn vào để return về axiosInstance
                     // Nên chắc dựng một action - cập nhật refresh token
 
-                    // store.dispatch(
-                    //     refreshAction({
-                    //         refreshtoken: refreshToken,
-                    //     }),
-                    // );
+                    store.dispatch(
+                        refreshAction({
+                            refreshtoken: refreshToken,
+                        }),
+                    );
 
-                    return await axiosInstance
-                        .post('/token/refresh', { refreshtoken: refreshToken })
-                        .then((response) => {
-                            console.log('Check access token from response >> ', response.data.access);
-                            localStorage.setItem('access_token', response.data.access);
-                            axiosInstance.defaults.headers['Authorization'] = 'Bearer ' + response.data.access;
-                            originalRequest.headers['Authorization'] = 'Bearer ' + response.data.access;
-                            return axiosInstance(originalRequest);
-                        })
-                        .catch((err) => {
-                            console.log(err);
-                        });
+                    axiosInstance.defaults.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
+                    originalRequest.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
+                    return axiosInstance(originalRequest);
+
+                    // return await axiosInstance
+                    //     .post('/token/refresh', { refreshtoken: refreshToken })
+                    //     .then((response) => {
+                    //         console.log('Check access token from response >> ', response.data.access);
+                    //         localStorage.setItem('access_token', response.data.access);
+                    //         axiosInstance.defaults.headers['Authorization'] = 'Bearer ' + response.data.access;
+                    //         originalRequest.headers['Authorization'] = 'Bearer ' + response.data.access;
+                    //         return axiosInstance(originalRequest);
+                    //     })
+                    //     .catch((err) => {
+                    //         console.log(err);
+                    //     });
                 } else {
                     console.log('Refresh token is expired', tokenParts.exp, now);
                     window.location.href = config.routes.login;

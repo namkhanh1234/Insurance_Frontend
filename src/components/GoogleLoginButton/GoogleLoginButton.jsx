@@ -34,7 +34,7 @@ function GoogleLoginButton() {
         console.error('Google login failed:', error);
     };
 
-    console.log('>> Check state auth: ', user);
+    // console.log('>> Check state auth: ', user);
     useEffect(() => {
         if (user.auth) {
             navigate(config.routes.home);
