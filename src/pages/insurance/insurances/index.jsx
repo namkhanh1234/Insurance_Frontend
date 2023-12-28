@@ -11,10 +11,11 @@ import {
 } from '@/components/ui/dialog';
 import styles from './Insurances.module.scss';
 import classNames from 'classnames/bind';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import FormatCurrency from '../../../components/FormatCurrency/FormatCurrency';
 import { ApiGetAllAges, ApiGetAllInsurances } from '../../../services/insuranceService';
+import { ApiGetBenefitsDetail } from '../../../services/beneficiaryService';
 
 const cx = classNames.bind(styles);
 
@@ -36,10 +37,24 @@ function Insurances() {
 
     const GetAllInsurancesByAge = async (currentAge) => {
         const res = await ApiGetAllInsurances(currentAge);
+
         if (res && res.data) {
             setInusurances(res.data);
         }
     };
+    const callApi = async (id) => {
+        console.log(id);
+        try {
+            const response = await ApiGetBenefitsDetail(id);
+            if (response) {
+                console.log(response.data);
+            } else {
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const handleBenefitDetail = () => {};
     // console.log('Checked >> ', currentAge);
     // console.log('Checked data >> ', insurances);
 
@@ -154,11 +169,12 @@ function Insurances() {
                             Chi tiết quyền lợi
                         </div> */}
                         <div className="flex justify-center mt-2 text-gray-500">
+                            {callApi(insurance.insuranceId)}
                             <Dialog>
-                                <DialogTrigger>Chi tiết quyền lợi</DialogTrigger>
+                                <DialogTrigger onClick={handleBenefitDetail}>Chi tiết quyền lợi</DialogTrigger>
                                 <DialogContent>
                                     <DialogHeader>
-                                        <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+                                        <DialogTitle>{insurance.insuranceId}</DialogTitle>
                                         <DialogDescription>
                                             This action cannot be undone. This will permanently delete your account and
                                             remove your data from our servers.

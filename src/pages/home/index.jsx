@@ -113,7 +113,7 @@ function Home() {
                     <header className="text-4xl font-bold mb-4">Bạn có biết</header>
                 </div>
                 {/* Body */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 justify-between">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 justify-between">
                     {/* Item - box */}
                     <div className={cx('box')}>
                         <FontAwesomeIcon className={cx('icon')} icon={faHospital} />
@@ -144,9 +144,9 @@ function Home() {
             </div>
             {/* Điểm mạnh của KNH */}
             <div className={cx('wrapper')}>
-                <h3 className="text-4xl font-bold text-sky-600 ml-10 mb-5">NHỮNG THẾ MẠNH CỦA KNH CARE </h3>
+                <h3 className="text-4xl font-bold text-sky-600 ml-10 mb-4">NHỮNG THẾ MẠNH CỦA KNH CARE </h3>
                 <div className="flex justify-evenly items-center">
-                    <div className="flex flex-col justify-between h-[70vh]">
+                    <div className="flex flex-col justify-between space-y-14">
                         <div className="flex items-center">
                             <ShieldPlus className="mr-2 w-[3vw] h-auto" />
                             <p className="ml-3 text-2xl font-semibold">QUYỀN LỢI BẢO HIỂM TOÀN DIỆN</p>
@@ -180,7 +180,7 @@ function Home() {
                 <h3 className="text-4xl font-bold text-sky-600 ml-10 mb-5">SẢN PHẨM ĐƯỢC KNH CARE CUNG CẤP </h3>
                 <div className="flex justify-evenly items-center w-full">
                     <img src={images.family3} alt="" className="w-1/3 h-auto" />
-                    <div className="w-1/2">
+                    <div className="w-1/2 space-y-3">
                         <p className="font-bold text-xl leading-8">
                             KNH Care cam kết mang đến cho khách hàng những sản phẩm bảo hiểm
                             <br />

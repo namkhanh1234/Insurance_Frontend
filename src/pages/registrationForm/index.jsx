@@ -1,5 +1,4 @@
 import classNames from 'classnames/bind';
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './RegistrationInsurance.module.scss';
@@ -21,6 +20,8 @@ import config from '../../config';
 import images from '../../assets/images';
 import { ApiInsurancesByAgeCustomer } from '../../services/insuranceService';
 import FormatCurrency from '../../components/FormatCurrency/FormatCurrency';
+
+import { ApiCreateBeneficiary } from '../../services/beneficiaryService';
 import { ApiPostRegistration } from '../../services/registrationService';
 
 const cx = classNames.bind(styles);
@@ -61,7 +62,7 @@ function RegistrationForm() {
     const [registration, setRegistration] = useState(initialRegistration);
     const [registrationResult, setRegistrationResult] = useState({});
 
-    // Submit form
+    // Clean code
     const handleSubmit = async (event) => {
         try {
             event.preventDefault();
@@ -83,27 +84,15 @@ function RegistrationForm() {
             // }
 
             // Step 1: Post API beneficiary
-            const beneficiaryResponse = await axios.post(
-                `https://localhost:7162/api/v1/beneficiary`,
-                formDataBeneficiary,
-                {
-                    timeout: 5000,
-                    headers: {
-                        Authorization: localStorage.getItem('access_token')
-                            ? 'JWT ' + localStorage.getItem('access_token')
-                            : null,
-                        accept: 'application/json',
-                    },
-                },
-            );
+            const res = await ApiCreateBeneficiary(formDataBeneficiary);
 
             // Get result from API beneficiary
-            if (beneficiaryResponse && beneficiaryResponse.data) {
-                console.log(beneficiaryResponse.data);
-                setBeneficiaryResult(beneficiaryResponse.data);
+            if (res && res.data) {
+                console.log(res.data);
+                setBeneficiaryResult(res.data);
 
                 // Kiểm tra xem có ID người thụ hưởng không
-                if (!beneficiaryResponse.data.beneficiaryId) {
+                if (!res.data.beneficiaryId) {
                     throw new Error('Failed to get beneficiary ID.');
                 }
                 
@@ -111,7 +100,7 @@ function RegistrationForm() {
                 if (currentInsurance.insuranceId != null && currentInsurance.insuranceId != undefined) {
                     registration.insuranceId = currentInsurance.insuranceId;
                     registration.basicInsuranceFee = currentInsurance.price;
-                    registration.beneficiaryId = beneficiaryResponse.data.beneficiaryId;
+                    registration.beneficiaryId = res.data.beneficiaryId;
                     registration.totalSupplementBenefitFee = 0; // chưa làm module này nên cho không
 
                     // Step 3: Post API registration
@@ -128,6 +117,7 @@ function RegistrationForm() {
         }
     };
 
+    // Call API
     const PostRegistration = async (data = {}) => {
         const res = await ApiPostRegistration(data);
 
@@ -152,6 +142,7 @@ function RegistrationForm() {
         GetInsurancesByAgeCustomer(age);
     }, [age]);
 
+    // Handle Change
     const handleBirthdateChange = (event) => {
         // console.log(event.target.value);
         const newBirthdate = event.target.value;
