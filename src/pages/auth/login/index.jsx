@@ -27,7 +27,7 @@ function Login() {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth);
 
-    console.log('>> Check auth: ', user);
+    // console.log('>> Check auth: ', user);
 
     const [typeInput, setTypeInput] = useState('password');
 
