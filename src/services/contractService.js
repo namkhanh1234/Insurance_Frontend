@@ -12,6 +12,7 @@ const ApiPostContract = async (registrationId = 1) => {
                 Authorization: localStorage.getItem('access_token')
                     ? 'JWT ' + localStorage.getItem('access_token')
                     : null,
+                accept: 'application/json',
             },
         });
         console.log(response.data);
@@ -23,17 +24,4 @@ const ApiPostContract = async (registrationId = 1) => {
     }
 };
 
-const ApiSendBeneficiarysId = async (data) => {
-    console.log(data);
-    try {
-        await axiosInstance.patch(`/Beneficiary/${data.id}`, {
-            userId: data.id,
-            beneficiaryId: data.beneficiaryId,
-        });
-
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-export { ApiPostContract, ApiSendBeneficiarysId };
+export { ApiPostContract };

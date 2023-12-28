@@ -17,7 +17,6 @@ import { faFileContract } from '@fortawesome/free-solid-svg-icons';
 import {useToast} from '@/components/ui/use-toast';
 import { ApiGetUserById } from '../../../services/userService';
 import { ApiPostContract } from '../../../services/contractService';
-import { ApiSendBeneficiarysId } from '../../../services/contractService';
 import { format } from 'date-fns';
 
 const cx = classNames.bind(styles);
@@ -86,17 +85,13 @@ function ContractPayment() {
         //return dateObject;
     };
 
-    const PostRegistrationId = async (data) =>{
+    const PostRegistrationId = async () =>{
         await ApiPostContract(localStorage.getItem('registrationId'));
-    }
-
-    const PostBeneficiaryId = async (data) =>{
-        await ApiSendBeneficiarysId(data);
     }
 
     const { toast } = useToast();
 
-    const onSubmit_1 = async (data) => {
+    const onSubmit = async (data) => {
         data.id = userId;
         data.registrationId = registrationDataId;
         console.log(data);
@@ -114,30 +109,6 @@ function ContractPayment() {
             });
         }
     };
-
-    const onSubmit_2 = async (data) => {
-        data.id = userId;
-        data.beneficiaryId = beneficiaryData.beneficiaryId;
-        console.log(data);
-        // call API
-        try {
-            PostBeneficiaryId(data);
-            toast({
-                description: 'Gửi thành công.',
-                variant: 'success',
-            });
-        } catch (error) {
-            toast({
-                description: 'Gửi không thành công',
-                variant: 'destructive',
-            });
-        }
-    };
-
-    const onSubmit = async (data) => {
-        onSubmit_1(data);
-        //onSubmit_2(data);
-    }
 
 
     return (
