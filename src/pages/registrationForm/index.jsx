@@ -8,6 +8,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog';
 
 import config from '../../config';
 import images from '../../assets/images';
@@ -52,6 +60,10 @@ function RegistrationForm() {
     const [beneficiaryResult, setBeneficiaryResult] = useState({});
     const [registration, setRegistration] = useState(initialRegistration);
     const [registrationResult, setRegistrationResult] = useState({});
+
+    /// Hùng
+    // console.log(beneficiaryResult);
+    // console.log(registrationResult);
 
     // Submit form
     const handleSubmit = async (event) => {
@@ -111,6 +123,10 @@ function RegistrationForm() {
 
                     // Step 3: Post API registration
                     PostRegistration(registration);
+
+                    // Set local storage // Hùng
+                    // localStorage.setItem('registration_id', registrationResult.registrationId);
+                    // localStorage.setItem('beneficiary_id', beneficiaryResult.beneficiaryId);
 
                     // Step 4: Nếu thành công -> Navigate contracts
                     navigate(config.routes.contractPayment);
@@ -482,16 +498,30 @@ function RegistrationForm() {
                 </div>
 
                 <div style={{ textAlign: 'center', marginTop: '40px' }}>
-                    <Button
-                        style={{
-                            fontWeight: 'bold',
-                            marginRight: '50px',
-                            backgroundColor: '#bae6fd',
-                            color: '#075985',
-                        }}
-                    >
-                        Chi tiết quyền lợi
-                    </Button>
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Button
+                                style={{
+                                    fontWeight: 'bold',
+                                    marginRight: '50px',
+                                    backgroundColor: '#bae6fd',
+                                    color: '#075985',
+                                }}
+                            >
+                                Chi tiết quyền lợi
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+                                <DialogDescription>
+                                    This action cannot be undone. This will permanently delete your account and remove
+                                    your data from our servers.
+                                </DialogDescription>
+                            </DialogHeader>
+                        </DialogContent>
+                    </Dialog>
+
                     <Button onSubmit={handleSubmit} onClick={handleSubmit} className="bg-[#3E8DCC] hover:bg-sky-700">
                         Tiếp tục
                     </Button>
