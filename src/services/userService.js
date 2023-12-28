@@ -37,5 +37,44 @@ const ApiUpdateUser = async (data) => {
     }
 };
 
+const ApiSendEmail = async (data) => {
+    console.log(data);
+    try {
+        const response = await axiosInstance.post('VerificationPassword/forgot-password',{
+            email: data 
+        });
+        return response
 
-export { ApiGetUserById, ApiUpdateUser};
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const ApiVerifiOTP = async (data) => {
+    console.log(data);
+    try {
+        const response = await axiosInstance.post('VerificationPassword/verify-password',{
+            email: data.email,  
+            message: data.otp
+        });
+        return response
+
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const ApiResetPassword = async (data) => {
+    console.log(data);
+    try {
+        const response = await axiosInstance.post('VerificationPassword/reset-password',{
+            email: data.email,  
+            message: data.newPassword
+        });
+        return response
+
+    } catch (error) {
+        console.log(error);
+    }
+};
+export { ApiGetUserById, ApiUpdateUser, ApiSendEmail, ApiVerifiOTP ,ApiResetPassword};

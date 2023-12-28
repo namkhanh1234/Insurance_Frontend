@@ -24,4 +24,6 @@ const ApiPostContract = async (registrationId = 1) => {
     }
 };
 
+
+
 export { ApiPostContract };
