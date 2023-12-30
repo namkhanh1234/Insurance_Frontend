@@ -26,6 +26,7 @@ function Insurances() {
     });
     const [ages, setAges] = useState([]);
     const [insurances, setInusurances] = useState([]);
+    const [detail, setDetail] = useState([]);
 
     const GetAllAges = async () => {
         const res = await ApiGetAllAges();
@@ -48,13 +49,15 @@ function Insurances() {
             const response = await ApiGetBenefitsDetail(id);
             if (response) {
                 console.log(response.data);
+                setDetail(response.data);
             } else {
+                console.log('abc');
             }
         } catch (error) {
             console.log(error);
         }
     };
-    const handleBenefitDetail = () => {};
+
     // console.log('Checked >> ', currentAge);
     // console.log('Checked data >> ', insurances);
 
@@ -157,7 +160,7 @@ function Insurances() {
                         <div className="my-3 border-b-2 border-dashed border-gray-500"></div>
                         {/* Tạm thời tính giá giảm ở front-end */}
                         <span className="text-sm font-medium">
-                            Tổng số tiền:{' '}
+                            Tổng số tiền:
                             {FormatCurrency(insurance?.price - (insurance?.price * insurance.discount) / 100)}
                         </span>
                         <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
@@ -169,17 +172,21 @@ function Insurances() {
                             Chi tiết quyền lợi
                         </div> */}
                         <div className="flex justify-center mt-2 text-gray-500">
-                            {callApi(insurance.insuranceId)}
                             <Dialog>
-                                <DialogTrigger onClick={handleBenefitDetail}>Chi tiết quyền lợi</DialogTrigger>
-                                <DialogContent>
-                                    <DialogHeader>
-                                        <DialogTitle>{insurance.insuranceId}</DialogTitle>
-                                        <DialogDescription>
-                                            This action cannot be undone. This will permanently delete your account and
-                                            remove your data from our servers.
-                                        </DialogDescription>
-                                    </DialogHeader>
+                                <DialogTrigger onClick={() => callApi(insurance.insuranceId)}>
+                                    Chi tiết quyền lợi
+                                </DialogTrigger>
+                                <DialogContent className="overflow-y-auto max-h-[90vh]">
+                                    {detail.map((data, index) => (
+                                        <DialogHeader key={`benefit-${index}`}>
+                                            <DialogDescription className="grid grid-cols-3">
+                                                <div className="col-span-2 text-black"> {data.nameBenefit}</div>
+                                                <div className="text-red-600 col-span-1 text-right">
+                                                    {FormatCurrency(data.claimSettlement)}
+                                                </div>
+                                            </DialogDescription>
+                                        </DialogHeader>
+                                    ))}
                                 </DialogContent>
                             </Dialog>
                         </div>

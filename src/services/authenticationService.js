@@ -13,7 +13,7 @@ import axiosInstance from '../utils/axios';
 //     }
 // };
 const ApiLogin = async ({ email, password }) => {
-    return axiosInstance.post('/token/loginn', {
+    return axiosInstance.post('/token/login', {
         email: email,
         password: password,
     });
@@ -32,16 +32,11 @@ const ApiSendAccessTokenToBackend = async (email, credential) => {
     }
 };
 
-const ApiLogout = async (refreshToken) => {
-    try {
-        const reponse = await axiosInstance.post('/token/logout', {
-            refreshtoken: refreshToken,
-        });
+const ApiLogout = async ({refreshToken}) => {
 
-        return reponse;
-    } catch (error) {
-        console.log(error);
-    }
+    return axiosInstance.post('/token/logout', {
+               refreshtoken: refreshToken,
+           });
 };
 
 const ApiRefreshToken = async ({ refreshtoken }) => {
