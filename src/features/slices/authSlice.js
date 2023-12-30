@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginAction, refreshAction } from '../actions/authAction';
+import { loginAction, refreshAction,logoutAction } from '../actions/authAction';
 
 // Initial state
 const initialState = {
@@ -44,8 +44,27 @@ const authSlice = createSlice({
             })
             .addCase(refreshAction.rejected, (state, action) => {
                 state.loading = false;
+                state.auth = false;
                 state.error = action.error.message;
-            });
+            })
+            // LogoutAction
+            .addCase(logoutAction.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(logoutAction.fulfilled, (state) => {
+                state.loading = false;
+                state.access_token= null;
+                state.refresh_token= null;
+                state.email= null;
+                state.user_id= null;
+                state.auth= false;
+                state.error= null;
+            })
+            .addCase(logoutAction.rejected, (state,action) => {
+                state.loading = false;
+                state.auth = false;
+                state.error = action.error.message;
+            })
     },
 });
 

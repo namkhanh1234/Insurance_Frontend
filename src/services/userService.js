@@ -18,7 +18,7 @@ const ApiGetUserById = async (userId) => {
 const ApiUpdateUser = async (data) => {
     console.log(data);
     try {
-        await axiosInstance.patch(`/User/${data.id}`, {
+        const response = await axiosInstance.patch(`/User/${data.id}`, {
             // userId: 6,
             // email: "bca@gmail.com",
             // phone: "0987654321",
@@ -31,6 +31,7 @@ const ApiUpdateUser = async (data) => {
             dateOfBirth: data.birthday,
             cardIdentification: data.cardID,
         });
+    return response
     } catch (error) {
         console.log(error);
     }
