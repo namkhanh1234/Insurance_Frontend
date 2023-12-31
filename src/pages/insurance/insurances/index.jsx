@@ -151,8 +151,7 @@ function Insurances() {
                         <div className="my-3 border-b-2 border-dashed border-gray-500"></div>
                         {/* Tạm thời tính giá giảm ở front-end */}
                         <span className="text-sm font-medium">
-                            Tổng số tiền:{' '}
-                            {FormatCurrency(insurance?.price - (insurance?.price * insurance.discount) / 100)}
+                            Tổng số tiền: {FormatCurrency(insurance?.priceDiscount)}
                         </span>
                         <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
                             <Button style={{ backgroundColor: '#3e8bcc' }} className="text-center mt-4 w-full">
