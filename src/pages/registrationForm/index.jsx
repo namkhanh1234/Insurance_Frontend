@@ -23,6 +23,7 @@ import FormatCurrency from '../../components/FormatCurrency/FormatCurrency';
 
 import { ApiCreateBeneficiary } from '../../services/beneficiaryService';
 import { ApiPostRegistration } from '../../services/registrationService';
+import { ApiGetBenefitsDetail } from '../../services/benefitdetailService';
 
 const cx = classNames.bind(styles);
 
@@ -55,6 +56,7 @@ function RegistrationForm() {
     const [birthdate, setBirthdate] = useState('2023-01-01');
     const [age, setAge] = useState(0);
     const [imageSrc, setImageSrc] = useState(null);
+    const [detail, setDetail] = useState([]);
 
     // Form - beneficiary  && registration + beneficiaryResult && registrationResult
     const [beneficiaryData, setBeneficiaryData] = useState(initialBeneficiaryData);
@@ -109,6 +111,8 @@ function RegistrationForm() {
                     // Step 4: Nếu thành công -> Navigate contracts
                     navigate(config.routes.contractPayment);
                 }
+
+                localStorage.setItem('beneficiaryData', JSON.stringify(beneficiaryResponse.data));
             }
         } catch (error) {
             console.log(error);
@@ -120,6 +124,9 @@ function RegistrationForm() {
         const res = await ApiPostRegistration(data);
 
         if (res && res.data) {
+            localStorage.setItem('basicInsuranceFee', res.data.basicInsuranceFee);
+            localStorage.setItem('registrationId', res.data.registrationId);
+
             setRegistrationResult(res.data);
             console.log('Result registration: ', res.data);
         }
@@ -227,6 +234,27 @@ function RegistrationForm() {
         }
     };
 
+    useEffect(() => {
+        localStorage.removeItem('beneficiaryData');
+        localStorage.removeItem('registrationId');
+        localStorage.removeItem('basicInsuranceFee');
+    }, []);
+
+    const handleDetail = async () => {
+        console.log('abc');
+
+        try {
+            const response = await ApiGetBenefitsDetail(currentInsurance.insuranceId);
+            if (response) {
+                console.log(response.data);
+                setDetail(response.data);
+            } else {
+                console.log('abc');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <div className="mx-3 md:mx-6">
             <div className="bg-white">
@@ -476,21 +504,25 @@ function RegistrationForm() {
                                     backgroundColor: '#bae6fd',
                                     color: '#075985',
                                 }}
+                                onClick={handleDetail}
+                                type="button"
                             >
                                 Chi tiết quyền lợi
                             </Button>
                         </DialogTrigger>
-                        <DialogContent>
-                            <DialogHeader>
-                                <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-                                <DialogDescription>
-                                    This action cannot be undone. This will permanently delete your account and remove
-                                    your data from our servers.
-                                </DialogDescription>
-                            </DialogHeader>
+                        <DialogContent className="overflow-y-auto max-h-[90vh]">
+                            {detail.map((data) => (
+                                <DialogHeader>
+                                    <DialogDescription className="grid grid-cols-3">
+                                        <div className="col-span-2 text-black"> {data.nameBenefit}</div>
+                                        <div className="text-red-600 col-span-1 text-right">
+                                            {FormatCurrency(data.claimSettlement)}
+                                        </div>
+                                    </DialogDescription>
+                                </DialogHeader>
+                            ))}
                         </DialogContent>
                     </Dialog>
-
                     <Button onSubmit={handleSubmit} onClick={handleSubmit} className="bg-[#3E8DCC] hover:bg-sky-700">
                         Tiếp tục
                     </Button>

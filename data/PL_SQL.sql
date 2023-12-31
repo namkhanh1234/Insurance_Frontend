@@ -304,3 +304,20 @@ begin
 	select * from payment_request where paymentrequest_id = @@IDENTITY
 end
 GO
+
+CREATE PROCEDURE UpdateRegistrationStatus
+	@id int,
+	@status nvarchar(100)
+as
+begin
+	update registrations set registration_Status = @status where registration_id = @id
+	select * from registrations where registration_id = @id
+end
+go
+
+--exec UpdateRegistrationStatus 1, N'Đã lập hợp đồng'
+
+
+exec CreateBeneficiary 'example@gmail.com', 'No Name', '123456789', 'Nam', '2002-01-15', '352606993', null, 'Thu Duc', 'Bản Thân', 1
+exec ResgistrationInsurance  '2023-01-15', '2024-01-15', 123456, 0, 1234, 1, 1
+exec AddContract '2023-01-15', '2024-01-15', 1, 1, 1, 123456, 0, 123456, 123, 1, 1

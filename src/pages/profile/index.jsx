@@ -14,6 +14,7 @@ import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import axiosInstance from '../../utils/axios';
 
 const schema = yup
     .object({
@@ -62,10 +63,6 @@ function Profile() {
         }
     };
 
-    const UpdateUser = async (data) => {
-        await ApiUpdateUser(data);
-    };
-
     useEffect(() => {
         GetUserById(userId.id);
     }, []);
@@ -78,11 +75,18 @@ function Profile() {
 
         // call API
         try {
-            UpdateUser(data);
-            toast({
-                description: 'Cập nhật thành công.',
-                variant: 'success',
-            });
+            const response = await ApiUpdateUser(data);
+            if (response) {
+                toast({
+                    description: 'Cập nhật thành công.',
+                    variant: 'success',
+                });
+            } else {
+                toast({
+                    description: 'Các trường nhập không hợp lệ! Thử lại',
+                    variant: 'destructive',
+                });
+            }
         } catch (error) {
             toast({
                 description: 'Các trường nhập không hợp lệ! Thử lại',
@@ -100,7 +104,7 @@ function Profile() {
                     className="p-7 rounded-2xl border-2 bg-white flex flex-col items-center w-[50vw]"
                 >
                     <div className="flex justify-evenly mb-4 w-full ">
-                        <div className="w-1/4">
+                        <div className="w-1/3">
                             <Label>Họ tên</Label>
                             <Input
                                 className={background}
@@ -143,7 +147,7 @@ function Profile() {
                     </div>
 
                     <div className="flex w-full justify-evenly">
-                        <div className="w-1/4">
+                        <div className="w-1/3">
                             <Label>Email</Label>
                             <Input
                                 className={background}

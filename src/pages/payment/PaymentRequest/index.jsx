@@ -10,49 +10,65 @@ import * as yup from 'yup';
 
 import { ApiGetUserById } from '../../../services/userService';
 import { ApiInsertRequest } from '../../../services/paymentRequestService';
+import FormatCurrency from '../../../components/FormatCurrency/FormatCurrency';
+import ParseCurrencyToNumber from '../../../components/ParseCurrency/ParseCurrency';
 
 const schema = yup
     .object({
-        cost: yup.number().required('Email không được để trống'),
+        cost: yup.string().required('Email không được để trống'),
         description: yup.string(),
+        // photo: yup.mixed().required('Vui lòng chọn file'),
     })
     .required();
+
 function PaymentRequest() {
     const [image, setImage] = useState();
     const [user, setUser] = useState();
+
     useEffect(() => {
         return () => {
             image && URL.revokeObjectURL(image.preview);
         };
     });
+
     const handleOnChange = (e) => {
         const file = e.target.files[0];
         console.log(e.target.files[0]);
         file.preview = URL.createObjectURL(file);
         setImage(file);
     };
-    const onSubmit = async (data) => {
-        console.log(data);
 
+    const onSubmit = async (data) => {
         //call API
+        const cost = ParseCurrencyToNumber(data.cost);
+        console.log(cost);
         const formData = new FormData();
+
         formData.append('description', data.description);
-        formData.append('total_cost', data.cost);
+        formData.append('total_cost', cost);
         formData.append('contract_id', 1);
-        //const response = await ApiInsertRequest(formData);
-        // if (response) {
-        // } else {
-        // }
+        formData.append('ImageIdentification', image);
+        console.log(image);
+
+        const response = await ApiInsertRequest(formData);
+
+        if (response) {
+            console.log('abc');
+        } else {
+            console.log('xyz');
+        }
     };
 
     const {
         register,
         handleSubmit,
         formState: { errors },
+        setValue,
+        watch,
     } = useForm({
         resolver: yupResolver(schema),
     });
-
+    const costValue = watch('cost');
     const GetUserById = async (id) => {
         const response = await ApiGetUserById(id);
 
@@ -88,11 +104,29 @@ function PaymentRequest() {
                     <div className="mt-5 flex w-full justify-evenly">
                         <div className="w-1/2 mr-2">
                             <Label htmlFor="picture">Ảnh hóa đơn hoặc hồ sơ bệnh án</Label>
-                            <Input id="picture" type="file" accept="image/*" onChange={handleOnChange} />
+                            <Input
+                                id="picture"
+                                type="file"
+                                accept="image/*"
+                                onChange={handleOnChange}
+                                // {...register('photo')}
+                            />
                         </div>
                         <div className="w-1/2">
                             <Label>Chi phí điều trị</Label>
-                            <Input type="number" min="0" placeholder="1000" step="1000" {...register('cost')}></Input>
+                            <Input
+                                type="text"
+                                placeholder="1000"
+                                {...register('cost')}
+                                value={costValue}
+                                onChange={(e) => {
+                                    setValue('cost', e.target.value);
+                                    console.log(costValue);
+                                }}
+                                onBlur={(e) => {
+                                    setValue('cost', FormatCurrency(e.target.value));
+                                }}
+                            ></Input>
                         </div>
                     </div>
                     {image && <img src={image.preview} className="w-full h-[30vh] mt-5"></img>}
