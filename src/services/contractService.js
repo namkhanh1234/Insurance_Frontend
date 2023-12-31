@@ -30,6 +30,14 @@ const ApiPostContract = async (registrationId) => {
         console.log(registrationId);
         const response = await axiosInstance.post('/contracts', {
             registration_id: registrationId,
+        },
+        {
+            headers: {
+                Authorization: localStorage.getItem('access_token')
+                    ? 'JWT ' + localStorage.getItem('access_token')
+                    : null,
+                accept: 'application/json',
+            },
         });
 
         return response;
