@@ -11,11 +11,12 @@ import {
 } from '@/components/ui/dialog';
 import styles from './Insurances.module.scss';
 import classNames from 'classnames/bind';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import FormatCurrency from '../../../components/FormatCurrency/FormatCurrency';
 import { ApiGetAllAges, ApiGetAllInsurances } from '../../../services/insuranceService';
-import { ApiGetBenefitsDetail } from '../../../services/beneficiaryService';
+
+import { ApiGetBenefitsDetail } from '../../../services/benefitdetailService';
 
 const cx = classNames.bind(styles);
 
@@ -75,12 +76,6 @@ function Insurances() {
                 CHỌN SẢN PHẨM BẢO HIỂM
             </div>
             <div className="mb-8"></div>
-            {/* <div
-                className={cx(
-                    'age-ranges',
-                    'py-3 flex whitespace-nowrap overflow-x-auto scroll-smooth scroll-m-5  border-b-4 border-[#005691]',
-                )}
-            > */}
             <div className={cx('age-ranges', 'custom-scroll', 'py-3 flex')}>
                 {ages.map((age) => (
                     <div key={`age-${age?.fromAge}`}>
@@ -160,8 +155,7 @@ function Insurances() {
                         <div className="my-3 border-b-2 border-dashed border-gray-500"></div>
                         {/* Tạm thời tính giá giảm ở front-end */}
                         <span className="text-sm font-medium">
-                            Tổng số tiền:
-                            {FormatCurrency(insurance?.price - (insurance?.price * insurance.discount) / 100)}
+                            Tổng số tiền: {FormatCurrency(insurance?.priceDiscount)}
                         </span>
                         <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
                             <Button style={{ backgroundColor: '#3e8bcc' }} className="text-center mt-4 w-full">
@@ -172,6 +166,7 @@ function Insurances() {
                             Chi tiết quyền lợi
                         </div> */}
                         <div className="flex justify-center mt-2 text-gray-500">
+                            {/* {callApi(insurance.insuranceId)} */}
                             <Dialog>
                                 <DialogTrigger onClick={() => callApi(insurance.insuranceId)}>
                                     Chi tiết quyền lợi

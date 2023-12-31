@@ -20,31 +20,38 @@ const schema = yup
         // photo: yup.mixed().required('Vui lòng chọn file'),
     })
     .required();
+
 function PaymentRequest() {
     const [image, setImage] = useState();
     const [user, setUser] = useState();
+
     useEffect(() => {
         return () => {
             image && URL.revokeObjectURL(image.preview);
         };
     });
+
     const handleOnChange = (e) => {
         const file = e.target.files[0];
         console.log(e.target.files[0]);
         file.preview = URL.createObjectURL(file);
         setImage(file);
     };
+
     const onSubmit = async (data) => {
         //call API
         const cost = ParseCurrencyToNumber(data.cost);
         console.log(cost);
         const formData = new FormData();
+
         formData.append('description', data.description);
         formData.append('total_cost', cost);
         formData.append('contract_id', 1);
         formData.append('ImageIdentification', image);
         console.log(image);
+
         const response = await ApiInsertRequest(formData);
+
         if (response) {
             console.log('abc');
         } else {

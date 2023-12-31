@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
 
 import config from '@/config';
 import { API_BASE_URL } from '../utils/constant';
+
+import store from '../app/store.js';
 import { refreshAction } from '../features/actions/authAction';
 
 const axiosInstance = axios.create({
@@ -21,10 +22,9 @@ axiosInstance.interceptors.response.use(
     },
     async function (error) {
         const originalRequest = error.config;
-        const dispatch = useDispatch();
 
-        console.log('>> check reponse error', error.response);
-        console.log('>> check original ', originalRequest);
+        // console.log('>> check reponse error', error.response);
+        // console.log('>> check original ', originalRequest);
 
         if (typeof error.response === 'undefined') {
             alert(
@@ -37,23 +37,15 @@ axiosInstance.interceptors.response.use(
 
         // Check response khi gửi request mà authorize thì về login
         // if (error.response.status === 401 && originalRequest.url === baseURL + '/token/refresh') {
-        if (error.response.status === 401 && originalRequest.baseURL === baseURL + '/token/refresh') {
+        if (error.response.status === 401 && originalRequest.baseURL === API_BASE_URL + '/token/refresh') {
             window.location.href = config.routes.login;
             return Promise.reject(error);
         }
 
-        // if (
-        //     error.response.data.code === 'token_not_valid' &&
-        //     error.response.status === 401 &&
-        //     error.response.statusText === 'Unauthorized'
-        // ) {
-        if (
-            // error.response.data.code === 'token_not_valid' &&
-            error.response.status === 401 &&
-            error.response.data.title === 'Unauthorized'
-        ) {
+        if (error.response.status === 401 && error.response.data.title === 'Unauthorized') {
             const refreshToken = localStorage.getItem('refresh_token');
-            console.log('Check refresh token from localstorgae >> ', refreshToken);
+            // console.log('Check refresh token from localstorgae >> ', refreshToken);
+
             if (refreshToken) {
                 const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
 
@@ -64,19 +56,25 @@ axiosInstance.interceptors.response.use(
 
                 if (tokenParts.exp > now) {
                     // Redux
-                    dispatch(
+                    // Đang gặp lỗi chỗ này - Dùng redux thiếu originalRequest
+                    // Cách fix tạm thời ở đây, getItem localstorage do bên action gắn vào để return về axiosInstance
+                    // Nên chắc dựng một action - cập nhật refresh token
+
+                    store.dispatch(
                         refreshAction({
                             refreshtoken: refreshToken,
                         }),
                     );
+
+                    axiosInstance.defaults.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
+                    originalRequest.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
+                    return axiosInstance(originalRequest);
 
                     // return await axiosInstance
                     //     .post('/token/refresh', { refreshtoken: refreshToken })
                     //     .then((response) => {
                     //         console.log('Check access token from response >> ', response.data.access);
                     //         localStorage.setItem('access_token', response.data.access);
-                    //         // If Backend "ROTATE_REFRESH_TOKENS": True,s
-                    //         // localStorage.setItem('refresh_token', response.data.refresh);
                     //         axiosInstance.defaults.headers['Authorization'] = 'Bearer ' + response.data.access;
                     //         originalRequest.headers['Authorization'] = 'Bearer ' + response.data.access;
                     //         return axiosInstance(originalRequest);
@@ -95,6 +93,7 @@ axiosInstance.interceptors.response.use(
                 localStorage.removeItem('access_token');
                 localStorage.removeItem('refresh_token');
                 localStorage.removeItem('user_id');
+                localStorage.removeItem('email');
                 axiosInstance.defaults.headers['Authorization'] = null;
 
                 window.location.href = config.routes.login;

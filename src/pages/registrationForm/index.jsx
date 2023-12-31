@@ -23,7 +23,7 @@ import FormatCurrency from '../../components/FormatCurrency/FormatCurrency';
 
 import { ApiCreateBeneficiary } from '../../services/beneficiaryService';
 import { ApiPostRegistration } from '../../services/registrationService';
-import { ApiGetBenefitsDetail } from '../../services/beneficiaryService';
+import { ApiGetBenefitsDetail } from '../../services/benefitdetailService';
 
 const cx = classNames.bind(styles);
 
@@ -456,7 +456,7 @@ function RegistrationForm() {
                                 type="text"
                                 placeholder="Nhập phí bảo hiểm"
                                 onChange={handleChangeRegistration}
-                                value={currentInsurance?.price ? FormatCurrency(currentInsurance?.price) : '0đ'}
+                                value={currentInsurance?.price ? FormatCurrency(currentInsurance?.priceDiscount) : '0đ'}
                                 className="bg-green-100 border-green-200 focus:ring-0 focus-visible:ring-0 focus-visible:ring-transparent"
                             ></Input>
                         </div>

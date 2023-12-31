@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faUser } from '@fortawesome/free-regular-svg-icons';
@@ -11,22 +11,13 @@ import config from '../../config';
 import Menu from '@/components/Popper/Menu';
 
 function Header() {
-    const [currentUser, setCurrentUser] = useState(null);
-    const userId = localStorage.getItem('user_id');
-
-    useEffect(() => {
-        // console.log(userId);
-
-        if (userId != null || userId != undefined) {
-            setCurrentUser(userId);
-        }
-    }, []);
+    const user = useSelector((state) => state.auth);
 
     const userMenu = [
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'View profile',
-            to: `/profile/${currentUser}`,
+            to: `/profile/${user?.user_id}`,
         },
         {
             icon: <FontAwesomeIcon icon={faEarthAsia} />,
@@ -114,7 +105,7 @@ function Header() {
                 </div>
 
                 {/* Chỗ này cần khi có account ẩn này hiện iamge cho khách hàng */}
-                {currentUser != null || currentUser != undefined ? (
+                {user.auth ? (
                     <div className="mt-[4px] flex items-center space-x-4">
                         <FontAwesomeIcon icon={faBell} className="text-lg" />
                         <Menu items={userMenu} onChange={handleMenuOnChange}>

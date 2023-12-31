@@ -2,11 +2,6 @@ import axiosInstance from '../utils/axios';
 
 const ApiGetUserById = async (userId) => {
     try {
-        // const response = await axiosInstance.get('/user/', {
-        //     params: {
-        //         id: userId,
-        //     },
-        // });
         const response = await axiosInstance.get(`/user/${userId}`);
 
         return response;
@@ -18,11 +13,7 @@ const ApiGetUserById = async (userId) => {
 const ApiUpdateUser = async (data) => {
     console.log(data);
     try {
-        const response = await axiosInstance.patch(`/User/${data.id}`, {
-            // userId: 6,
-            // email: "bca@gmail.com",
-            // phone: "0987654321",
-            // cardIdentification: "1234567890"
+        const response = await axiosInstance.patch(`/user/${data.id}`, {
             userId: data.id,
             email: data.email,
             fullName: data.name,
@@ -31,7 +22,24 @@ const ApiUpdateUser = async (data) => {
             dateOfBirth: data.birthday,
             cardIdentification: data.cardID,
         });
-    return response
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const ApiRegister = async (data) => {
+    try {
+        const response = await axiosInstance.post('/user', {
+            email: data.email,
+            password: data.password,
+            fullName: data.name,
+            phone: data.phone_number,
+            sex: data.gender,
+            dateOfBirth: data.birthday,
+            cardIdentification: data.id,
+        });
+        return response;
     } catch (error) {
         console.log(error);
     }
@@ -75,21 +83,4 @@ const ApiResetPassword = async (data) => {
     }
 };
 
-const ApiRegister =  async (data) => {
-    try {
-        const response =  await axiosInstance.post('/User/register', {
-            email: data.email,
-            password: data.password,
-            fullName: data.name,
-            phone: data.phone_number,
-            sex: data.gender,
-            dateOfBirth: data.birthday,
-            cardIdentification: data.id,
-        });
-        return response
-
-    } catch (error) {
-        console.log(error);
-    }
-}
-export { ApiGetUserById, ApiUpdateUser, ApiSendEmail, ApiVerifiOTP ,ApiResetPassword ,  ApiRegister};
+export { ApiGetUserById, ApiUpdateUser, ApiSendEmail, ApiVerifiOTP, ApiResetPassword, ApiRegister };
