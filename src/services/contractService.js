@@ -28,7 +28,7 @@ const ApiPostContract = async (registrationId) => {
     try {
         // Chỗ này hùng đặt tên đường dẫn đúng chuẩn Restful
         console.log(registrationId);
-        const response = await axiosInstance.post('/contracts', {
+        const response = await axiosInstance.post('/Contracts', {
             registration_id: registrationId,
         },
         {
