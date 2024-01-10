@@ -103,22 +103,18 @@ GO
 CREATE TABLE [dbo].[beneficiaries](
 	[beneficiary_id] [int] IDENTITY(1,1) NOT NULL,
 	[email] [nvarchar](255) NOT NULL,
-	[full_name] [nvarchar](255) NULL,
+	[full_name] [nvarchar](255) NOT NULL,
 	[phone] [nvarchar](20) NOT NULL,
-	[sex] [nvarchar](5) NULL,
-	[date_of_birth] [date] NULL,
+	[sex] [nvarchar](5) NOT NULL,
+	[date_of_birth] [date] NOT NULL,
 	[card_identification] [nvarchar](20) NOT NULL,
 	[image_identification_url] [varchar](255) NULL,
-	[address] [nvarchar](255) NULL,
-	[relationship_policyholder] [nvarchar](100) NULL,
-	[user_id] [int] NULL,
+	[address] [nvarchar](255) NOT NULL,
+	[relationship_policyholder] [nvarchar](100) NOT NULL,
+	[user_id] [int] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[beneficiary_id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
-UNIQUE NONCLUSTERED 
-(
-	[email] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -265,21 +261,22 @@ GO
 
 CREATE TABLE [dbo].[registrations](
 	[registration_id] [int] IDENTITY(1,1) NOT NULL,
-	[registration_Date] [datetime] NULL,
+	[registration_Date] [datetime] NOT NULL,
 	[start_Date] [datetime] NOT NULL,
 	[end_Date] [datetime] NOT NULL,
-	[basicInsuranceFee] [decimal](10, 2) NULL,
-	[discount] [decimal](5, 2) NULL,
-	[totalSupplementalBenefitFee] [decimal](10, 2) NULL,
-	[registration_Status] [nvarchar](100) NOT NULL,
-	[beneficiary_id] [int] NULL,
-	[insurance_id] [int] NULL,
+	[basicInsuranceFee] [decimal](10, 2) NOT NULL,
+	[discount] [decimal](5, 2) NOT NULL,
+	[totalSupplementalBenefitFee] [decimal](10, 2) DEFAULT 0,
+	[registration_Status] [nvarchar](100) NOT NULL DEFAULT N'Chờ xử lý', -- Chờ xử lý | Đã lập hợp đồng
+	[beneficiary_id] [int] NOT NULL,
+	[insurance_id] [int] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[registration_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
 
 ALTER TABLE [dbo].[registrations] ADD  DEFAULT (getdate()) FOR [registration_Date]
 GO
