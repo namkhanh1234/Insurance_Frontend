@@ -126,6 +126,7 @@ function RegistrationForm() {
         if (res && res.data) {
             localStorage.setItem('basicInsuranceFee', res.data.basicInsuranceFee);
             localStorage.setItem('registrationId', res.data.registrationId);
+            localStorage.setItem('beneficiaryId', res.data.beneficiaryId);
 
             setRegistrationResult(res.data);
             console.log('Result registration: ', res.data);

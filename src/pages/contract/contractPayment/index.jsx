@@ -16,7 +16,8 @@ import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faFileContract } from '@fortawesome/free-solid-svg-icons';
 import { ApiGetUserById } from '../../../services/userService';
 import { ApiPostContract } from '../../../services/contractService';
-import { format } from 'date-fns';
+import { ApiReadBeneficiary } from '../../../services/beneficiaryService';
+import { format, set } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import config from '../../../config';
 
@@ -35,7 +36,9 @@ function ContractPayment() {
     };
 
     const userId = localStorage.getItem('user_id');
+    const beneficiaryId = localStorage.getItem('beneficiaryId');
     const [user, setUser] = useState({});
+    const [beneficiaryData, setBeneficiaryData] = useState({});
     const navigate = useNavigate();
 
     // Chỗ này ok
@@ -47,23 +50,26 @@ function ContractPayment() {
         }
     };
 
+    // Đã fix
+    const readBeneficiaryData = async (beneficiaryId) => {
+        const response = await ApiReadBeneficiary(beneficiaryId);
+        
+        if (response && response.data) {
+            //console.log(response.data);
+            setBeneficiaryData(response.data);
+        }
+    };
+
     // Chỗ này ok
     useEffect(() => {
         GetUserById(userId);
+        readBeneficiaryData(beneficiaryId);
     }, []);
-
-    // Chỗ này cần xem lại - Hơi nhọc nhằn chỗ này - Ngta review code kh ổn
-    const readBeneficiaryFromLocalStorage = () => {
-        var x = localStorage.getItem('beneficiaryData');
-        var _beneficiary = JSON.parse(x);
-        // console.log(_beneficiary);
-        return _beneficiary;
-    };
 
     const readRegistrationIdFromLocalStograge = () => {
         var x = localStorage.getItem('registrationId');
         var _registrationId = JSON.parse(x);
-        console.log(_registrationId);
+        //console.log(_registrationId);
         return _registrationId;
     };
 
@@ -75,7 +81,6 @@ function ContractPayment() {
     };
 
     // Gọi cách này: Mà lỡ ra null hay undefined mà ở dưới html chọt vô thuộc tính => Lỗi, trắng màn hình
-    const beneficiaryData = readBeneficiaryFromLocalStorage();
     const registrationDataId = readRegistrationIdFromLocalStograge();
     const insuranceFee = readFeeFromLocalStograge();
 
@@ -97,7 +102,7 @@ function ContractPayment() {
         }
     };
 
-    const onSubmit = async (data) => {
+    const onSubmit = async () => {
         // Chỗ này tại sao data.id với data.registrationId trong khi bên backend của hùng chỉ cần registrationId
         // data.id = userId;
         // data.registrationId = registrationDataId;
