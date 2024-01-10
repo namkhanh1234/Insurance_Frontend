@@ -37,7 +37,6 @@ EXEC RegisterUser N'anhkhoaphamnhat@gmail.com', 'password_1', N'Nguyễn Phạm 
 EXEC RegisterUser N'rename0209@gmail.com', 'password_1', N'Phạm Quốc Hùng', N'0969958964', N'Nam', '2002-03-08', N'352606502';
 GO
 
-
 --
 -- PROCEDURE CheckLogin
 --
@@ -66,39 +65,6 @@ GO
 
 
 --
--- PROCEDURE GetInsurances
---
-/*
-DROP PROCEDURE dbo.GetInsurances; 
-GO
-*/
-
-CREATE PROCEDURE [dbo].[GetInsurances]
-    @fromAge INT,
-    @toAge INT
-AS
-BEGIN
-	declare @average FLOAT
-	SET @average = (@fromAge + @toAge)/2
-	
-	--print('Average '+ cast(@average as varchar(10)))
-
-	SELECT *
-	FROM dbo.insurances
-	WHERE FromAge <= @average and @average <= ToAge;
-	--WHERE FromAge = @fromAge and ToAge = @toAge
-END;
-GO
-
---EXEC dbo.GetInsurances 0, 0;
---EXEC dbo.GetInsurances 4, 6;
---EXEC dbo.GetInsurances 7, 9;
---EXEC dbo.GetInsurances 10, 18;
---EXEC dbo.GetInsurances 19, 30;
---EXEC dbo.GetInsurances 31, 40;
-
-
---
 -- PROCEDURE CreateBeneficiary
 --
 /*
@@ -106,45 +72,45 @@ DROP PROCEDURE dbo.CreateBeneficiary;
 GO
 */
 
-CREATE PROCEDURE [dbo].[CreateBeneficiary]
-    @email NVARCHAR(255),
-    @full_name NVARCHAR(255),
-    @phone NVARCHAR(20),
-	@sex NVARCHAR(5),
-    @date_of_birth DATE,
-    @card_identification NVARCHAR(20),
-	@image_identification_url VARCHAR(255),
-	@address NVARCHAR(255),
-	@relationship_policyholder NVARCHAR(100),
-	@user_id INT
-AS
-BEGIN
-    INSERT INTO beneficiaries (email, 
-								full_name, 
-								phone, 
-								sex, 
-								date_of_birth, 
-								card_identification, 
-								image_identification_url, 
-								address, 
-								relationship_policyholder, 
-								user_id)
-    VALUES (
-		@email, 
-		@full_name, 
-		@phone, 
-		@sex, 
-		@date_of_birth,
-		@card_identification,
-		@image_identification_url,
-		@address,
-		@relationship_policyholder,
-		@user_id);    
+--CREATE PROCEDURE [dbo].[CreateBeneficiary]
+--    @email NVARCHAR(255),
+--    @full_name NVARCHAR(255),
+--    @phone NVARCHAR(20),
+--	@sex NVARCHAR(5),
+--    @date_of_birth DATE,
+--    @card_identification NVARCHAR(20),
+--	@image_identification_url VARCHAR(255),
+--	@address NVARCHAR(255),
+--	@relationship_policyholder NVARCHAR(100),
+--	@user_id INT
+--AS
+--BEGIN
+--    INSERT INTO beneficiaries (email, 
+--								full_name, 
+--								phone, 
+--								sex, 
+--								date_of_birth, 
+--								card_identification, 
+--								image_identification_url, 
+--								address, 
+--								relationship_policyholder, 
+--								user_id)
+--    VALUES (
+--		@email, 
+--		@full_name, 
+--		@phone, 
+--		@sex, 
+--		@date_of_birth,
+--		@card_identification,
+--		@image_identification_url,
+--		@address,
+--		@relationship_policyholder,
+--		@user_id);    
 
-    -- Return entity instance after inserting
-    SELECT * FROM beneficiaries WHERE beneficiary_id = @@IDENTITY;
-END;
-GO
+--    -- Return entity instance after inserting
+--    SELECT * FROM beneficiaries WHERE beneficiary_id = @@IDENTITY;
+--END;
+--GO
 
 
 --
@@ -180,6 +146,7 @@ BEGIN
 END;
 GO
 
+EXEC [dbo].[ResgistrationInsurance] '2024-01-01', '2025-12-31', 390000.00, 0, 0, 1, 6
 
 --
 -- PROCEDURE VerificationPassword
@@ -318,6 +285,6 @@ go
 --exec UpdateRegistrationStatus 1, N'Đã lập hợp đồng'
 
 
-exec CreateBeneficiary 'example@gmail.com', 'No Name', '123456789', 'Nam', '2002-01-15', '352606993', null, 'Thu Duc', 'Bản Thân', 1
-exec ResgistrationInsurance  '2023-01-15', '2024-01-15', 123456, 0, 1234, 1, 1
-exec AddContract '2023-01-15', '2024-01-15', 1, 1, 1, 123456, 0, 123456, 123, 1, 1
+--exec CreateBeneficiary 'example@gmail.com', 'No Name', '123456789', 'Nam', '2002-01-15', '352606993', null, 'Thu Duc', 'Bản Thân', 1
+--exec ResgistrationInsurance  '2023-01-15', '2024-01-15', 123456, 0, 1234, 1, 1
+--exec AddContract '2023-01-15', '2024-01-15', 1, 1, 1, 123456, 0, 123456, 123, 1, 1
