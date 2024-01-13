@@ -2,7 +2,7 @@ import axiosInstance from '../utils/axios';
 
 const ApiCreateBeneficiary = async (data = {}) => {
     try {
-        const response = await axiosInstance.post('/beneficiary', data);
+        const response = await axiosInstance.post('/beneficiaries', data);
 
         return response;
     } catch (error) {
@@ -12,7 +12,7 @@ const ApiCreateBeneficiary = async (data = {}) => {
 
 const ApiReadBeneficiary = async (id) => {
     try {
-        const response = await axiosInstance.get(`/Beneficiary/${id}`);
+        const response = await axiosInstance.get(`/Beneficiaries/${id}`);
         //console.log(response.data);
 
         return response;

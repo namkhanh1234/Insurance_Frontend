@@ -2,7 +2,7 @@ import axiosInstance from '../utils/axios';
 
 const ApiGetUserById = async (userId) => {
     try {
-        const response = await axiosInstance.get(`/user/${userId}`);
+        const response = await axiosInstance.get(`/users/${userId}`);
 
         return response;
     } catch (error) {
@@ -13,7 +13,7 @@ const ApiGetUserById = async (userId) => {
 const ApiUpdateUser = async (data) => {
     console.log(data);
     try {
-        const response = await axiosInstance.patch(`/user/${data.id}`, {
+        const response = await axiosInstance.patch(`/users/${data.id}`, {
             userId: data.id,
             email: data.email,
             fullName: data.name,
@@ -30,7 +30,7 @@ const ApiUpdateUser = async (data) => {
 
 const ApiRegister = async (data) => {
     try {
-        const response = await axiosInstance.post('/user', {
+        const response = await axiosInstance.post('/users', {
             email: data.email,
             password: data.password,
             fullName: data.name,

@@ -146,8 +146,8 @@ BEGIN
 END;
 GO
 
-EXEC [dbo].[ResgistrationInsurance] '2024-01-01', '2025-12-31', 390000.00, 0, 0, 1, 6
 
+GO
 --
 -- PROCEDURE VerificationPassword
 --

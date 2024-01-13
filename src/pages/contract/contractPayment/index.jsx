@@ -53,7 +53,7 @@ function ContractPayment() {
     // Đã fix
     const readBeneficiaryData = async (beneficiaryId) => {
         const response = await ApiReadBeneficiary(beneficiaryId);
-        
+
         if (response && response.data) {
             //console.log(response.data);
             setBeneficiaryData(response.data);
@@ -73,16 +73,16 @@ function ContractPayment() {
         return _registrationId;
     };
 
-    const readFeeFromLocalStograge = () => {
-        var x = localStorage.getItem('basicInsuranceFee');
-        var _fee = JSON.parse(x);
-        // console.log(_fee);
-        return _fee;
-    };
+    // const readFeeFromLocalStograge = () => {
+    //     var x = localStorage.getItem('basicInsuranceFee');
+    //     var _fee = JSON.parse(x);
+    //     // console.log(_fee);
+    //     return _fee;
+    // };
 
     // Gọi cách này: Mà lỡ ra null hay undefined mà ở dưới html chọt vô thuộc tính => Lỗi, trắng màn hình
     const registrationDataId = readRegistrationIdFromLocalStograge();
-    const insuranceFee = readFeeFromLocalStograge();
+    //const insuranceFee = readFeeFromLocalStograge();
 
     const formatingDated = (birthDay) => {
         if (!birthDay) return;
@@ -173,7 +173,7 @@ function ContractPayment() {
                         <div className={cx('personInfo_modal', 'rounded-2xl border-2 mr-20 mb-6')}>
                             <div className="Buyee__info items-center">
                                 <p className="info ml-3">Họ tên: {beneficiaryData?.fullName}</p>
-                                <p className="info ml-3">Phí bảo hiểm: {insuranceFee} </p>
+                                {/* <p className="info ml-3">Phí bảo hiểm: {insuranceFee} </p> */}
                             </div>
 
                             <FontAwesomeIcon

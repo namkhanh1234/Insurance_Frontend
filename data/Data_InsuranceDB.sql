@@ -1,4 +1,4 @@
-﻿
+
 GO
 USE DB_Insurance
 GO

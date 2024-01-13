@@ -38,4 +38,13 @@ const ApiPostContract = async (registrationId) => {
     }
 };
 
-export { ApiPostContract };
+const ApiGetContractById = async (id) => { 
+    try {
+        const response = await axiosInstance.get(`/Contracts/${id}`);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export { ApiPostContract , ApiGetContractById };

@@ -12,6 +12,7 @@ function Logout() {
     const user = useSelector((state) => state.auth);
     const dispath = useDispatch();
     useEffect(() => {
+        console.log('>> Check auth logout: ', user);
         if (user.auth) {
             dispath(logoutAction({ refreshtoken: user.refresh_token }));
         }

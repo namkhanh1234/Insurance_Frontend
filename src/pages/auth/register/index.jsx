@@ -15,13 +15,8 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/components/ui/use-toast';
 
-import axiosInstance from '../../../utils/axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-regular-svg-icons';
-import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import { ApiRegister } from '../../../services/userService';
 
@@ -68,15 +63,6 @@ function Register() {
     const onSubmit = async (data) => {
         data.gender = gender;
         try {
-            // await axiosInstance.post('/User/register', {
-            //     email: data.email,
-            //     password: data.password,
-            //     fullName: data.name,
-            //     phone: data.phone_number,
-            //     sex: gender,
-            //     dateOfBirth: data.birthday,
-            //     cardIdentification: data.id,
-            // });
             const response = ApiRegister(data);
             if (response) {
                 toast({

@@ -1,10 +1,10 @@
-﻿--
+
 -- CREATE DATABASE
---
 IF EXISTS(SELECT * FROM sys.databases WHERE name = 'DB_Insurance')
 BEGIN
   DROP DATABASE DB_Insurance;
 END
+GO
 CREATE DATABASE DB_Insurance;
 
 GO
@@ -330,9 +330,6 @@ ALTER TABLE [dbo].[contracts]  WITH CHECK ADD FOREIGN KEY([beneficiary_id])
 REFERENCES [dbo].[beneficiaries] ([beneficiary_id])
 GO
 
-ALTER TABLE [dbo].[contracts]  WITH CHECK ADD FOREIGN KEY([insurance_id])
-REFERENCES [dbo].[insurances] ([Insurance_ID])
-GO
 
 ALTER TABLE [dbo].[contracts]  WITH CHECK ADD FOREIGN KEY([registration_id])
 REFERENCES [dbo].[registrations] ([registration_id])
