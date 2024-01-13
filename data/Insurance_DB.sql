@@ -315,7 +315,6 @@ CREATE TABLE [dbo].[contracts](
 	[periodic_Fee] [decimal](10, 2) NOT NULL,
 	[user_id] [int] NULL,
 	[beneficiary_id] [int] NULL,
-	[insurance_id] [int] NULL,
 	[registration_id] [int] NULL,
 PRIMARY KEY CLUSTERED 
 (
@@ -357,29 +356,30 @@ CREATE TABLE [dbo].[payment_request](
 	[total_payment] [float] NULL,
 	[description] [nvarchar](255) NULL,
 	[image_identification_url] [varchar](255) NULL,
-	[request_status] [varchar](25) NULL,
+	[request_status] [nvarchar](25) NULL,
 	[contract_id] [int] NULL,
-	[update_date] [datetime] NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[paymentrequest_id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	[update_date] [datetime] NULL
 ) ON [PRIMARY]
 GO
 
 ALTER TABLE [dbo].[payment_request] ADD  DEFAULT ((0)) FOR [total_payment]
 GO
 
-ALTER TABLE [dbo].[payment_request] ADD  DEFAULT ('in process') FOR [request_status]
+ALTER TABLE [dbo].[payment_request] ADD  DEFAULT ('') FOR [image_identification_url]
+GO
+
+ALTER TABLE [dbo].[payment_request] ADD  DEFAULT (N'Chờ xử lý') FOR [request_status]
 GO
 
 ALTER TABLE [dbo].[payment_request] ADD  DEFAULT (getdate()) FOR [update_date]
 GO
 
-ALTER TABLE [dbo].[payment_request]  WITH CHECK ADD FOREIGN KEY([contract_id])
+ALTER TABLE [dbo].[payment_request]  WITH CHECK ADD  CONSTRAINT [FK_PaymentRequest_Contract] FOREIGN KEY([contract_id])
 REFERENCES [dbo].[contracts] ([contract_id])
 GO
 
+ALTER TABLE [dbo].[payment_request] CHECK CONSTRAINT [FK_PaymentRequest_Contract]
+GO
 
 --
 -- Table contract_payment_history
