@@ -12,6 +12,8 @@ import { ApiGetUserById } from '../../../services/userService';
 import { ApiInsertRequest } from '../../../services/paymentRequestService';
 import FormatCurrency from '../../../components/FormatCurrency/FormatCurrency';
 import ParseCurrencyToNumber from '../../../components/ParseCurrency/ParseCurrency';
+import { ApiGetContractById } from '../../../services/contractService';
+import { set } from 'date-fns';
 
 const schema = yup
     .object({
@@ -24,6 +26,7 @@ const schema = yup
 function PaymentRequest() {
     const [image, setImage] = useState();
     const [user, setUser] = useState();
+    const [contract, setContract] = useState();
 
     useEffect(() => {
         return () => {
@@ -45,9 +48,9 @@ function PaymentRequest() {
         const formData = new FormData();
 
         formData.append('description', data.description);
-        formData.append('total_cost', cost);
-        formData.append('contract_id', 1);
-        formData.append('ImageIdentification', image);
+        formData.append('totalcost', cost);
+        formData.append('contractId', 1);
+        formData.append('ImagePaymentRequest', image);
         console.log(image);
 
         const response = await ApiInsertRequest(formData);
@@ -76,9 +79,19 @@ function PaymentRequest() {
             setUser(response.data);
         }
     };
+
+    const GetContractById = async (id) => {
+        const response = await ApiGetContractById(id);
+
+        if (response && response.data) {
+            console.log(response.data);
+            setContract(response.data);
+        }
+    };
     useEffect(() => {
         const userId = localStorage.getItem('user_id');
         GetUserById(userId);
+        GetContractById(userId);
     }, []);
 
     return (
@@ -93,7 +106,12 @@ function PaymentRequest() {
                         </div>
                         <div className="w-1/2">
                             <Label>Mã hợp đồng bảo hiểm</Label>
-                            <Input type="text" disabled className="bg-slate-200"></Input>
+                            <Input
+                                type="text"
+                                disabled
+                                className="bg-slate-200"
+                                defaultValue={contract?.insuranceCode}
+                            ></Input>
                         </div>
                     </div>
 

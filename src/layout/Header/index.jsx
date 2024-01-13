@@ -12,12 +12,13 @@ import Menu from '@/components/Popper/Menu';
 
 function Header() {
     const user = useSelector((state) => state.auth);
+    console.log(user);
 
     const userMenu = [
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'View profile',
-            to: `/profile/${user?.user_id}`,
+            to: `/profile/${user?.userId}`,
         },
         {
             icon: <FontAwesomeIcon icon={faEarthAsia} />,

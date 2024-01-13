@@ -42,34 +42,34 @@ const news = [
         p2: '[Hoạt động] Kỉ niệm 5 năm thành lập KNH Care',
     },
     {
-        image: images.logo,
+        image: images.dichvu,
         p1: '11/11/2023',
-        p2: '[Hoạt động] Kỉ niệm 5 năm thành lập KNH Care',
+        p2: 'Từ nay đến hết ngày 7/7/2021,Triển khai Chương trình khuyến mãi (CTKM).',
     },
     {
-        image: images.logo,
+        image: images.card3,
         p1: '11/11/2023',
-        p2: '[Hoạt động] Kỉ niệm 5 năm thành lập KNH Care',
+        p2: 'Mua bán ngoại tệ eFast - Nhanh chóng, tiện lợi, an toàn',
     },
     {
-        image: images.logo,
+        image: images.card4,
         p1: '11/11/2023',
-        p2: '[Hoạt động] Kỉ niệm 5 năm thành lập KNH Care',
+        p2: 'Efast - Giải pháp thanh toán ngoại tệ trực tuyến',
     },
     {
-        image: images.logo,
+        image: images.card5,
         p1: '11/11/2023',
-        p2: '[Hoạt động] Kỉ niệm 5 năm thành lập KNH Care',
+        p2: 'Miễn phí ngân hàng điện tử dành cho doanh nghiệp',
     },
     {
-        image: images.logo,
+        image: images.card6,
         p1: '11/11/2023',
-        p2: '[Hoạt động] Kỉ niệm 5 năm thành lập KNH Care',
+        p2: 'Thời gian giao dịch phục vụ khách hàng tại các Chi nhánh, PGD của VietinBank - Từ thứ 2 tới thứ 6 (trừ ngày lễ, tết)',
     },
     {
-        image: images.logo,
+        image: images.card7,
         p1: '11/11/2023',
-        p2: '[Hoạt động] Kỉ niệm 5 năm thành lập KNH Care',
+        p2: 'Tài khoản 0 phí đăng kí tức thì',
     },
 ];
 function Home() {

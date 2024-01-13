@@ -91,18 +91,20 @@ function RegistrationForm() {
             // Get result from API beneficiary
             if (res && res.data) {
                 console.log(res.data);
+
                 setBeneficiaryResult(res.data);
 
                 // Kiểm tra xem có ID người thụ hưởng không
-                if (!res.data.beneficiaryId) {
+                if (!res.data.id) {
                     throw new Error('Failed to get beneficiary ID.');
                 }
+                localStorage.setItem('beneficiaryId', res.data.id);
 
                 // Step 2: Prepare data for beneficiary's registration
                 if (currentInsurance.insuranceId != null && currentInsurance.insuranceId != undefined) {
                     registration.insuranceId = currentInsurance.insuranceId;
                     registration.basicInsuranceFee = currentInsurance.price;
-                    registration.beneficiaryId = res.data.beneficiaryId;
+                    registration.beneficiaryId = res.data.id;
                     registration.totalSupplementBenefitFee = 0; // chưa làm module này nên cho không
 
                     // Step 3: Post API registration
@@ -124,9 +126,9 @@ function RegistrationForm() {
         const res = await ApiPostRegistration(data);
 
         if (res && res.data) {
-            localStorage.setItem('basicInsuranceFee', res.data.basicInsuranceFee);
-            localStorage.setItem('registrationId', res.data.registrationId);
-            localStorage.setItem('beneficiaryId', res.data.beneficiaryId);
+            console.log('Result registration: ', res.data);
+
+            localStorage.setItem('registrationId', res.data.id);
 
             setRegistrationResult(res.data);
             console.log('Result registration: ', res.data);

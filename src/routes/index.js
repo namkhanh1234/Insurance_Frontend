@@ -59,6 +59,9 @@ const privateRoutes = [
 
     //Payment
     {path: config.routes.paymentRequest, component: PaymentRequest},
+
+    //Profile
+    {path: config.routes.profile, component: Profile}
 ];
 
 export { privateRoutes, publicRoutes };

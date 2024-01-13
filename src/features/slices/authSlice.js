@@ -7,7 +7,7 @@ const initialState = {
     access_token: null,
     refresh_token: null,
     email: null,
-    user_id: null,
+    userId: null,
     auth: false,
     error: null,
 };
@@ -26,7 +26,7 @@ const authSlice = createSlice({
             .addCase(loginAction.fulfilled, (state, action) => {
                 state.loading = false;
                 state.email = action.payload?.email;
-                state.user_id = action.payload?.user_id;
+                state.userId = action.payload?.userId;
                 state.auth = true;
                 state.access_token = action.payload?.access;
                 state.refresh_token = action.payload?.refresh;
@@ -43,7 +43,7 @@ const authSlice = createSlice({
             .addCase(loginGoogleAction.fulfilled, (state, action) => {
                 state.loading = false;
                 state.email = action.payload?.email;
-                state.user_id = action.payload?.user_id;
+                state.userId = action.payload?.userId;
                 state.auth = true;
                 state.access_token = action.payload?.access;
                 state.refresh_token = action.payload?.refresh;
@@ -75,7 +75,7 @@ const authSlice = createSlice({
                 state.access_token = null;
                 state.refresh_token = null;
                 state.email = null;
-                state.user_id = null;
+                state.userId = null;
                 state.auth = false;
                 state.error = null;
             })

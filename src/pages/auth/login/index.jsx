@@ -19,12 +19,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Divider } from '@mui/material';
+import { useToast } from '@/components/ui/use-toast';
 
 const cx = classNames.bind(styles);
 
 function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { toast } = useToast();
+
     const user = useSelector((state) => state.auth);
 
     // console.log('>> Check auth login: ', user);
@@ -47,13 +50,24 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         dispatch(
             loginAction({
                 email: formData.email,
                 password: formData.password,
             }),
         );
+        if (user.auth) {
+            toast({
+                description: 'Đăng nhập thành công.',
+                variant: 'success',
+            });
+        }
+        // } else {
+        //     toast({
+        //         description: 'Tài khoản hoặc mật khẩu sai! ',
+        //         variant: 'destructive',
+        //     });
+        // }
     };
 
     useEffect(() => {

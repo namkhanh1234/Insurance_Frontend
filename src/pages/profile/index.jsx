@@ -14,17 +14,6 @@ import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import axiosInstance from '../../utils/axios';
-
-const schema = yup
-    .object({
-        email: yup.string(),
-        name: yup.string(),
-        phone_number: yup.string(),
-        birthday: yup.string(),
-        cardID: yup.string(),
-    })
-    .required();
 
 function Profile() {
     const userId = useParams();
@@ -34,6 +23,16 @@ function Profile() {
     const { toast } = useToast();
     const [gender, setGender] = useState('Nam');
     const [background, setBackground] = useState('bg-slate-200');
+
+    const schema = yup
+        .object({
+            email: yup.string().required('Email không được để trống').default(user?.email),
+            name: yup.string().required('Họ tên không được để trống').default(user?.fullName),
+            phone_number: yup.string().required('Số điện thoại không được để trống').default(user?.phone),
+            birthday: yup.string().required('Ngày sinh không được để trống').default(user?.dateOfBirth),
+            cardID: yup.string().required('CCCD không được để trống').default(user?.cardIdentification),
+        })
+        .required();
 
     const {
         register,
