@@ -62,7 +62,7 @@ axiosInstance.interceptors.response.use(
 
                     store.dispatch(
                         refreshAction({
-                            refreshtoken: refreshToken,
+                            refresh: refreshToken,
                         }),
                     );
 

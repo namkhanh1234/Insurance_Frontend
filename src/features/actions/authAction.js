@@ -8,17 +8,12 @@ import {
     ApiLogout,
 } from '../../services/authenticationService';
 
-
-
-
 export const loginAction = createAsyncThunk('auth/login', async ({ email, password }) => {
-
     try {
         const response = await ApiLogin({ email, password });
 
         if (response && response.data) {
-        
-            console.log('>> Check response: ', response.data);
+            // console.log('>> Check response: ', response.data);
 
             // Do thiết lập axios cuối project nên vẫn phải set LocalStorage ở đây
             localStorage.setItem('access_token', response.data?.access);
@@ -29,11 +24,8 @@ export const loginAction = createAsyncThunk('auth/login', async ({ email, passwo
             axiosInstance.defaults.headers['Authorization'] = 'Bearer ' + response.data.access;
 
             return response.data;
-
-       
         }
     } catch (error) {
-   
         throw error;
     }
 });
@@ -59,9 +51,9 @@ export const loginGoogleAction = createAsyncThunk('auth/login-google', async ({ 
     }
 });
 
-export const refreshAction = createAsyncThunk('auth/refresh', async ({ refreshtoken }) => {
+export const refreshAction = createAsyncThunk('auth/refresh', async ({ refresh }) => {
     try {
-        const response = await ApiRefreshToken({ refreshtoken });
+        const response = await ApiRefreshToken({ refresh });
 
         if (response && response.data) {
             // console.log('>> Check response: ', response.data);
@@ -76,15 +68,12 @@ export const refreshAction = createAsyncThunk('auth/refresh', async ({ refreshto
     }
 });
 
-export const logoutAction = createAsyncThunk('auth/logout', async ({ refreshtoken }) => {
+export const logoutAction = createAsyncThunk('auth/logout', async ({ refresh }) => {
     try {
-        //const refresh_token = localStorage.getItem('refresh_token');
-
-        const response = await ApiLogout({ refreshtoken });
-        console.log('>> Check response: ', response.data);
+        const response = await ApiLogout({ refresh });
+        // console.log('>> Check response: ', response.data);
 
         if (response && response.data) {
-          
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
             localStorage.removeItem('user_id');

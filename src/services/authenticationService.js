@@ -14,15 +14,19 @@ const ApiSendAccessTokenToBackend = async ({ email, credential }) => {
     });
 };
 
-const ApiLogout = async ({ refreshToken }) => {
+const ApiLogout = async ({ refresh }) => {
+    // console.log('>> Check refresh: ', refresh);
+
     return await axiosInstance.post('/tokens/logout', {
-        refresh: refreshToken,
+        refresh: refresh,
     });
 };
 
-const ApiRefreshToken = async ({ refreshtoken }) => {
+const ApiRefreshToken = async ({ refresh }) => {
+    // console.log('>> Check refresh: ', refresh);
+
     return await axiosInstance.post('/tokens/refresh', {
-        refresh: refreshtoken,
+        refresh: refresh,
     });
 };
 

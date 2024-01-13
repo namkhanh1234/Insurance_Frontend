@@ -12,7 +12,7 @@ import Menu from '@/components/Popper/Menu';
 
 function Header() {
     const user = useSelector((state) => state.auth);
-    console.log(user);
+    // console.log(user);
 
     const userMenu = [
         {

@@ -30,8 +30,6 @@ function Login() {
 
     const user = useSelector((state) => state.auth);
 
-    // console.log('>> Check auth login: ', user);
-
     const [typeInput, setTypeInput] = useState('password');
 
     const initialFormData = Object.freeze({
