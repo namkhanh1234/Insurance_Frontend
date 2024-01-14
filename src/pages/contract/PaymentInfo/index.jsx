@@ -63,7 +63,7 @@ function ContractPaymentInfo() {
                     <div className={cx('transfer_info', 'col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1')}>
                         <div className='text-2xl uppercase font-semibold text-white pb-10'>Thông tin chuyển khoản</div>
                         
-                        {/* thông tin MoMo của nhóm */}
+                        {/* thông tin tài khoản nhóm */}
                         <div className='text-white flex flex-col justify-center'>
                             <div className='mb-2'>
                                 Tên tài khoản:
@@ -83,13 +83,13 @@ function ContractPaymentInfo() {
 
                     </div>
 
-                    <form className={cx('username__wrapper', 'ccol-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2 p-4 rounded-md border')} onSubmit={handleSubmit(onSubmit)}>
+                    <form className={cx('input_info', 'ccol-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2')} onSubmit={handleSubmit(onSubmit)}>
                         <div className='text-2xl uppercase font-semibold pb-5'>Thông tin khách hàng thanh toán</div>
 
                         <div className='border-b'></div>
 
                         <div className='text-xl pt-5'>Phương thức thanh toán: 
-                            <span className={cx('colored-text-MoMo')}> MoMo</span>
+                            <span className={cx('colored-text-method')}> VNPAY</span>
                         </div>
                         
                         <div className='grid grid-cols-2 gap:2 md:gap-4'>
@@ -102,7 +102,7 @@ function ContractPaymentInfo() {
 
                                 <div className='pt-5 mr-5'>
                                     <Label htmlFor='invoice_id'>Mã thanh toán</Label>
-                                    <Input type='text' placeholder='Nhập mã thanh toán MoMo' {...register('invoice_id')}></Input>
+                                    <Input type='text' placeholder='Nhập mã thanh toán' {...register('invoice_id')}></Input>
                                     <p className="text-red-600 text-xs">{errors.invoice_id?.message}</p>
                                 </div>                                
                             </div>
@@ -123,12 +123,11 @@ function ContractPaymentInfo() {
                         </div>
 
                         <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '25px' }}>
-                            <Button type="submit" style={{ fontWeight: 'bold', backgroundColor: '#db2777' }}>Xác nhận</Button>
+                            <Button type="submit" style={{ fontWeight: 'bold', backgroundColor: '#dc2626' }}>Xác nhận</Button>
                         </div>                    
                     </form>
                 </div>
             </div>
-
         </div>
     )
 }
