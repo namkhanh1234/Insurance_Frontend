@@ -19,7 +19,7 @@ function Logout() {
     }
 
     useEffect(() => {
-        console.log('>> Check user logout page: ', user);
+        // console.log('>> Check user logout page: ', user);
 
         if (user.auth == false) {
             navigate(config.routes.home);

@@ -105,6 +105,8 @@ export const logoutAction = createAsyncThunk('auth/logout', async ({ refresh }) 
             localStorage.removeItem('user_id');
             localStorage.removeItem('email');
             localStorage.removeItem('is_admin');
+            localStorage.removeItem('registrationId');
+            localStorage.removeItem('beneficiaryId');
 
             axiosInstance.defaults.headers['Authorization'] = null;
         }

@@ -92,7 +92,6 @@ function Insurances() {
                             className={cx('age__item-label')}
                             onClick={() => setCurrentAge(age)}
                         >
-                            {/* {age?.fromAge}-{age?.toAge} tuổi */}
                             {age?.fromAge === 0
                                 ? `60 ngày tuổi < ${age?.toAge + 1} tuổi`
                                 : `${age?.fromAge}-${age?.toAge} tuổi`}
@@ -141,7 +140,7 @@ function Insurances() {
                     </div>
                 </div>
             </div>
-            <div className="insurance lg:mx-[100px] grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-3 mt-10">
+            <div className="mt-10 xl:mx-[100px] grid gap-6 sm:gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
                 {insurances.map((insurance) => (
                     <div key={`insurance-${insurance.insuranceId}`} className={cx('product')}>
                         <h3 className="name_package mb-2 text-lg font-medium text-black-500 text-center">
