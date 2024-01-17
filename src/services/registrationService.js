@@ -10,4 +10,14 @@ const ApiPostRegistration = async (data = {}) => {
     }
 };
 
-export { ApiPostRegistration };
+const ApiGetRegistrationById = async (id) => {
+    try {
+        const response = await axiosInstance.get(`/registrations/${id}`);
+
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export { ApiPostRegistration, ApiGetRegistrationById };

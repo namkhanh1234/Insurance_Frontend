@@ -1,23 +1,18 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+
+import config from '../../../config';
+import Menu from '@/components/Popper/Menu';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faUser } from '@fortawesome/free-regular-svg-icons';
 import { faEarthAsia, faPhone, faSignOut } from '@fortawesome/free-solid-svg-icons';
 
-import { Button } from '@/components/ui/button';
-import config from '../../config';
-import Menu from '@/components/Popper/Menu';
-
-function Header() {
-    const user = useSelector((state) => state.auth);
-    // console.log(user);
-
+function HeaderAdmin() {
     const userMenu = [
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'View profile',
-            to: `/profile/${user?.userId}`,
+            // to: `/profile/${user?.userId}`,
         },
         {
             icon: <FontAwesomeIcon icon={faEarthAsia} />,
@@ -44,14 +39,9 @@ function Header() {
             },
         },
         {
-            icon: <FontAwesomeIcon icon={faPhone} />,
-            title: 'Hỗ trợ',
-            to: `${config.routes.support}`,
-        },
-        {
             icon: <FontAwesomeIcon icon={faSignOut} />,
             title: 'Đăng xuất',
-            to: `${config.routes.logout}`,
+            to: `${config.routes.adminLogout}`,
             separate: true,
         },
     ];
@@ -61,9 +51,10 @@ function Header() {
     };
 
     return (
-        <div className="w-full h-full flex justify-between">
+        <div className="w-full h-full flex items-center justify-between">
             <div className="flex items-center">
-                <Link to={config.routes.home}>
+                {/* Logo and Name app */}
+                <Link to={config.routes.adminGeneral}>
                     <svg
                         width="40px"
                         height="40px"
@@ -85,51 +76,20 @@ function Header() {
                 <div className="ml-3 text-xl text-[#3E8DCC] font-bold select-none">Bảo hiểm KNH</div>
             </div>
 
-            <div className="flex items-center space-x-4">
-                <div className="mr-6 space-x-6 items-center hidden md:inline-flex">
-                    <Link to={config.routes.home} className="hover:underline">
-                        Giới thiệu
-                    </Link>
-                    <Link to={config.routes.insurances} className="hover:underline">
-                        Sản phẩm
-                    </Link>
-                    <Link to={config.routes.support} className="hover:underline">
-                        Hỗ trợ
-                    </Link>
-                    <Link to={config.routes.registrationForm} className="hover:underline">
-                        Đăng ký bảo hiểm
-                    </Link>
-                    <Link to={config.routes.paymentRequest} className="hover:underline">
-                        Yêu cầu
-                    </Link>
-                </div>
-
-                {/* Chỗ này cần khi có account ẩn này hiện iamge cho khách hàng */}
-                {user.auth ? (
-                    <div className="mt-[4px] flex items-center space-x-4">
-                        <FontAwesomeIcon icon={faBell} className="text-lg" />
-                        <Menu items={userMenu} onChange={handleMenuOnChange}>
-                            <button>
-                                <FontAwesomeIcon
-                                    className="w-4 h-4 p-2 border-2 border-[#0f172a1a] rounded-full  hover:bg-gray-200 hover:text-[#3E8DCC]"
-                                    icon={faUser}
-                                />
-                            </button>
-                        </Menu>
-                    </div>
-                ) : (
-                    <>
-                        <Button className="bg-[#3E8DCC] hover:bg-sky-700" asChild>
-                            <Link to={config.routes.login}>Đăng nhập</Link>
-                        </Button>
-                        <Button className="bg-[#aadffb] text-[#3E8DCC] hover:bg-sky-300" asChild>
-                            <Link to={config.routes.register}>Đăng ký</Link>
-                        </Button>
-                    </>
-                )}
+            {/* Action */}
+            <div className="mt-[4px] flex items-center space-x-4">
+                <FontAwesomeIcon icon={faBell} className="text-lg" />
+                <Menu items={userMenu} onChange={handleMenuOnChange}>
+                    <button>
+                        <FontAwesomeIcon
+                            className="w-4 h-4 p-2 border-2 border-[#0f172a1a] rounded-full hover:bg-gray-200 hover:text-[#3E8DCC]"
+                            icon={faUser}
+                        />
+                    </button>
+                </Menu>
             </div>
         </div>
     );
 }
 
-export default Header;
+export default HeaderAdmin;

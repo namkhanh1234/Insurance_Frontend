@@ -1,0 +1,29 @@
+.header {
+    width: 100%;
+    height: var(--default-header-height, 60px);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    background-color: #f9fafb;
+}
+
+.container {
+    display: flex;
+    margin-top: var(--default-header-height);
+}
+
+.sidebar {
+    width: var(--default-sidebar-width, 300px);
+    height: 100vh;
+    position: fixed;
+    z-index: 10;
+    border-right: 1px dashed rgba(145, 158, 171, 0.2);
+    background-color: #f9fafb;
+}
+
+.content {
+    margin-left: var(--default-sidebar-width);
+    flex: 1;
+    overflow: hidden;
+}

@@ -470,17 +470,6 @@ function RegistrationForm() {
                             <Label htmlFor="end-date">Ngày kết thúc</Label>
                             <Input name="endDate" type="date" id="end-date" onChange={handleChangeRegistration} />
                         </div>
-
-                        {/* <div className="pt-2">
-                            <Label htmlFor="old-contract">Số hợp đồng cũ</Label>
-                            <Input
-                                name="oldContract"
-                                type="text"
-                                id="old-contract"
-                                placeholder="Nhập số hợp đồng cũ"
-                                onChange={handleChangeRegistration}
-                            ></Input>
-                        </div> */}
                     </div>
 
                     <div className={cx('username__wrapper', 'col_span_1')}>

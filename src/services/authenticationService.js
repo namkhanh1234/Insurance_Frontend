@@ -7,6 +7,13 @@ const ApiLogin = async ({ email, password }) => {
     });
 };
 
+const ApiLoginAdmin = async ({ email, password }) => {
+    return axiosInstance.post('/tokens/login-admin', {
+        email: email,
+        password: password,
+    });
+};
+
 const ApiSendAccessTokenToBackend = async ({ email, credential }) => {
     return await axiosInstance.post('/tokens/validate-google-token', {
         email: email,
@@ -30,4 +37,4 @@ const ApiRefreshToken = async ({ refresh }) => {
     });
 };
 
-export { ApiLogin, ApiLogout, ApiSendAccessTokenToBackend, ApiRefreshToken };
+export { ApiLogin, ApiLoginAdmin, ApiLogout, ApiSendAccessTokenToBackend, ApiRefreshToken };

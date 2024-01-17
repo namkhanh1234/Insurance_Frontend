@@ -19,6 +19,7 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[users]') AND OBJ
   DROP TABLE [dbo].[users]
 GO
 
+
 CREATE TABLE [dbo].[users](
 	[user_id] [int] IDENTITY(1,1) NOT NULL,
 	[email] [nvarchar](255) NOT NULL,
@@ -28,16 +29,17 @@ CREATE TABLE [dbo].[users](
 	[sex] [nvarchar](5) NULL,
 	[date_of_birth] [date] NULL,
 	[card_identification] [nvarchar](20) NOT NULL,
+	[is_admin] [bit] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[user_id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
-UNIQUE NONCLUSTERED 
-(
-	[email] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+ALTER TABLE [dbo].[users] ADD  DEFAULT ((0)) FOR [is_admin]
+GO
+
 
 
 --
@@ -381,30 +383,35 @@ GO
 --
 -- Table contract_payment_history
 --
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[contract_payment_history]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[Contract_payment_histories]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
   DROP TABLE [dbo].[contract_payment_history]
 GO
 
-CREATE TABLE [dbo].[contract_payment_history](
-	[pay_con_id] [int] IDENTITY(1,1) NOT NULL,
-	[payment_turn] [int] NULL,
-	[periodic_fee] [float] NULL,
-	[payment_date] [datetime] NULL,
-	[payment_method] [nvarchar](100) NULL,
-	[name] [nvarchar](100) NULL,
-	[phone_number] [char](10) NULL,
-	[invoice_id] [nvarchar](20) NULL,
-	[contract_id] [int] NULL,
+CREATE TABLE [dbo].[contract_payment_histories](
+	[paymentcontract_Id] [int] IDENTITY(1,1) NOT NULL,
+	[transaction_Code] [varchar](25) NULL,
+	[payment_Date] [datetime] NULL,
+	[payment_Amount] [int] NULL,
+	[service_Payment] [varchar](20) NULL,
+	[bank_Name] [nvarchar](50) NULL,
+	[status] [nvarchar](30) NULL,
+	[contract_Id] [int] NULL,
 PRIMARY KEY CLUSTERED 
 (
-	[pay_con_id] ASC
+	[paymentcontract_Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[contract_payment_history] ADD  DEFAULT (getdate()) FOR [payment_date]
+ALTER TABLE [dbo].[contract_payment_histories] ADD  DEFAULT (getdate()) FOR [payment_Date]
 GO
 
-ALTER TABLE [dbo].[contract_payment_history]  WITH CHECK ADD FOREIGN KEY([contract_id])
+ALTER TABLE [dbo].[contract_payment_histories] ADD  DEFAULT (N'Chờ thanh toán') FOR [status]
+GO
+
+ALTER TABLE [dbo].[contract_payment_histories]  WITH CHECK ADD  CONSTRAINT [FK_ContractPaymentHistory_Contract] FOREIGN KEY([contract_Id])
 REFERENCES [dbo].[contracts] ([contract_id])
+GO
+
+ALTER TABLE [dbo].[contract_payment_histories] CHECK CONSTRAINT [FK_ContractPaymentHistory_Contract]
 GO

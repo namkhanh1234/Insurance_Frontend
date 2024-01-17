@@ -10,7 +10,7 @@ const ApiCreateBeneficiary = async (data = {}) => {
     }
 };
 
-const ApiReadBeneficiary = async (id) => {
+const ApiGetBeneficiaryById = async (id) => {
     try {
         const response = await axiosInstance.get(`/Beneficiaries/${id}`);
         //console.log(response.data);
@@ -19,6 +19,6 @@ const ApiReadBeneficiary = async (id) => {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
-export { ApiCreateBeneficiary, ApiReadBeneficiary };
+export { ApiCreateBeneficiary, ApiGetBeneficiaryById };
