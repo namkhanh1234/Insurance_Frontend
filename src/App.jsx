@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { privateRoutes } from './routes';
 import { DefaultLayout } from './layout';
+// import { AdminLayout } from './layout/Admin';
 
 function App() {
     return (

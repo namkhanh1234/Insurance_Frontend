@@ -26,7 +26,6 @@ BEGIN
     -- Return entity instance after inserting
     SELECT * FROM users WHERE user_id = @@IDENTITY;
 END;
-
 GO
 
 --Thêm các bản ghi vào bảng users sử dụng procedures
@@ -35,6 +34,11 @@ EXEC RegisterUser N'namkhanh16052002@gmail.com', 'password_1', N'Nguyễn Đặn
 EXEC RegisterUser N'nguyendoanvannhi20@gmail.com', 'password_1', N'Nguyễn Đoàn Vân Nhi', N'0969958960', N'Nữ', '2002-06-18', N'352606702';
 EXEC RegisterUser N'anhkhoaphamnhat@gmail.com', 'password_1', N'Nguyễn Phạm Anh Khoa', N'0969958962', N'Nam', '2002-04-20', N'352606602';
 EXEC RegisterUser N'rename0209@gmail.com', 'password_1', N'Phạm Quốc Hùng', N'0969958964', N'Nam', '2002-03-08', N'352606502';
+GO
+
+UPDATE users SET is_admin = 1 WHERE user_id = 1;
+UPDATE users SET is_admin = 1 WHERE user_id = 2;
+UPDATE users SET is_admin = 1 WHERE user_id = 5;
 GO
 
 --

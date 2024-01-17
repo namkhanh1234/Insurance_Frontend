@@ -33,6 +33,16 @@ const routes = {
 
     //Payment
     paymentRequest: '/paymentRequest',
+
+    // Admin
+    adminLogin: '/admin/login',
+    adminLogout: '/admin/logout',
+
+    adminGeneral: '/admin/general',
+    adminUser: '/admin/users',
+    adminRegistration: '/admin/registrations',
+    adminBeneficiary: '/admin/beneficiaries',
+    adminPaymentRequest: '/admin/paymentrequests',
 };
 
 export default routes;

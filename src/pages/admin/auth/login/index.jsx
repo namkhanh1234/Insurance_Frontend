@@ -1,37 +1,28 @@
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
 
-import styles from './Login.module.scss';
-import config from '../../../config';
+import styles from './LoginAdmin.module.scss';
 import logo from '@/assets/images/logo.png';
-import { ApiLogin } from '../../../services/authenticationService';
-import axiosInstance from '../../../utils/axios';
-import GoogleLoginButton from '../../../components/GoogleLoginButton/GoogleLoginButton';
-// Redux
-import { loginAction } from '../../../features/actions/authAction';
+import config from '../../../../config';
+import { loginAdminAction } from '../../../../features/actions/authAction';
 
-import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-regular-svg-icons';
-import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { Divider } from '@mui/material';
-import { useToast } from '@/components/ui/use-toast';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
-function Login() {
+function LoginAdmin() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { toast } = useToast();
 
     const user = useSelector((state) => state.auth);
 
     const [typeInput, setTypeInput] = useState('password');
-
     const initialFormData = Object.freeze({
         email: '',
         password: '',
@@ -46,30 +37,6 @@ function Login() {
         });
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        dispatch(
-            loginAction({
-                email: formData.email,
-                password: formData.password,
-            }),
-        );
-        if (user.auth) {
-            toast({
-                description: 'Đăng nhập thành công.',
-                variant: 'success',
-            });
-        }
-    };
-
-    useEffect(() => {
-        console.log('>> Check user login page: ', user);
-
-        if (user.auth) {
-            navigate(config.routes.home);
-        }
-    }, [user]);
-
     const handleTypeInput = () => {
         if (typeInput == 'password') {
             setTypeInput('text');
@@ -78,15 +45,41 @@ function Login() {
         }
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        dispatch(
+            loginAdminAction({
+                email: formData.email,
+                password: formData.password,
+            }),
+        );
+
+        // if (user.auth && user.isAdmin) {
+        //     toast({
+        //         description: 'Đăng nhập thành công.',
+        //         variant: 'success',
+        //     });
+        // }
+    };
+
+    useEffect(() => {
+        // Auth trong state
+        // console.log('>> Check login page', user);
+
+        if (user.auth && user.isAdmin) {
+            navigate(config.routes.adminGeneral);
+        }
+    }, [user]);
+
     return (
         <div className={cx('login__modal')}>
             <div className={cx('login__modal-inner', 'rounded-2xl border-2')}>
                 <div className="login__header flex flex-col items-center justify-center select-none">
-                    <Link to={config.routes.home} className="w-fit ">
-                        <img className="h-24 w-24 rounded-3xl" src={logo} alt="KNH" />
-                    </Link>
-                    <h2 className="mt-3 font-semibold">Quản lý hợp đồng bảo hiểm online cùng KNH</h2>
+                    <img className="h-24 w-24 rounded-3xl" src={logo} alt="KNH" />
+                    <h2 className="mt-3 font-semibold">Quản trị viên KNH</h2>
                 </div>
+
                 {/* login__form */}
                 <form action="" method="POST" className="mt-6 flex-1">
                     <div className={cx('username__wrapper', 'space-y-1')}>
@@ -118,7 +111,7 @@ function Login() {
                             />
                         </div>
                     </div>
-                    <div className="my-6 flex justify-center items-center">
+                    <div className="mt-6 flex justify-center items-center">
                         <Button
                             type="submit"
                             onClick={handleSubmit}
@@ -127,40 +120,10 @@ function Login() {
                             Đăng nhập
                         </Button>
                     </div>
-                    <div className="my-4">
-                        <Divider>Hoặc</Divider>
-                    </div>
                 </form>
-                {/* login google - auth2 */}
-                <div className="mb-4 flex justify-center">
-                    {/* <div> */}
-                    <GoogleLoginButton />
-                    {/* </div> */}
-                    {/* <div>Facebook</div> */}
-                </div>
-                <div className="login__footer">
-                    <Link
-                        to={config.routes.forgotPassword}
-                        className="flex justify-center text-sm font-normal text-blue-600 hover:underline"
-                    >
-                        Quên mật khẩu
-                    </Link>
-
-                    <div className="mt-2 flex justify-center items-center text-sm">
-                        <span className="mx-2 text-sm text-gray-400">Bạn chưa có tài khoản?</span>
-                        <Link to={config.routes.register} className="font-normal text-blue-600 hover:underline italic">
-                            Đăng ký tài khoản
-                        </Link>
-                    </div>
-                    <div className="mt-2 flex justify-center items-center text-sm">
-                        <Link to={config.routes.adminLogin} className="font-normal text-cyan-600 hover:underline">
-                            Quản trị viên
-                        </Link>
-                    </div>
-                </div>
             </div>
         </div>
     );
 }
 
-export default Login;
+export default LoginAdmin;

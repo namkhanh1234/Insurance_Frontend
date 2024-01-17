@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
 
-import config from '../../../config';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutAction } from '../../../features/actions/authAction';
+import config from '../../../../config';
+import { logoutAction } from '../../../../features/actions/authAction';
 
-function Logout() {
+function LogoutAdmin() {
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth);
     const dispath = useDispatch();
@@ -19,12 +19,12 @@ function Logout() {
     }
 
     useEffect(() => {
-        console.log('>> Check user logout page: ', user);
+        // console.log('>> Check user logout page', user);
 
         if (user.auth == false) {
-            navigate(config.routes.home);
+            navigate(config.routes.adminLogin);
         }
     }, [user]);
 }
 
-export default Logout;
+export default LogoutAdmin;

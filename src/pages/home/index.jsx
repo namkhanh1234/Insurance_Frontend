@@ -22,6 +22,7 @@ import { Link } from 'react-router-dom';
 import config from '../../config';
 
 import SlickSlider from '../../components/SlickSlider/SlickSlider';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
@@ -73,6 +74,9 @@ const news = [
     },
 ];
 function Home() {
+    const user = useSelector((state) => state.auth);
+    console.log('>> Check user home page: ', user);
+
     return (
         <div>
             <div className="flex justify-evenly max-w-full bg-sky-100 p-8 mt-0 items-center">

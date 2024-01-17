@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import styles from './Sidebar.module.scss';
 import config from '../../config';
