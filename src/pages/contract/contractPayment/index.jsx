@@ -35,8 +35,13 @@ function ContractPayment() {
     const [contractData, setContractData] = useState({});
 
     const auth = useSelector((state) => state.auth);
-    const beneficiaryId = localStorage.getItem('beneficiaryId');
+
+    const userId = localStorage.getItem('user_id');
     const registrationId = localStorage.getItem('registrationId');
+    const beneficiaryId = localStorage.getItem('beneficiaryId');
+
+    // console.log('>> Check registrationId: ', registrationId);
+    // console.log('>> Check beneficiaryId: ', beneficiaryId);
 
     const GetUserById = async (id) => {
         const response = await ApiGetUserById(id);
@@ -50,6 +55,7 @@ function ContractPayment() {
         const response = await ApiGetBeneficiaryById(beneficiaryId);
 
         if (response && response.data) {
+            // console.log('>> Check api beneficiary: ', response.data);
             setBeneficiaryData(response.data);
         }
     };
@@ -58,12 +64,15 @@ function ContractPayment() {
         const response = await ApiGetRegistrationById(registrationId);
 
         if (response && response.data) {
+            // console.log('>> Check api registration: ', response.data);
             setRegistrationData(response.data);
         }
     };
 
     useEffect(() => {
-        GetUserById(auth.userId);
+        // GetUserById(auth.userId);
+        // Tạm thời localStorage
+        GetUserById(userId);
 
         if (beneficiaryId != null || beneficiaryId != undefined) {
             GetBeneficiaryById(beneficiaryId);
@@ -72,13 +81,13 @@ function ContractPayment() {
         if (registrationId != null || registrationId != undefined) {
             GetRegistrationById(registrationId);
         }
-    }, []);
+    }, [beneficiaryId]);
 
     const PostRegistrationId = async (registrationId) => {
         const res_contract = await ApiPostContract(registrationId);
 
         if (res_contract && res_contract.data) {
-            console.log('>> Check api conatract payment: ', res_contract.data);
+            console.log('>> Check api contract payment: ', res_contract.data);
             setContractData(res_contract.data);
             // navigate(config.routes.contractPaymentInfo);
 

@@ -63,7 +63,7 @@ function Login() {
     };
 
     useEffect(() => {
-        console.log('>> Check user login page: ', user);
+        // console.log('>> Check user login page: ', user);
 
         if (user.auth) {
             navigate(config.routes.home);

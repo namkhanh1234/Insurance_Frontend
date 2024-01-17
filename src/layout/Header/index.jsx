@@ -86,7 +86,7 @@ function Header() {
             </div>
 
             <div className="flex items-center space-x-4">
-                <div className="mr-6 space-x-6 items-center hidden md:inline-flex">
+                <div className="mr-4 space-x-4 items-center hidden lg:inline-flex lg:space-x-4">
                     <Link to={config.routes.home} className="hover:underline">
                         Giới thiệu
                     </Link>
