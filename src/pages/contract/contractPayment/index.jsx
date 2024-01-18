@@ -19,7 +19,7 @@ import { ApiPostContract } from '../../../services/contractService';
 import { ApiGetBeneficiaryById } from '../../../services/beneficiaryService';
 import { ApiGetRegistrationById } from '../../../services/registrationService';
 import { ApiPaymentContractByVnPay } from '../../../services/paymentContractService';
-import { format, set } from 'date-fns';
+import { format } from 'date-fns';
 import FormatCurrency from '../../../components/FormatCurrency/FormatCurrency';
 
 const cx = classNames.bind(styles);

@@ -3,6 +3,7 @@ GO
 USE DB_Insurance
 GO
 
+
 --
 -- PROCEDURE RegisterUser
 --
@@ -34,6 +35,15 @@ EXEC RegisterUser N'namkhanh16052002@gmail.com', 'password_1', N'Nguyễn Đặn
 EXEC RegisterUser N'nguyendoanvannhi20@gmail.com', 'password_1', N'Nguyễn Đoàn Vân Nhi', N'0969958960', N'Nữ', '2002-06-18', N'352606702';
 EXEC RegisterUser N'anhkhoaphamnhat@gmail.com', 'password_1', N'Nguyễn Phạm Anh Khoa', N'0969958962', N'Nam', '2002-04-20', N'352606602';
 EXEC RegisterUser N'rename0209@gmail.com', 'password_1', N'Phạm Quốc Hùng', N'0969958964', N'Nam', '2002-03-08', N'352606502';
+
+EXEC RegisterUser N'nguyenvana@gmail.com', 'password_1', N'Nguyen Van A', N'0969958000', N'Nam', '2002-04-20', N'352606000';
+EXEC RegisterUser N'nguyenvanb@gmail.com', 'password_1', N'Nguyen Van B', N'0969958001', N'Nam', '2002-04-21', N'352606001';
+EXEC RegisterUser N'nguyenvanc@gmail.com', 'password_1', N'Nguyen Van C', N'0969958002', N'Nam', '2002-04-22', N'352606002';
+EXEC RegisterUser N'nguyenvand@gmail.com', 'password_1', N'Nguyen Van D', N'0969958003', N'Nam', '2002-04-23', N'352606003';
+EXEC RegisterUser N'nguyenvane@gmail.com', 'password_1', N'Nguyen Van E', N'0969958004', N'Nam', '2002-04-24', N'352606004';
+EXEC RegisterUser N'nguyenvanf@gmail.com', 'password_1', N'Nguyen Van F', N'0969958005', N'Nam', '2002-04-25', N'352606005';
+EXEC RegisterUser N'nguyenvanh@gmail.com', 'password_1', N'Nguyen Van H', N'0969958006', N'Nam', '2002-04-26', N'352606006';
+EXEC RegisterUser N'nguyenvang@gmail.com', 'password_1', N'Nguyen Van G', N'0969958007', N'Nam', '2002-04-27', N'352606007';
 GO
 
 UPDATE users SET is_admin = 1 WHERE user_id = 1;

@@ -29,6 +29,7 @@ CREATE TABLE [dbo].[users](
 	[sex] [nvarchar](5) NULL,
 	[date_of_birth] [date] NULL,
 	[card_identification] [nvarchar](20) NOT NULL,
+	[status] [bit] NULL,
 	[is_admin] [bit] NULL,
 PRIMARY KEY CLUSTERED 
 (
@@ -37,10 +38,11 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[users] ADD  DEFAULT ((0)) FOR [is_admin]
+ALTER TABLE [dbo].[users] ADD  DEFAULT ((1)) FOR [status]
 GO
 
-
+ALTER TABLE [dbo].[users] ADD  DEFAULT ((0)) FOR [is_admin]
+GO
 
 --
 -- Table token
