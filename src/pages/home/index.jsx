@@ -37,9 +37,9 @@ const news = [
         p2: '[Tuyển dụng] KNH Care tuyển dụng vị trí Sale Lead',
     },
     {
-        image: images.logo,
+        image: images.card3,
         p1: '11/11/2023',
-        p2: '[Hoạt động] Kỉ niệm 5 năm thành lập KNH Care',
+        p2: '[Hoạt động] Kỉ niệm 20 năm thành lập KNH Care',
     },
     {
         image: images.dichvu,
@@ -47,7 +47,7 @@ const news = [
         p2: 'Từ nay đến hết ngày 7/7/2021,Triển khai Chương trình khuyến mãi (CTKM).',
     },
     {
-        image: images.card3,
+        image: images.img1,
         p1: '11/11/2023',
         p2: 'Mua bán ngoại tệ eFast - Nhanh chóng, tiện lợi, an toàn',
     },
