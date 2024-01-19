@@ -31,6 +31,7 @@ CREATE TABLE [dbo].[users](
 	[card_identification] [nvarchar](20) NOT NULL,
 	[status] [bit] NULL,
 	[is_admin] [bit] NULL,
+	[created_date] [datetime] default GETDATE(),
 PRIMARY KEY CLUSTERED 
 (
 	[user_id] ASC
@@ -116,6 +117,7 @@ CREATE TABLE [dbo].[beneficiaries](
 	[address] [nvarchar](255) NOT NULL,
 	[relationship_policyholder] [nvarchar](100) NOT NULL,
 	[user_id] [int] NOT NULL,
+	[created_date] [datetime] default GETDATE(),
 PRIMARY KEY CLUSTERED 
 (
 	[beneficiary_id] ASC
