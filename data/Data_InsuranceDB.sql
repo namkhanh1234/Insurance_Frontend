@@ -141,17 +141,17 @@ VALUES
 ('KimTuyen@example.com', N'Hoàng Kim Tuyền', '9876543210', N'Nữ', '1985-11-25', '987654321', NULL, N'Huyện Đoàn Khôi Hà Nội', N'Cha/Mẹ', 7),
 ('HuuLuong@example.com', N'Quang Hữu Lương', '5556667777', N'Nam', '1982-11-30', '555666777', NULL, N'Huyện Nhiệm Lâm Đồng', N'Anh/Chị', 8),
 ('AnhDao@example.com', N'Võ Anh Ðào', '3334445555', N'Nữ', '1995-03-22', '333444555', NULL, N'Huyện Dao Di Nam Định', N'Vợ/Chồng', 9),
-('DacThanh@example.com', N'Nguyễn Ðắc Thành', '1112223333', N'Nam', '1988-07-10', '111222333', NULL, 'Huyện Vi Sử Đồng Tháp', N'Con', 10),
-('NguyetLam@example.com', N'Bành Nguyệt Lan', '9998887777', N'Nữ', '1992-09-05', '999888777', NULL, 'Huyện Thi Quảng Nam', N'Bản thân', 11),
-('NamThanh@example.com', N'Hoàng Nam Thanh', '4445556666', N'Nam', '2012-04-18', '444555666', NULL, 'Huyện Đỗ Minh Thiện Hà Nam', N'Cha/Mẹ', 12),
-('KhanhVi@example.com', N'Nghiêm Khánh Vi', '7778889999', N'Nữ', '1997-12-25', '777888999', NULL, 'Huyện Lỳ Dương Đài Nghệ AN', N'Anh/Chị', 13),
-('KhacVu@example.com', N'Đỗ Khắc Vũ', '6667778888', N'Nam', '1998-06-08', '666777888', NULL, ' Quận Cát Ninh Bình', N'Vợ/Chồng', 14),
-('QuynhNhung@example.com',  N'Huỳnh Quỳnh Nhung', '2223334444', N'Nữ', '1991-02-14', '222333444', NULL, 'Thôn Hoàng Vỹ Phượng, Phường Mi Trưng', N'Con', 15),
-('VietCuong@example.com', N'Vũ Việt Cương', '8889990000', N'Nam', '1964-10-03', '888999000', NULL, 'Ấp Đoàn Thuận, Xã Kim', N'Bản thân', 16),
-('ThyVan@example.com', N'Văn Thy Vân', '7776665555', N'Nữ', '1973-08-17', '777666555', NULL, 'Quận Đan Quân Bình Thuận', N'Cha/Mẹ', 17),
-('DucToan@example.com', N'Hoàng Ðức Toản', '3332221111', N'Nam', '1994-04-12', '333222111', NULL, 'Thành phố Thủ Đức', N'Anh/Chị', 18),
-('ThachThao@example.com', N'Nguyễn Thạch Thảo', '5554443333', N'Nữ', '2002-01-28', '555444333', NULL, 'Biên Hòa, Đồng Nai', N'Vợ/Chồng', 19),
-('ChiKien@example.com', 'Tôn Chí Kiên', '1119998888', N'Nam', '2008-07-05', '111999888', NULL, 'Tp.Hồ Chí Minh', N'Con', 20);
+('DacThanh@example.com', N'Nguyễn Ðắc Thành', '1112223333', N'Nam', '1988-07-10', '111222333', NULL, N'Huyện Vi Sử Đồng Tháp', N'Con', 10),
+('NguyetLam@example.com', N'Bành Nguyệt Lan', '9998887777', N'Nữ', '1992-09-05', '999888777', NULL, N'Huyện Thi Quảng Nam', N'Bản thân', 11),
+('NamThanh@example.com', N'Hoàng Nam Thanh', '4445556666', N'Nam', '2012-04-18', '444555666', NULL, N'Huyện Đỗ Minh Thiện Hà Nam', N'Cha/Mẹ', 12),
+('KhanhVi@example.com', N'Nghiêm Khánh Vi', '7778889999', N'Nữ', '1997-12-25', '777888999', NULL, N'Huyện Lỳ Dương Đài Nghệ AN', N'Anh/Chị', 13),
+('KhacVu@example.com', N'Đỗ Khắc Vũ', '6667778888', N'Nam', '1998-06-08', '666777888', NULL, N'Quận Cát Ninh Bình', N'Vợ/Chồng', 14),
+('QuynhNhung@example.com',  N'Huỳnh Quỳnh Nhung', '2223334444', N'Nữ', '1991-02-14', '222333444', NULL, N'Thôn Hoàng Vỹ Phượng, Phường Mi Trưng', N'Con', 15),
+('VietCuong@example.com', N'Vũ Việt Cương', '8889990000', N'Nam', '1964-10-03', '888999000', NULL, N'Ấp Đoàn Thuận, Xã Kim', N'Bản thân', 16),
+('ThyVan@example.com', N'Văn Thy Vân', '7776665555', N'Nữ', '1973-08-17', '777666555', NULL, N'Quận Đan Quân Bình Thuận', N'Cha/Mẹ', 17),
+('DucToan@example.com', N'Hoàng Ðức Toản', '3332221111', N'Nam', '1994-04-12', '333222111', NULL, N'Thành phố Thủ Đức', N'Anh/Chị', 18),
+('ThachThao@example.com', N'Nguyễn Thạch Thảo', '5554443333', N'Nữ', '2002-01-28', '555444333', NULL, N'Biên Hòa, Đồng Nai', N'Vợ/Chồng', 19),
+('ChiKien@example.com', 'Tôn Chí Kiên', '1119998888', N'Nam', '2008-07-05', '111999888', NULL, N'Tp.Hồ Chí Minh', N'Con', 20);
 
 --
 -- INSERT DATA BENEFIT_DETAILS
