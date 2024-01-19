@@ -105,6 +105,54 @@ VALUES
 	(N'Chi phí y tế điều trị tai nạn', N'Năm', 3);
 
 
+-- INSERT DATA USER
+EXEC RegisterUser N'JohnDoe@example.com', 'password_1', 'John Doe', '1234567890', N'Nam', '1990-01-01', '123456789';
+EXEC RegisterUser N'AliceJohnson@gmail.com', 'password_1', N'Alice Johnson', N'9876543210', N'Nữ', '1985-11-25', N'886377666';
+EXEC RegisterUser N'MichaelSmith@gmail.com', 'password_1', N'Michael Smith', N'5552223333', N'Nam', '2002-01-05', N'888777666';
+EXEC RegisterUser N'EmilyWhite@gmail.com', 'password_1', N'Emily White', N'4441112222', N'Nữ', '1995-09-14', N'999000111';
+EXEC RegisterUser N'DavidBrown@gmail.com', 'password_1', N'David Brown', N'9998887777', N'Nam', '1990-07-02', N'222333444';
+EXEC RegisterUser N'OliviaMiller@gmail.com', 'password_1', N'Olivia Miller', N'1112223334', N'Nữ', '1988-12-18', N'555666777';
+EXEC RegisterUser N'AndrewWilson@gmail.com', 'password_1', N'Andrew Wilson', N'6667778888', N'Nam', '2001-04-09', N'111222333';
+EXEC RegisterUser N'SophiaTaylor@gmail.com', 'password_1', N'Sophia Taylor', N'1239876543', N'Nữ', '1993-06-30', N'444555666';
+EXEC RegisterUser N'WilliamTurner@gmail.com', 'password_1', N'William Turner', N'7894561230', N'Nam', '1980-02-12', N'666555444';
+EXEC RegisterUser N'EllaMartinez@gmail.com', 'password_1', N'Ella Martinez', N'3216549870', N'Nam', '1998-08-22', N'123789456';
+EXEC RegisterUser N'JacobHall@gmail.com', 'password_1', N'Jacob Hall', N'9871234560', N'Nam', '1987-10-05', N'789456123';
+EXEC RegisterUser N'AvaDavis@gmail.com', 'password_1', N'Ava Davis', N'6547893210', N'Nữ', '1994-04-15', N'456789012';
+EXEC RegisterUser N'ChristopherClark@gmail.com', 'password_1', N'Christopher Clark', N'Nam', N'ChrisC', '1976-07-28', N'987012345';
+EXEC RegisterUser N'GraceTurner@gmail.com', 'password_1', N'Grace Turner', N'4567890123', N'Nữ', '1983-01-03', N'654321789';
+EXEC RegisterUser N'AlexTaylor@gmail.com', 'password_1', N'Alex Taylor', N'4567890123', N'Nam', '1987-09-03', N'913545876';
+
+
+-- INSERT DATA BENEFICIARY
+INSERT INTO [dbo].[beneficiaries] (
+    [email],
+    [full_name],
+    [phone],
+    [sex],
+    [date_of_birth],
+    [card_identification],
+    [image_identification_url],
+    [address],
+    [relationship_policyholder],
+    [user_id]
+)
+VALUES
+('beneficiary1@example.com', 'John Doe', '1234567890', N'Nam', '1990-01-01', '123456789', NULL, '123 Main St, City', N'Bản thân', 6),
+('beneficiary2@example.com', 'Jane Smith', '9876543210', N'Nữ', '1985-05-15', '987654321', NULL, '456 Oak St, Town', N'Cha/Mẹ', 7),
+('beneficiary3@example.com', 'Bob Johnson', '5556667777', N'Nam', '1982-11-30', '555666777', NULL, '789 Pine St, Village', N'Anh/Chị', 8),
+('beneficiary4@example.com', 'Alice Brown', '3334445555', N'Nữ', '1995-03-22', '333444555', NULL, '101 Cedar St, City', N'Vợ/Chồng', 9),
+('beneficiary5@example.com', 'Chris Wilson', '1112223333', N'Nam', '1988-07-10', '111222333', NULL, '202 Maple St, Town', N'Con', 10),
+('beneficiary6@example.com', 'Emily Davis', '9998887777', N'Nữ', '1992-09-05', '999888777', NULL, '303 Birch St, Village', N'Bản thân', 11),
+('beneficiary7@example.com', 'Michael Lee', '4445556666', N'Nam', '1980-04-18', '444555666', NULL, '404 Pine St, City', N'Cha/Mẹ', 12),
+('beneficiary8@example.com', 'Samantha Taylor', '7778889999', N'Nữ', '1987-12-25', '777888999', NULL, '505 Elm St, Town', N'Anh/Chị', 13),
+('beneficiary9@example.com', 'David Smith', '6667778888', N'Nam', '1998-06-08', '666777888', NULL, '606 Oak St, Village', N'Vợ/Chồng', 14),
+('beneficiary10@example.com', 'Eva Brown', '2223334444', N'Nữ', '1991-02-14', '222333444', NULL, '707 Maple St, City', N'Con', 15),
+('beneficiary11@example.com', 'George Wilson', '8889990000', N'Nam', '1984-10-03', '888999000', NULL, '808 Cedar St, Town', N'Bản thân', 16),
+('beneficiary12@example.com', 'Olivia Johnson', '7776665555', N'Nữ', '1983-08-17', '777666555', NULL, '909 Pine St, Village', N'Cha/Mẹ', 17),
+('beneficiary13@example.com', 'Tom Davis', '3332221111', N'Nam', '1994-04-12', '333222111', NULL, '111 Oak St, City', N'Anh/Chị', 18),
+('beneficiary14@example.com', 'Sophia Lee', '5554443333', N'Nữ', '1986-01-28', '555444333', NULL, '222 Maple St, Town', N'Vợ/Chồng', 19),
+('beneficiary15@example.com', 'Alex Taylor', '1119998888', N'Nam', '1997-07-05', '111999888', NULL, '333 Elm St, Village', N'Con', 20);
+
 --
 -- INSERT DATA BENEFIT_DETAILS
 --
