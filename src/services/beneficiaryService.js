@@ -12,7 +12,7 @@ const ApiCreateBeneficiary = async (data = {}) => {
 
 const ApiGetBeneficiaryById = async (id) => {
     try {
-        const response = await axiosInstance.get(`/Beneficiaries/${id}`);
+        const response = await axiosInstance.get(`/beneficiaries/${id}`);
         //console.log(response.data);
 
         return response;
@@ -21,4 +21,14 @@ const ApiGetBeneficiaryById = async (id) => {
     }
 };
 
-export { ApiCreateBeneficiary, ApiGetBeneficiaryById };
+const ApiSummaryBeneficiary = async () => {
+    try {
+        const response = await axiosInstance.get('/beneficiaries/summary');
+
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export { ApiCreateBeneficiary, ApiGetBeneficiaryById, ApiSummaryBeneficiary };

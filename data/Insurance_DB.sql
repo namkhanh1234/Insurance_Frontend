@@ -417,3 +417,29 @@ GO
 
 ALTER TABLE [dbo].[contract_payment_histories] CHECK CONSTRAINT [FK_ContractPaymentHistory_Contract]
 GO
+
+
+--
+-- View count beneficiary based on their age
+--
+CREATE VIEW View_BeneficiaryCount AS
+SELECT
+    CASE
+        WHEN DATEDIFF(YEAR, date_of_birth, GETDATE()) BETWEEN 0 AND 19 THEN '0+'
+        WHEN DATEDIFF(YEAR, date_of_birth, GETDATE()) BETWEEN 20 AND 29 THEN '20+'
+        WHEN DATEDIFF(YEAR, date_of_birth, GETDATE()) BETWEEN 30 AND 39 THEN '30+'
+        WHEN DATEDIFF(YEAR, date_of_birth, GETDATE()) BETWEEN 40 AND 49 THEN '40+'
+        ELSE '50+'
+    END AS Label,
+    COUNT(*) AS Total
+FROM
+    beneficiaries
+GROUP BY
+    CASE 
+        WHEN DATEDIFF(YEAR, date_of_birth, GETDATE()) BETWEEN 0 AND 19 THEN '0+'
+        WHEN DATEDIFF(YEAR, date_of_birth, GETDATE()) BETWEEN 20 AND 29 THEN '20+'
+        WHEN DATEDIFF(YEAR, date_of_birth, GETDATE()) BETWEEN 30 AND 39 THEN '30+'
+        WHEN DATEDIFF(YEAR, date_of_birth, GETDATE()) BETWEEN 40 AND 49 THEN '40+'
+        ELSE '50+'
+    END
+GO
