@@ -20,4 +20,13 @@ const ApiGetContractById = async (id) => {
     }
 };
 
-export { ApiPostContract, ApiGetContractById };
+const ApiSummaryContract = async () => {
+    try {
+        const response = await axiosInstance.get(`/contracts/summary`);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export { ApiPostContract, ApiGetContractById, ApiSummaryContract };

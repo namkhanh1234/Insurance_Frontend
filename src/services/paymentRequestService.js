@@ -10,4 +10,18 @@ const ApiInsertRequest = async (formData) => {
     }
 };
 
-export { ApiInsertRequest };
+const ApiSummaryPaymentRequest = async ({ year }) => {
+    try {
+        const response = await axiosInstance.get('/paymentrequests/summary', {
+            params: {
+                year: year,
+            },
+        });
+
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export { ApiInsertRequest, ApiSummaryPaymentRequest };

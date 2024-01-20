@@ -355,8 +355,8 @@ GO
 
 CREATE TABLE [dbo].[payment_request](
 	[paymentrequest_id] [int] IDENTITY(1,1) NOT NULL,
-	[total_cost] [float] NULL,
-	[total_payment] [float] NULL,
+	[total_cost] [decimal](19,2) NULL,
+	[total_payment] [decimal](19,2) NULL,
 	[description] [nvarchar](255) NULL,
 	[image_identification_url] [varchar](255) NULL,
 	[request_status] [nvarchar](25) NULL,
@@ -395,7 +395,7 @@ CREATE TABLE [dbo].[contract_payment_histories](
 	[paymentcontract_Id] [int] IDENTITY(1,1) NOT NULL,
 	[transaction_Code] [varchar](25) NULL,
 	[payment_Date] [datetime] NULL,
-	[payment_Amount] [int] NULL,
+	[payment_Amount] [decimal](19,2) NULL,
 	[service_Payment] [varchar](20) NULL,
 	[bank_Name] [nvarchar](50) NULL,
 	[status] [nvarchar](30) NULL,
@@ -444,4 +444,59 @@ GROUP BY
         WHEN DATEDIFF(YEAR, date_of_birth, GETDATE()) BETWEEN 40 AND 49 THEN '40+'
         ELSE '50+'
     END
+GO
+
+
+--
+-- View: revenue - sum totalFee - over year, month - and select TOP 2
+--
+CREATE VIEW View_RevenueContract 
+AS
+SELECT TOP 2
+    DATEPART(year, signing_Date) as year,
+    DATEPART(month, signing_Date) as month,
+    sum(total_Fee) as revenue
+FROM contracts
+GROUP BY DATEPART(year, signing_Date), DATEPART(month, signing_Date)
+ORDER BY year DESC, month DESC
+GO
+
+--
+-- View: number of user register KNH application by year, month
+--
+CREATE VIEW View_CountUser
+AS
+SELECT TOP 100 PERCENT
+	DATEPART(year, created_date) as Year,
+    DATEPART(month, created_date) as Month,
+    count(*) as Total
+FROM users
+GROUP BY DATEPART(year, created_date), DATEPART(month, created_date)
+ORDER BY Year DESC, Month DESC
+GO
+
+--
+-- View: Profit based on month, years
+--
+CREATE VIEW View_Icome_PaymentContract
+AS
+SELECT TOP 100 PERCENT
+	DATEPART(year, payment_Date) as Year,
+    DATEPART(month, payment_Date) as Month,
+    Sum(payment_Amount) as Amount
+FROM contract_payment_histories
+GROUP BY DATEPART(year, payment_Date), DATEPART(month, payment_Date)
+GO
+
+--
+-- View: Payment for customer based on month, years
+--
+CREATE VIEW View_Payment_PaymentRequest 
+AS
+SELECT TOP 100 PERCENT
+	DATEPART(year, update_date) as Year,
+    DATEPART(month, update_date) as Month,
+    Sum(total_payment) as Amount
+FROM payment_request
+GROUP BY DATEPART(year, update_date), DATEPART(month, update_date)
 GO
