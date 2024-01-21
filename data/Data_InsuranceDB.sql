@@ -1286,3 +1286,105 @@ INSERT [dbo].[contracts] ([contract_id], [insurance_code], [signing_Date], [star
 GO
 SET IDENTITY_INSERT [dbo].[contracts] OFF
 GO
+
+
+-- table [contract_payment_histories]
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-01-08 02:54:01', 2047, 5787500, 'VNPAY', 'VIB', 52);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-01-11 06:19:02', 2049, 2955000, 'VNPAY', 'VietinBank', 48);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-01-11 14:07:46', 2119, 3470000, 'VNPAY', 'TPBank', 45);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-01-12 23:39:35', 2083, 4500000, 'VNPAY', 'VPBank', 64);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-01-15 14:03:17', 2057, 3212500, 'VNPAY', 'ACB', 47);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-01-16 11:50:34', 2043, 3212500, 'VNPAY', 'Techcombank', 47);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-01-23 14:44:10', 2138, 3341250, 'VNPAY', 'VietinBank', 46);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-01-28 21:29:54', 2111, 3083750, 'VNPAY', 'Vietcombank', 69);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-02-03 08:18:22', 2058, 1560000, 'VNPAY', 'Vietcombank', 57);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-03-04 00:00:21', 2065, 3083750, 'VNPAY', 'Techcombank', 49);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-03-06 17:27:30', 2107, 3341250, 'VNPAY', 'Techcombank', 46);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-03-10 04:51:03', 2092, 1432000, 'VNPAY', 'ACB', 58);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-03-13 02:24:46', 2055, 2955000, 'VNPAY', 'MB', 68);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-03-15 14:19:10', 2075, 3212500, 'VNPAY', 'Agribank', 50);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-03-16 12:33:52', 2051, 3470000, 'VNPAY', 'TPBank', 45);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-03-18 14:26:59', 2060, 3212500, 'VNPAY', 'TPBank', 70);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-03-23 02:32:29', 2104, 3212500, 'VNPAY', 'ACB', 50);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-03-31 00:44:41', 2099, 2955000, 'VNPAY', 'VPBank', 68);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-04-06 10:09:34', 2122, 5787500, 'VNPAY', 'Techcombank', 52);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-04-13 08:22:57', 2058, 2955000, 'VNPAY', 'VIB', 48);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-04-15 11:37:25', 2048, 1432000, 'VNPAY', 'Vietcombank', 58);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-04-20 19:33:44', 2105, 3341250, 'VNPAY', 'Techcombank', 66);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-04-30 03:05:38', 2099, 2200000, 'VNPAY', 'VPBank', 54);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-05-02 00:38:08', 2118, 1496000, 'VNPAY', 'VietinBank', 59);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-05-08 18:40:54', 2106, 1496000, 'VNPAY', 'VietinBank', 59);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-05-09 18:18:47', 2089, 3495750, 'VNPAY', 'Agribank', 71);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-05-12 11:20:54', 2075, 2200000, 'VNPAY', 'Techcombank', 54);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-05-19 14:42:51', 2088, 3083750, 'VNPAY', 'MB', 69);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-05-21 21:05:15', 2096, 4500000, 'VNPAY', 'Agribank', 44);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-05-23 03:22:03', 2093, 3212500, 'VNPAY', 'BIDV', 47);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-05-24 10:19:00', 2073, 1688000, 'VNPAY', 'Techcombank', 55);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-05-26 02:29:16', 2070, 4500000, 'VNPAY', 'MB', 64);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-05-30 16:17:49', 2069, 3495750, 'VNPAY', 'VIB', 51);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-06-01 02:01:07', 2103, 3470000, 'VNPAY', 'Agribank', 45);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-06-12 14:45:01', 2132, 3470000, 'VNPAY', 'BIDV', 45);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-06-12 15:03:20', 2118, 1560000, 'VNPAY', 'BIDV', 60);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-06-14 22:31:22', 2105, 3495750, 'VNPAY', 'Agribank', 51);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-06-18 00:28:11', 2124, 3212500, 'VNPAY', 'ACB', 67);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-06-20 02:58:40', 2121, 3212500, 'VNPAY', 'Agribank', 50);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-06-23 16:27:16', 2148, 1496000, 'VNPAY', 'VPBank', 59);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-06-26 17:37:56', 2067, 2955000, 'VNPAY', 'Agribank', 48);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-06-28 22:07:08', 2123, 4500000, 'VNPAY', 'Agribank', 44);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-07-01 15:47:38', 2093, 5787500, 'VNPAY', 'TPBank', 52);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-07-03 15:24:30', 2074, 4500000, 'VNPAY', 'VPBank', 64);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-07-12 08:01:22', 2045, 4500000, 'VNPAY', 'ACB', 44);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-07-16 09:56:35', 2061, 1560000, 'VNPAY', 'MB', 57);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-07-23 01:33:35', 2148, 3083750, 'VNPAY', 'BIDV', 49);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-07-25 23:55:51', 2134, 3341250, 'VNPAY', 'Vietcombank', 46);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-07-27 09:40:21', 2111, 5787500, 'VNPAY', 'ACB', 52);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-08-01 14:20:14', 2081, 8681250, 'VNPAY', 'Agribank', 53);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-08-05 19:18:00', 2065, 3470000, 'VNPAY', 'VIB', 65);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-08-20 20:48:54', 2125, 1624000, 'VNPAY', 'Vietcombank', 56);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-09-04 07:38:22', 2057, 3495750, 'VNPAY', 'ACB', 51);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-09-05 02:41:59', 2071, 2955000, 'VNPAY', 'ACB', 48);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-09-08 14:05:13', 2047, 3341250, 'VNPAY', 'VPBank', 46);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-09-19 04:22:04', 2069, 3495750, 'VNPAY', 'Agribank', 51);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-09-28 08:32:42', 2150, 3495750, 'VNPAY', 'BIDV', 71);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-10-02 06:48:41', 2097, 1688000, 'VNPAY', 'Vietcombank', 55);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-10-03 08:28:37', 2107, 3341250, 'VNPAY', 'TPBank', 66);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-10-08 11:30:45', 2105, 3212500, 'VNPAY', 'BIDV', 47);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-10-18 06:27:54', 2091, 3212500, 'VNPAY', 'VPBank', 67);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-10-23 13:39:17', 2131, 3212500, 'VNPAY', 'Techcombank', 70);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-10-27 09:15:46', 2119, 3470000, 'VNPAY', 'BIDV', 45);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-10-29 00:28:00', 2091, 3212500, 'VNPAY', 'VIB', 50);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-10-30 01:09:56', 2068, 1432000, 'VNPAY', 'BIDV', 58);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-11-02 12:47:48', 2063, 1560000, 'VNPAY', 'VIB', 60);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-11-09 06:57:06', 2064, 3495750, 'VNPAY', 'Techcombank', 51);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-11-09 23:30:48', 2102, 3341250, 'VNPAY', 'VietinBank', 46);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-11-12 03:53:49', 2070, 2200000, 'VNPAY', 'Agribank', 54);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-11-14 03:28:40', 2074, 3470000, 'VNPAY', 'TPBank', 45);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-11-16 22:49:10', 2139, 1496000, 'VNPAY', 'TPBank', 59);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-11-21 07:09:16', 2108, 1688000, 'VNPAY', 'Agribank', 55);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-11-22 00:50:18', 2101, 4500000, 'VNPAY', 'Techcombank', 44);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-11-29 08:04:30', 2068, 8681250, 'VNPAY', 'VIB', 53);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-12-04 23:08:40', 2089, 3212500, 'VNPAY', 'TPBank', 70);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-12-08 13:32:36', 2113, 4500000, 'VNPAY', 'VietinBank', 44);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-12-09 08:57:28', 2117, 1624000, 'VNPAY', 'ACB', 56);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-12-12 14:56:36', 2144, 3083750, 'VNPAY', 'ACB', 49);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-12-18 12:55:38', 2109, 3470000, 'VNPAY', 'Vietcombank', 65);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-12-19 04:09:34', 2080, 1624000, 'VNPAY', 'Vietcombank', 56);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-12-22 03:52:22', 2111, 3083750, 'VNPAY', 'Techcombank', 49);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2023-12-25 23:20:50', 2077, 1560000, 'VNPAY', 'TPBank', 60);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2024-01-02 18:12:03', 2064, 3212500, 'VNPAY', 'Vietcombank', 47);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2024-01-04 14:41:46', 2040, 8681250, 'VNPAY', 'Agribank', 53);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2024-01-05 22:10:39', 2049, 4500000, 'VNPAY', 'ACB', 44);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2024-01-08 02:19:52', 2094, 1560000, 'VNPAY', 'BIDV', 57);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2024-01-15 06:41:20', 2065, 3341250, 'VNPAY', 'Techcombank', 66);
+insert into [contract_payment_histories] (payment_Date, [transaction_Code], [payment_Amount], [service_Payment], [bank_Name], [contract_Id]) values ('2024-01-19 02:40:27', 2077, 5787500, 'VNPAY', 'VPBank', 52);
+
+update [contract_payment_histories]
+set [status] = N'Đã thanh toán'
+
+update [contracts]
+set contract_Status = N'Đã thanh toán'
+where contract_id in (44, 45, 64, 66, 70)
+
+update [contracts]
+set contract_Status = N'Chưa hoàn thành thanh toán'
+where contract_id not in (41, 44, 45, 64, 66, 70)
