@@ -1388,3 +1388,16 @@ where contract_id in (44, 45, 64, 66, 70)
 update [contracts]
 set contract_Status = N'Chưa hoàn thành thanh toán'
 where contract_id not in (41, 44, 45, 64, 66, 70)
+
+-- INSERT PAYMENT REQUEST
+exec AddPaymentRequest 41, 2000000, 'Gãy chân', null;
+exec AddPaymentRequest 44, 6000000, 'Gãy tay', null;
+exec AddPaymentRequest 45, 45000000, 'Ung thư', null;
+exec AddPaymentRequest 46, 25000000, 'Đau dạ dày', null;
+exec AddPaymentRequest 47, 450000, 'Viêm họng', null;
+exec AddPaymentRequest 48, 27000000, 'HIV/AIDS', null;
+exec AddPaymentRequest 49, 34000000, 'Đứt dây chằng ở chân', null;
+exec AddPaymentRequest 50, 28000000, 'Chấn thương cột sống', null;
+exec AddPaymentRequest 51, 4000000, 'Thoát vị đĩa đệm', null;
+exec AddPaymentRequest 52, 2000000, 'Chấn thương tâm lý', null;
+exec AddPaymentRequest 52, 13000000, 'Sỏ thận', null;
