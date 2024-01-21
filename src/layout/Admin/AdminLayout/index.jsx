@@ -20,7 +20,7 @@ function AdminLayout({ children }) {
                 <div className={cx('sidebar')}>
                     <SidebarAdmin />
                 </div>
-                <div className={cx('content', 'px-4')}>{children}</div>
+                <div className={cx('content', 'p-4')}>{children}</div>
             </div>
         </div>
     );

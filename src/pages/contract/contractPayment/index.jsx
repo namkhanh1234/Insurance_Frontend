@@ -43,6 +43,21 @@ function ContractPayment() {
     // console.log('>> Check registrationId: ', registrationId);
     // console.log('>> Check beneficiaryId: ', beneficiaryId);
 
+    useEffect(() => {
+        // GetUserById(auth.userId);
+        // Tạm thời localStorage
+        GetUserById(userId);
+
+        if (beneficiaryId != null || beneficiaryId != undefined) {
+            GetBeneficiaryById(beneficiaryId);
+        }
+
+        console.log('>> Check registration before call api: ', registrationId);
+        if (registrationId != null || registrationId != undefined) {
+            GetRegistrationById(registrationId);
+        }
+    }, [beneficiaryId]);
+
     const GetUserById = async (id) => {
         const response = await ApiGetUserById(id);
 
@@ -69,20 +84,6 @@ function ContractPayment() {
         }
     };
 
-    useEffect(() => {
-        // GetUserById(auth.userId);
-        // Tạm thời localStorage
-        GetUserById(userId);
-
-        if (beneficiaryId != null || beneficiaryId != undefined) {
-            GetBeneficiaryById(beneficiaryId);
-        }
-
-        if (registrationId != null || registrationId != undefined) {
-            GetRegistrationById(registrationId);
-        }
-    }, [beneficiaryId]);
-
     const PostRegistrationId = async (registrationId) => {
         const res_contract = await ApiPostContract(registrationId);
 
@@ -105,7 +106,6 @@ function ContractPayment() {
     };
 
     const PostPaymentContract = async ({ data }) => {
-        console.log('>> Check data: ', data);
         const res = await ApiPaymentContractByVnPay({ data: data });
 
         if (res && res.data) {

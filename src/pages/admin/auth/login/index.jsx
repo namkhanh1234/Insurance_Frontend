@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
@@ -76,7 +76,9 @@ function LoginAdmin() {
         <div className={cx('login__modal')}>
             <div className={cx('login__modal-inner', 'rounded-2xl border-2')}>
                 <div className="login__header flex flex-col items-center justify-center select-none">
-                    <img className="h-24 w-24 rounded-3xl" src={logo} alt="KNH" />
+                    <Link to={config.routes.home}>
+                        <img className="h-24 w-24 rounded-3xl" src={logo} alt="KNH" />
+                    </Link>
                     <h2 className="mt-3 font-semibold">Quản trị viên KNH</h2>
                 </div>
 

@@ -5,6 +5,7 @@ import styles from './Sidebar.module.scss';
 import config from '../../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faHome, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faClipboard } from '@fortawesome/free-regular-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -73,6 +74,18 @@ function Sidebar() {
             >
                 <FontAwesomeIcon icon={faPhone} />
                 <h3>Hỗ trợ</h3>
+            </NavLink>
+            <NavLink
+                to={config.routes.paymentRequest}
+                className={(nav) =>
+                    cx(
+                        'flex items-center space-x-3 p-3 font-semibold text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-900 group',
+                        { active: nav.isActive },
+                    )
+                }
+            >
+                <FontAwesomeIcon icon={faClipboard} />
+                <h3>Yêu cầu thanh toán</h3>
             </NavLink>
 
             <NavLink
