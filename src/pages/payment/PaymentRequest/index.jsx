@@ -13,12 +13,21 @@ import { ApiInsertRequest } from '../../../services/paymentRequestService';
 import FormatCurrency from '../../../components/FormatCurrency/FormatCurrency';
 import ParseCurrencyToNumber from '../../../components/ParseCurrency/ParseCurrency';
 import { ApiGetContractById } from '../../../services/contractService';
-import { set } from 'date-fns';
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
+import { useToast } from '@/components/ui/use-toast';
 
 const schema = yup
     .object({
-        cost: yup.string().required('Email không được để trống'),
-        description: yup.string(),
+        cost: yup.string().required('Chi phí không được để trống'),
+        description: yup.string().required('Mô tả không được để trống'),
         // photo: yup.mixed().required('Vui lòng chọn file'),
     })
     .required();
@@ -26,7 +35,9 @@ const schema = yup
 function PaymentRequest() {
     const [image, setImage] = useState();
     const [user, setUser] = useState();
-    const [contract, setContract] = useState();
+    const [contract, setContract] = useState([]);
+    const [contractId, setContractId] = useState();
+    const { toast } = useToast();
 
     useEffect(() => {
         return () => {
@@ -49,16 +60,22 @@ function PaymentRequest() {
 
         formData.append('description', data.description);
         formData.append('totalcost', cost);
-        formData.append('contractId', 1);
+        formData.append('contractId', contractId);
         formData.append('ImagePaymentRequest', image);
         console.log(image);
 
         const response = await ApiInsertRequest(formData);
 
         if (response) {
-            console.log('abc');
+            toast({
+                description: 'Đã gửi đơn yêu cầu.',
+                variant: 'success',
+            });
         } else {
-            console.log('xyz');
+            toast({
+                description: 'Gửi đơn không thành công.',
+                variant: 'destructive',
+            });
         }
     };
 
@@ -85,9 +102,26 @@ function PaymentRequest() {
 
         if (response && response.data) {
             console.log(response.data);
-            setContract(response.data);
+            if (response.data.length <= 0) {
+                toast({
+                    description: 'Bạn chưa có hợp đồng nào.',
+                    variant: 'destructive',
+                });
+            } else {
+                setContract(response.data);
+            }
         }
     };
+
+    const handleInsuranceCode = (e) => {
+        console.log(e);
+
+        // find contractId by insuranceCode
+        const ct = contract.find((item) => item.insuranceCode === e);
+        console.log(ct.contractId);
+        setContractId(ct.contractId);
+    };
+
     useEffect(() => {
         const userId = localStorage.getItem('user_id');
         GetUserById(userId);
@@ -96,7 +130,7 @@ function PaymentRequest() {
 
     return (
         <>
-            <div className="flex justify-evenly  bg-sky-100">
+            <div className="flex justify-between bg-sky-100">
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center bg-sky-100 p-10">
                     <h3 className="text-2xl m-2 font-bold text-sky-600 text-center">YÊU CẦU THANH TOÁN ĐIỀU TRỊ</h3>
                     <div className="flex flex-col items-center p-5 rounded-2xl border-2 bg-white">
@@ -111,13 +145,21 @@ function PaymentRequest() {
                                 ></Input>
                             </div>
                             <div className="w-1/2">
-                                <Label>Mã hợp đồng bảo hiểm</Label>
-                                <Input
-                                    type="text"
-                                    disabled
-                                    className="bg-slate-200"
-                                    defaultValue={contract?.insuranceCode}
-                                ></Input>
+                                <Label>Mã bảo hiểm</Label>
+                                <Select onValueChange={handleInsuranceCode}>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Chọn mã bảo hiểm" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectGroup>
+                                            {contract.map((item, index) => (
+                                                <SelectItem key={index} value={item.insuranceCode}>
+                                                    {item.insuranceCode}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectGroup>
+                                    </SelectContent>
+                                </Select>
                             </div>
                         </div>
                         <div className="w-full mt-5">
@@ -159,7 +201,10 @@ function PaymentRequest() {
                             >
                                 Gửi
                             </Button>
-                            <Button className="w-[140px] h-[42px] bg-red-600 text-base rounded-md hover:bg-red-700">
+                            <Button
+                                className="w-[140px] h-[42px] bg-red-600 text-base rounded-md hover:bg-red-700"
+                                type="button"
+                            >
                                 Quay về
                             </Button>
                         </div>

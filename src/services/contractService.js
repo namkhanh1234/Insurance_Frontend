@@ -13,7 +13,11 @@ const ApiPostContract = async (registrationId) => {
 
 const ApiGetContractById = async (id) => {
     try {
-        const response = await axiosInstance.get(`/contracts/${id}`);
+        const response = await axiosInstance.get('/contracts/filter/',{
+            params:{
+                userId: id,
+            }
+        });
         return response;
     } catch (error) {
         console.log(error);

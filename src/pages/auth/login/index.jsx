@@ -63,9 +63,13 @@ function Login() {
     };
 
     useEffect(() => {
-        // console.log('>> Check user login page: ', user);
+        console.log('>> Check user login page: ', user.auth);
 
         if (user.auth) {
+            toast({
+                description: 'Đăng nhập thành công.',
+                variant: 'success',
+            });
             navigate(config.routes.home);
         }
     }, [user]);
