@@ -14,4 +14,17 @@ const ApiPaymentContractByVnPay = async ({ data }) => {
     }
 };
 
-export { ApiPaymentContractByVnPay };
+const ApiGetPaymentContractHistory = async ({ year }) => {
+    try {
+        const response = await axiosInstance.get('paymentcontracts/summary', {
+            params: {
+                year: year,
+            },
+        });
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export { ApiPaymentContractByVnPay, ApiGetPaymentContractHistory };

@@ -11,7 +11,6 @@ const ApiGetUserById = async (userId) => {
 };
 
 const ApiUpdateUser = async (data) => {
-    console.log(data);
     try {
         const response = await axiosInstance.patch(`/users/${data.id}`, {
             userId: data.id,
@@ -46,7 +45,6 @@ const ApiRegister = async (data) => {
 };
 
 const ApiSendEmail = async (data) => {
-    console.log(data);
     try {
         const response = await axiosInstance.post('/verificationPassword/forgot-password', {
             email: data,
@@ -58,7 +56,6 @@ const ApiSendEmail = async (data) => {
 };
 
 const ApiVerifiOTP = async (data) => {
-    console.log(data);
     try {
         const response = await axiosInstance.post('/verificationPassword/verify-password', {
             email: data.email,
@@ -71,7 +68,6 @@ const ApiVerifiOTP = async (data) => {
 };
 
 const ApiResetPassword = async (data) => {
-    console.log(data);
     try {
         const response = await axiosInstance.post('/verificationPassword/reset-password', {
             email: data.email,
@@ -83,4 +79,13 @@ const ApiResetPassword = async (data) => {
     }
 };
 
-export { ApiGetUserById, ApiUpdateUser, ApiSendEmail, ApiVerifiOTP, ApiResetPassword, ApiRegister };
+const ApiSummaryUser = async () => {
+    try {
+        const response = await axiosInstance.get(`/users/summary`);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export { ApiGetUserById, ApiUpdateUser, ApiSendEmail, ApiVerifiOTP, ApiResetPassword, ApiRegister, ApiSummaryUser };

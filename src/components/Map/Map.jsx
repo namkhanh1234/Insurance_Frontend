@@ -27,7 +27,7 @@ const Map = () => {
     }, []);
 
     return (
-        <div className="h-[100vh] w-full ">
+        <div className="h-[100vh] w-full">
             <LoadScript googleMapsApiKey={import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY}>
                 <GoogleMap
                     mapContainerStyle={{
