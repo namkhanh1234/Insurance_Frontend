@@ -111,7 +111,8 @@ function RegistrationForm() {
                     PostRegistration(registration);
 
                     // Step 4: Nếu thành công -> Navigate contracts
-                    navigate(config.routes.contractPayment);
+                    // Navigate ở đây diễn ra trước khi set -> chuyển vào hàm gọi api
+                    // navigate(config.routes.contractPayment);
                 }
             }
         } catch (error) {
@@ -125,10 +126,11 @@ function RegistrationForm() {
 
         if (res && res.data) {
             // console.log('Result registration: ', res.data);
+            // debugger;
             localStorage.setItem('registrationId', res.data.id);
 
             setRegistrationResult(res.data);
-            console.log('Result registration: ', res.data);
+            navigate(config.routes.contractPayment);
         }
     };
 

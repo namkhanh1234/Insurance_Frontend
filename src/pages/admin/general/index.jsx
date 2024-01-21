@@ -10,7 +10,6 @@ import { ApiSummaryContract } from '../../../services/contractService';
 import { ApiSummaryUser } from '../../../services/userService';
 import { ApiGetPaymentContractHistory } from '../../../services/paymentContractService';
 import { ApiSummaryPaymentRequest } from '../../../services/paymentRequestService';
-import { set } from 'date-fns';
 
 function GeneralAdmin() {
     const [summaryContract, setSummaryContract] = useState({
@@ -317,7 +316,7 @@ function GeneralAdmin() {
                 </div>
             </div>
             <div className="mt-4 w-full grid gap-4 grid-cols-3">
-                <div className="main-chart col-span-2 px-6 py-3 bg-stone-50 border border-gray-200 rounded-lg shadow-sm">
+                <div className="main-chart col-span-3 px-6 py-3 bg-stone-50 border border-gray-200 rounded-lg shadow-sm">
                     <h3 className="text-base font-semibold text-gray-500">Tổng quan</h3>
                     <Chart
                         options={mainChart?.options}
@@ -337,9 +336,9 @@ function GeneralAdmin() {
                         height="370"
                     />
                 </div>
-                <div className="col-span-1 px-6 py-3 bg-stone-50 border border-gray-200 rounded-lg shadow-sm">
+                {/* <div className="col-span-1 px-6 py-3 bg-stone-50 border border-gray-200 rounded-lg shadow-sm">
                     <h3 className="text-base font-semibold text-gray-500">Sản phẩm bán chạy</h3>
-                </div>
+                </div> */}
             </div>
         </div>
     );

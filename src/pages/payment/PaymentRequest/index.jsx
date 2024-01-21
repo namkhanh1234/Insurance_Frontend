@@ -96,8 +96,8 @@ function PaymentRequest() {
 
     return (
         <>
-            <div className="flex justify-evenly  bg-sky-100">
-                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center bg-sky-100 p-10">
+            {/* <div className="flex justify-evenly">
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center p-10">
                     <h3 className="text-2xl m-2 font-bold text-sky-600 text-center">YÊU CẦU THANH TOÁN ĐIỀU TRỊ</h3>
                     <div className="flex flex-col items-center p-5 rounded-2xl border-2 bg-white">
                         <div className="flex justify-evenly w-full">
@@ -165,7 +165,7 @@ function PaymentRequest() {
                         </div>
                     </div>
                 </form>
-                <div>
+                <div className="bg-gray-200">
                     <p>Ảnh xem trước</p>
                     {image && (
                         <img
@@ -173,6 +173,89 @@ function PaymentRequest() {
                             className="w-[50vw] h-[60vh] p-2 border-2 rounded m-1 border-gray-400"
                         ></img>
                     )}
+                </div>
+            </div> */}
+            <div className="p-6 mx-[140px]">
+                <div>
+                    <h3 className="text-2xl m-2 font-bold text-sky-600 text-center">YÊU CẦU THANH TOÁN ĐIỀU TRỊ</h3>
+                </div>
+                <div className="p-6 grid gap-4 grid-cols-1 lg:grid-cols-2 border-2 rounded-xl">
+                    <div className="border-4 border-cyan-600 rounded-lg">
+                        {image && <img src={image.preview} className="w-full h-full p-2"></img>}
+                    </div>
+                    <div className="">
+                        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center">
+                            <div className="flex flex-col items-center bg-white">
+                                <div className="flex justify-evenly w-full">
+                                    <div className="w-1/2 mr-2">
+                                        <Label>Họ tên khách hàng</Label>
+                                        <Input
+                                            type="text"
+                                            disabled
+                                            defaultValue={user?.fullName}
+                                            className="bg-slate-200"
+                                        ></Input>
+                                    </div>
+                                    <div className="w-1/2">
+                                        <Label>Mã hợp đồng bảo hiểm</Label>
+                                        <Input
+                                            type="text"
+                                            disabled
+                                            className="bg-slate-200"
+                                            defaultValue={contract?.insuranceCode}
+                                        ></Input>
+                                    </div>
+                                </div>
+                                <div className="w-full mt-5">
+                                    <Label htmlFor="message">Mô tả điều trị</Label>
+                                    <Textarea
+                                        placeholder="Nhập mô tả ở đây."
+                                        id="message"
+                                        {...register('description')}
+                                    />
+                                </div>
+                                <div className="mt-5 flex w-full justify-evenly">
+                                    <div className="w-1/2 mr-2">
+                                        <Label htmlFor="picture">Ảnh hóa đơn hoặc hồ sơ bệnh án</Label>
+                                        <Input
+                                            id="picture"
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={handleOnChange}
+                                            // {...register('photo')}
+                                        />
+                                    </div>
+                                    <div className="w-1/2">
+                                        <Label>Chi phí điều trị</Label>
+                                        <Input
+                                            type="text"
+                                            placeholder="1000"
+                                            {...register('cost')}
+                                            value={costValue}
+                                            onChange={(e) => {
+                                                setValue('cost', e.target.value);
+                                                console.log(costValue);
+                                            }}
+                                            onBlur={(e) => {
+                                                setValue('cost', FormatCurrency(e.target.value));
+                                            }}
+                                        ></Input>
+                                    </div>
+                                </div>
+                                <div className="mt-4 flex justify-evenly w-full">
+                                    <Button
+                                        className="w-[140px] h-[42px] bg-sky-600 text-base rounded-md hover:bg-sky-700"
+                                        type="submit"
+                                    >
+                                        Gửi
+                                    </Button>
+                                    <Button className="w-[140px] h-[42px] bg-red-600 text-base rounded-md hover:bg-red-700">
+                                        Quay về
+                                    </Button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </>
