@@ -1390,14 +1390,24 @@ set contract_Status = N'Chưa hoàn thành thanh toán'
 where contract_id not in (41, 44, 45, 64, 66, 70)
 
 -- INSERT PAYMENT REQUEST
-exec AddPaymentRequest 41, 2000000, 'Gãy chân', null;
-exec AddPaymentRequest 44, 6000000, 'Gãy tay', null;
-exec AddPaymentRequest 45, 45000000, 'Ung thư', null;
-exec AddPaymentRequest 46, 25000000, 'Đau dạ dày', null;
-exec AddPaymentRequest 47, 450000, 'Viêm họng', null;
-exec AddPaymentRequest 48, 27000000, 'HIV/AIDS', null;
-exec AddPaymentRequest 49, 34000000, 'Đứt dây chằng ở chân', null;
-exec AddPaymentRequest 50, 28000000, 'Chấn thương cột sống', null;
-exec AddPaymentRequest 51, 4000000, 'Thoát vị đĩa đệm', null;
-exec AddPaymentRequest 52, 2000000, 'Chấn thương tâm lý', null;
-exec AddPaymentRequest 52, 13000000, 'Sỏ thận', null;
+
+insert into payment_request (contract_id, total_payment, total_cost, description, request_status, image_identification_url, update_date) 
+values
+	(41, 0, 2000000, 'Gãy chân', 'Đã xử lý', null, '2024-01-22'),
+	(44, 0, 6000000, 'Gãy tay', 'Đã xử lý', null, '2023-01-24'),
+	(45, 0, 45000000, 'Ung thư', 'Chờ xử lý', null, '2023-02-02'),
+	(46, 0, 25000000, 'Đau dạ dày', 'Chờ xử lý', null, '2023-03-06'),
+	(59, 0, 34000000, 'Suy dinh dưỡng', 'Chờ xử lý', null, '2023-03-13'),
+	(47, 0, 450000, 'Viêm họng', 'Chờ xử lý', null, '2023-04-23'),
+	(48, 0, 27000000, 'HIV/AIDS', 'Chờ xử lý', null, '2023-05-02'),
+	(49, 0, 34000000, 'Đứt dây chằng', 'Đã xử lý', null, '2023-06-17'),
+	(50, 0, 28000000, 'Chấn thương cột sống', 'Chờ xử lý', null, '2023-07-29'),
+	(51, 0, 2000000, 'Thoát vị đĩa đệm', 'Chờ xử lý', null, '2023-08-12'),
+	(52, 0, 1200000, 'Đau đầu', 'Đã xử lý', null, '2023-09-11'),
+	(53, 0, 2800000, 'Nứt hộp sọ', 'Chờ xử lý', null, '2023-10-23'),
+	(54, 0, 3200000, 'Suy tim', 'Chờ xử lý', null, '2023-11-04'),
+	(55, 0, 980000, 'Ngộ độc thực phẩm', 'Chờ xử lý', null, '2023-12-17'),
+	(56, 0, 1600000, 'Đột quỵ', 'Đã xử lý', null, '2023-06-19'),
+	(57, 0, 13000000, 'Sỏi thận', 'Chờ xử lý', null, '2023-08-04'),
+	(58, 0, 71000000, 'Tâm thần phân liệt', 'Chờ xử lý', null, '2023-08-13'),
+	(60, 0, 5800000, 'Sốt xuất huyết', 'Chờ xử lý', null, '2024-01-31');
