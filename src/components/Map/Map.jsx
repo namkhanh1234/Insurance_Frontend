@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, InfoWindow, LoadScript, MarkerF } from '@react-google-maps/api';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 const locations = [
     {
@@ -17,9 +15,10 @@ const locations = [
 ];
 const Map = () => {
     const [coords, setCoords] = useState({ lat: 10.7919048, lng: 106.68315 });
-    const [selectedLocation, setSelectedLocation] = useState(locations[0]);
+    const [selectedLocation, setSelectedLocation] = useState(null);
 
     useEffect(() => {
+        console.log('useEffect');
         navigator.geolocation.getCurrentPosition(({ coords: { longitude, latitude } }) => {
             console.log(latitude, ' ', longitude);
             setCoords({ lat: latitude, lng: longitude });
@@ -46,6 +45,7 @@ const Map = () => {
                             }}
                             onClick={() => {
                                 setSelectedLocation(location);
+                                console.log(location);
                             }}
                         />
                     ))}
@@ -54,6 +54,7 @@ const Map = () => {
                         <InfoWindow
                             position={selectedLocation}
                             onCloseClick={() => {
+                                console.log('close');
                                 setSelectedLocation(null);
                             }}
                         >

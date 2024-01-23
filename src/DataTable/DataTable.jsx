@@ -1,9 +1,16 @@
-import { flexRender, getCoreRowModel, useReactTable, getPaginationRowModel } from '@tanstack/react-table';
+import {
+    flexRender,
+    getCoreRowModel,
+    useReactTable,
+    getPaginationRowModel,
+    getFilteredRowModel,
+} from '@tanstack/react-table';
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
 
 export default function DataTable({
     columns,
@@ -14,14 +21,21 @@ export default function DataTable({
     nextPage,
     previousPage,
     onPageSizeChange = null,
+    onSelected = () => {},
 }) {
     const [localPageIndex, setLocalPageIndex] = useState(pageIndex);
     const [localPageSize, setLocalPageSize] = useState(pageSize);
+    const [columnFilters, setColumnFilters] = useState();
     const table = useReactTable({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
+        onColumnFiltersChange: setColumnFilters,
+        getFilteredRowModel: getFilteredRowModel(),
+        state: {
+            columnFilters,
+        },
     });
     useEffect(() => {
         table.setPageSize(pageSize);
@@ -45,8 +59,22 @@ export default function DataTable({
         table.setPageSize(localPageSize);
         onPageSizeChange(localPageSize);
     }, [localPageSize, onPageSizeChange]);
+    useEffect(() => {
+        onSelected(table.getFilteredSelectedRowModel().rows);
+    }, [table.getFilteredSelectedRowModel().rows]);
+    // const handleSearch = (event) => {
+    //     table.getColumn('email')?.setFilterValue(event.target.value);
+    // };
     return (
         <div>
+            <div className="flex items-center py-4">
+                {/* <Input
+                    placeholder="Filter emails..."
+                    value={table.getColumn('email')?.getFilterValue() ?? ''}
+                    onChange={handleSearch}
+                    className="max-w-sm absolute top-12"
+                /> */}
+            </div>
             <div className="rounded-md border">
                 <Table>
                     <TableHeader>
@@ -78,7 +106,7 @@ export default function DataTable({
                         ) : (
                             <TableRow>
                                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                                    No results.
+                                    Đang tải...
                                 </TableCell>
                             </TableRow>
                         )}
@@ -87,7 +115,7 @@ export default function DataTable({
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
                 <div className="flex-1 text-sm text-muted-foreground">
-                    {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length}{' '}
+                    {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length}
                     row(s) selected.
                 </div>
                 <div className="space-x-2 flex ">
