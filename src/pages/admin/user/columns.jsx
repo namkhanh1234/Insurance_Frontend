@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { Checkbox } from '@/components/ui/checkbox';
+import FormatCurrency from '../../../components/FormatCurrency/FormatCurrency';
 const columns = [
     {
         id: 'select',
