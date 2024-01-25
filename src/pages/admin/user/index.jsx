@@ -124,7 +124,7 @@ function UserAdmin() {
         <div className="relative">
             <h1 className="space-y-4">Danh sách người dùng</h1>
             <div className="my-4 flex justify-end">
-                <Input onChange={handleSearch}></Input>
+                <Input onChange={handleSearch} className="mr-4"></Input>
                 <Dialog>
                     <DialogTrigger asChild>
                         <Button className=" bg-sky-600 text-base rounded-md hover:bg-sky-700">

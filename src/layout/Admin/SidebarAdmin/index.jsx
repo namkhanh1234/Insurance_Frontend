@@ -36,7 +36,7 @@ function SidebarAdmin() {
                 <FontAwesomeIcon icon={faUser} />
                 <h3>Người dùng</h3>
             </NavLink>
-            <NavLink
+            {/* <NavLink
                 to={config.routes.adminBeneficiary}
                 className={(nav) =>
                     cx(
@@ -47,8 +47,8 @@ function SidebarAdmin() {
             >
                 <FontAwesomeIcon icon={faUserPlus} />
                 <h3>Người thụ hưởng</h3>
-            </NavLink>
-            <NavLink
+            </NavLink> */}
+            {/* <NavLink
                 to={config.routes.adminRegistration}
                 className={(nav) =>
                     cx(
@@ -59,7 +59,7 @@ function SidebarAdmin() {
             >
                 <FontAwesomeIcon icon={faLayerGroup} />
                 <h3>Đơn đăng ký</h3>
-            </NavLink>
+            </NavLink> */}
             <NavLink
                 to={config.routes.adminPaymentRequest}
                 className={(nav) =>
