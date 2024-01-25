@@ -73,7 +73,7 @@ function Sidebar() {
                 }
             >
                 <FontAwesomeIcon icon={faPhone} />
-                <h3>Hỗ trợ</h3>
+                <h3>Vị trí</h3>
             </NavLink>
             <NavLink
                 to={config.routes.paymentRequest}
