@@ -94,7 +94,7 @@ function Header() {
                         Sản phẩm
                     </Link>
                     <Link to={config.routes.support} className="hover:underline">
-                        Hỗ trợ
+                        Vị trí
                     </Link>
                     <Link to={config.routes.registrationForm} className="hover:underline">
                         Đăng ký bảo hiểm

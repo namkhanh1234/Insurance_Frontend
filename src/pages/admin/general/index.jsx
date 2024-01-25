@@ -212,7 +212,7 @@ function GeneralAdmin() {
         const res = await ApiSummaryUser();
 
         if (res && res.data) {
-            // console.log('>> Check api user result: ', res.data);
+            console.log('>> Check api user result: ', res.data);
 
             setSummaryUser({
                 total: res.data.total,

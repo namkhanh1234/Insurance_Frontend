@@ -48,6 +48,8 @@ GO
 
 UPDATE users SET is_admin = 1 WHERE user_id = 1;
 UPDATE users SET is_admin = 1 WHERE user_id = 2;
+UPDATE users SET is_admin = 1 WHERE user_id = 3;
+UPDATE users SET is_admin = 1 WHERE user_id = 4;
 UPDATE users SET is_admin = 1 WHERE user_id = 5;
 GO
 
