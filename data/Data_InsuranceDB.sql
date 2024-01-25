@@ -1517,7 +1517,5 @@ SET IDENTITY_INSERT [dbo].[payment_request] OFF
 GO
 
 
-
-
 update payment_request
 set request_status = N'Đã xử lý'

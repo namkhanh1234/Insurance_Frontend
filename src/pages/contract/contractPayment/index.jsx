@@ -239,7 +239,7 @@ function ContractPayment() {
                             <RadioGroup defaultValue="MoMo" className="flex">
                                 <div className="flex items-center space-x-2 ml-6">
                                     <RadioGroupItem value="MoMo" id="r1" className="" />
-                                    <Label htmlFor="r1">Ví điện tử MoMo</Label>
+                                    <Label htmlFor="r1">Thanh toán trực tuyến Vnpay</Label>
                                 </div>
                                 <div className="flex items-center space-x-2 ml-6">
                                     <RadioGroupItem value="atStore" id="r2" />
