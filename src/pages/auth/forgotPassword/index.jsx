@@ -53,23 +53,23 @@ function ForgotPassword() {
         localStorage.setItem('email', data.email);
         handleNextStep();
 
-        // try {
-        //     const response = await ApiSendEmail(data.email);
-        //     if (response) {
-        //         handleNextStep();
-        //     } else {
-        //         toast({
-        //             description: 'Nhập email sai! Vui lòng thử lại.',
-        //             variant: 'destructive',
-        //         });
-        //     }
-        // } catch (error) {
-        //     console.log(error);
-        //     toast({
-        //         description: 'Nhập email sai! Vui lòng thử lại.',
-        //         variant: 'destructive',
-        //     });
-        // }
+        try {
+            const response = await ApiSendEmail(data.email);
+            if (response) {
+                handleNextStep();
+            } else {
+                toast({
+                    description: 'Nhập email sai! Vui lòng thử lại.',
+                    variant: 'destructive',
+                });
+            }
+        } catch (error) {
+            console.log(error);
+            toast({
+                description: 'Nhập email sai! Vui lòng thử lại.',
+                variant: 'destructive',
+            });
+        }
     };
     const verifingOTP = async () => {
         //handleNextStep();

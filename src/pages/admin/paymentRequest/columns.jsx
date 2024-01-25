@@ -45,6 +45,21 @@ const columns = [
     {
         accessorKey: 'imagePaymentRequestUrl',
         header: 'Link ảnh chụp phiếu yêu cầu',
+        cell: (row) => {
+            if (!row.getValue('imagePaymentRequestUrl')) {
+                return <span>Không có ảnh</span>;
+            } else
+                return (
+                    <a
+                        className="underline text-blue-500 hover:text-blue-600"
+                        href={row.getValue('imagePaymentRequestUrl')}
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        Xem ảnh
+                    </a>
+                );
+        },
     },
     {
         accessorKey: 'requestStatus',
