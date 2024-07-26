@@ -1,8 +1,27 @@
-# React + Vite
+# Insurance Management Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This project is an Insurance Management web application featuring two main interfaces:
+1. **Admin Interface**: For managing insurance policies.
+2. **User Interface**: For users to purchase insurance.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The main technology used to build the interface is **ReactJS**, with the JavaScript framework **ViteJS**.
+
+## Features
+
+### Admin Interface
+- Manage insurance policies.
+- View and update policy details.
+- Track user purchases and policy status.
+
+### User Interface
+- Browse available insurance policies.
+- Purchase insurance.
+- View and manage purchased policies.
+
+## Tech Stack
+
+- **Frontend**: ReactJS
+- **Framework**: ViteJS
+- **Backend**: .NET (for reference, not part of this repository)
