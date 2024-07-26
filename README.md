@@ -24,4 +24,4 @@ The main technology used to build the interface is **ReactJS**, with the JavaScr
 
 - **Frontend**: ReactJS
 - **Framework**: ViteJS
-- **Backend**: .NET (for reference, not part of this repository)
+- **Backend**: .NET
