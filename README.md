@@ -4,21 +4,20 @@
 
 This project is an Insurance Management web application featuring two main interfaces:
 1. **Admin Interface**: For managing insurance policies.
-2. **User Interface**: For users to purchase insurance.
+2. **User Interface**: For users to purchase insurance and request treatment payments.
 
 The main technology used to build the interface is **ReactJS**, with the JavaScript framework **ViteJS**.
 
 ## Features
 
 ### Admin Interface
-- Manage insurance policies.
-- View and update policy details.
-- Track user purchases and policy status.
+- View revenue statistics based on the number of insurance policies sold.
+- Review and process treatment payment requests.
 
 ### User Interface
 - Browse available insurance policies.
 - Purchase insurance.
-- View and manage purchased policies.
+- Request treatment payments and send these requests to the admin.
 
 ## Tech Stack
 
